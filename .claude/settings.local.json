@@ -138,7 +138,12 @@
       "WebFetch(domain:scholarworks.utep.edu)",
       "Bash(PYTHONIOENCODING=utf-8 python -c \":*)",
       "Bash(ls -1 D:spider1_training/*.py)",
-      "Bash(find D:spider1_trainingdatawp_m09 -type f -name *.json)"
+      "Bash(find D:spider1_trainingdatawp_m09 -type f -name *.json)",
+      "Bash(gh auth:*)",
+      "Bash(where gh:*)",
+      "Read(//c/Program Files/GitHub CLI/**)",
+      "Read(//d/spider1_training/$LOCALAPPDATA/GitHub CLI/**)",
+      "Bash(wc -l /d/spider1_training/data/wp_m09/*.json)"
     ]
   }
 }

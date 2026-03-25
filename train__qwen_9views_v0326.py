@@ -1,46 +1,31 @@
-# train__9views_20k_v0325.py
+# train__qwen_9views_v0326.py
 # ============================================================
-# 9 Views × 20K 訓練腳本 v0325（Blackwell 加速版）
+# Qwen 系列模型 × 9 Views × 20K 訓練腳本 v0326
 #
-# vs 前一版關鍵改動：
-#   1. 使用 train_9views_20k.json（19,993 筆），80/10/10 分層切分
-#   2. 新增 WP_vMemberDeposit、WP_vPdCombine 兩個 View 的 schema
-#   3. 更新 BUSINESS_RULES 涵蓋 9 個 View
-#   4. 移除外部 augmentation（20K 資料量已足夠）
+# 支援模型切換（--model 參數）：
+#   qwen3.5-9b       → Qwen/Qwen3.5-9B              （首選推薦）
+#   qwen2.5-coder-7b → Qwen/Qwen2.5-Coder-7B-Instruct（保守穩定）
+#   llama3.1-8b      → meta-llama/Llama-3.1-8B-Instruct（舊版基線）
+#   自訂路徑          → 任意 HuggingFace 模型路徑
 #
-# v0325 速度優化（RTX 5070 Ti Blackwell, CC 12.0）：
-#   1. attn_implementation="sdpa"（PyTorch 原生 Scaled Dot-Product Attention）
-#   2. TF32 啟用（Blackwell tensor core 加速矩陣運算）
-#   3. torch.compile（inductor 後端，減少 Python overhead）
-#   4. gradient_checkpointing 啟用（省 VRAM → 可加大 batch）
-#   5. BATCH_SIZE 2→4（搭配 gradient_checkpointing 不爆顯存）
-#   6. GRAD_ACCUM 8→4（effective batch 維持 16，但更新更頻繁）
-#   7. dataloader_num_workers=2 + pin_memory（加速資料載入）
-#   8. Val 集抽樣 200 筆 eval（避免每次 eval 花 24 分鐘）
-#
-# v0325 防過擬合改動（v0324/首版 v0325 分析：epoch 0.2 即飽和）：
-#   9.  Epochs 2→1（模型 0.2~0.3 epoch 收斂，1 epoch 綽綽有餘）
-#   10. LR 2e-5→5e-6（大幅降低，讓模型慢慢學而非瞬間背完）
-#   11. LoRA r 16→8（減少微調容量，降低記憶能力）
-#   12. Dropout 0.05→0.15（更強的正則化）
-#   13. Weight decay 0.01→0.05（更強的權重衰減）
-#   14. Eval 頻率 0.5 epoch→0.25 epoch（更早偵測收斂）
-#   15. Early Stopping patience=3（配合更頻繁的 eval）
-#
-# 預估訓練時間：
-#   舊版：~19 小時（2 epochs, batch=2, eager, 無 compile）
-#   新版：~2-3 小時（1 epoch, batch=4, sdpa, compile, gradient_ckpt）
+# 基於 v0325 改進：
+#   1. 模型切換機制（--model 參數）
+#   2. 自動偵測 Qwen vs Llama 的 tokenizer 差異（pad/eos token）
+#   3. Qwen 的 chat template 自動適配（apply_chat_template 統一處理）
+#   4. 保留 v0325 所有防過擬合 + Blackwell 加速設定
 #
 # 用法:
-#   python train__9views_20k_v0325.py
-#   python train__9views_20k_v0325.py --no-rules        # 不含規則（ablation）
-#   python train__9views_20k_v0325.py --epochs 2        # 自訂 epoch 數
-#   python train__9views_20k_v0325.py --lr 1e-5         # 自訂學習率
+#   python train__qwen_9views_v0326.py                           # 預設 Qwen3.5-9B
+#   python train__qwen_9views_v0326.py --model qwen2.5-coder-7b # Qwen2.5 Coder
+#   python train__qwen_9views_v0326.py --model llama3.1-8b       # Llama 基線
+#   python train__qwen_9views_v0326.py --model Qwen/Qwen3.5-4B  # 自訂路徑
+#   python train__qwen_9views_v0326.py --no-rules                # 不含規則
+#   python train__qwen_9views_v0326.py --epochs 2 --lr 1e-5     # 覆蓋超參數
 #
 # 輸出:
-#   outputs/models/9views_20k_0325/final_model/
-#   data/wp_m09/split_9views_20k_val.json    （驗證集）
-#   data/wp_m09/split_9views_20k_test.json   （測試集）
+#   outputs/models/qwen35_9b_9views_0326/final_model/
+#   data/wp_m09/split_9views_20k_val.json
+#   data/wp_m09/split_9views_20k_test.json
 # ============================================================
 
 import json
@@ -65,56 +50,98 @@ from trl import SFTTrainer, SFTConfig
 
 
 # ============================================================
-# Blackwell Optimizations（啟動時執行）
+# Blackwell Optimizations
 # ============================================================
-# TF32：Blackwell (CC 12.0) tensor core 支援，矩陣乘法精度足夠且速度快 ~2x
-# PyTorch 2.10+ 新 API（舊 API 在 2.9 後 deprecated）
 try:
     torch.backends.cudnn.conv.fp32_precision = "tf32"
     torch.backends.cuda.matmul.fp32_precision = "tf32"
 except AttributeError:
-    # fallback 舊版 API
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
-# cuDNN benchmark：對固定 seq_len 自動選最快的卷積算法
 torch.backends.cudnn.benchmark = True
+
+
+# ============================================================
+# Model Presets（模型預設配置）
+# ============================================================
+MODEL_PRESETS = {
+    "qwen3.5-9b": {
+        "path": "Qwen/Qwen3.5-9B",
+        "short_name": "qwen35_9b",
+        "family": "qwen",
+    },
+    "qwen2.5-coder-7b": {
+        "path": "Qwen/Qwen2.5-Coder-7B-Instruct",
+        "short_name": "qwen25_coder_7b",
+        "family": "qwen",
+    },
+    "llama3.1-8b": {
+        "path": "meta-llama/Llama-3.1-8B-Instruct",
+        "short_name": "llama31_8b",
+        "family": "llama",
+    },
+}
+
+
+def resolve_model(model_key: str) -> dict:
+    """解析模型參數，支援預設名稱或自訂 HuggingFace 路徑。"""
+    key = model_key.lower().strip()
+    if key in MODEL_PRESETS:
+        return MODEL_PRESETS[key]
+
+    # 自訂路徑：從路徑推斷 family 和 short_name
+    path = model_key
+    name_lower = path.lower()
+    if "qwen" in name_lower:
+        family = "qwen"
+    elif "llama" in name_lower:
+        family = "llama"
+    else:
+        family = "unknown"
+
+    # 從路徑生成簡短名稱
+    short = path.split("/")[-1].lower().replace("-", "_").replace(".", "")[:20]
+
+    return {
+        "path": path,
+        "short_name": short,
+        "family": family,
+    }
 
 
 # ============================================================
 # Settings
 # ============================================================
-MODEL_PATH   = "meta-llama/Llama-3.1-8B-Instruct"
-DATE_STR     = "0325"
+DATE_STR     = "0326"
 
 DATA_PATH    = r"data\wp_m09\train_9views_20k.json"
-SPLIT_SEED   = 42          # 固定種子確保可重現
+SPLIT_SEED   = 42
 TRAIN_RATIO  = 0.80
 VAL_RATIO    = 0.10
 TEST_RATIO   = 0.10
 
-# 切分後的輸出路徑
 SPLIT_VAL_PATH  = r"data\wp_m09\split_9views_20k_val.json"
 SPLIT_TEST_PATH = r"data\wp_m09\split_9views_20k_test.json"
 
-# ---- DoRA（降容量防過擬合）----
-LORA_R        = 8           # 16→8: 減少微調容量，降低記憶能力
-LORA_ALPHA    = 16          # 維持 alpha/r = 2 的放大倍率
-LORA_DROPOUT  = 0.15        # 0.05→0.15: 更強正則化
+# ---- DoRA ----
+LORA_R        = 8
+LORA_ALPHA    = 16
+LORA_DROPOUT  = 0.15
 USE_DORA      = True
 
-# ---- Training hyperparams（防過擬合 + 加速）----
-NUM_EPOCHS    = 1           # 2→1: 模型 0.2~0.3 epoch 即收斂
-BATCH_SIZE    = 4           # 2→4: gradient_checkpointing 省 VRAM 後可加大
-GRAD_ACCUM    = 4           # 8→4: effective batch = 16（不變），更頻繁更新
-EARLY_STOPPING_PATIENCE = 3 # 配合每 0.25 epoch eval
-LEARNING_RATE = 5e-6        # 2e-5→5e-6: 大幅降低，慢學習防瞬間背完
-MAX_SEQ_LEN   = 1536        # 9 views schema 需要較長序列
+# ---- Training hyperparams ----
+NUM_EPOCHS    = 1
+BATCH_SIZE    = 4
+GRAD_ACCUM    = 4           # effective batch = 16
+EARLY_STOPPING_PATIENCE = 3
+LEARNING_RATE = 5e-6
+MAX_SEQ_LEN   = 1536
 LR_SCHEDULER  = "cosine"
-WARMUP_RATIO  = 0.10        # 0.06→0.10: 更長 warmup 配合低 LR
-WEIGHT_DECAY  = 0.05        # 0.01→0.05: 更強的權重衰減
+WARMUP_RATIO  = 0.10
+WEIGHT_DECAY  = 0.05
 
 # ---- Eval 抽樣 ----
-VAL_EVAL_MAX  = 200         # eval 時最多用 200 筆（避免每次 24 分鐘）
+VAL_EVAL_MAX  = 200
 
 
 # ============================================================
@@ -170,7 +197,6 @@ BUSINESS_RULES = (
 # Utils
 # ============================================================
 def extract_view_from_sql(sql):
-    """從 SQL 中提取 View 名稱"""
     m = re.search(r'WP_M09\.dbo\.(\w+)', sql)
     if m:
         return m.group(1)
@@ -185,19 +211,12 @@ def normalize_query(sql):
 
 
 # ============================================================
-# Stratified Split（分層抽樣）
+# Stratified Split
 # ============================================================
 def stratified_split(data, train_ratio, val_ratio, test_ratio, seed=42):
-    """
-    按 View × Difficulty 分層切分資料。
-
-    確保每個 (view, difficulty) 組合在 train/val/test 中的比例一致。
-    """
     assert abs(train_ratio + val_ratio + test_ratio - 1.0) < 1e-6
-
     rng = random.Random(seed)
 
-    # 按 (view, difficulty) 分組
     groups = defaultdict(list)
     for item in data:
         view = extract_view_from_sql(item.get("query", ""))
@@ -214,7 +233,6 @@ def stratified_split(data, train_ratio, val_ratio, test_ratio, seed=42):
         n_train = n - n_val - n_test
 
         if n_train < 1:
-            # 資料太少，全部放 train
             train_set.extend(items)
             continue
 
@@ -229,7 +247,7 @@ def stratified_split(data, train_ratio, val_ratio, test_ratio, seed=42):
 # Build Chat Template prompts
 # ============================================================
 def build_system_prompt(include_rules=True):
-    """建構 system prompt（全 9 表 schema）"""
+    """建構 system prompt（全 9 表 schema）。供 eval 腳本 import 使用。"""
     parts = [
         "You are an expert T-SQL assistant for WP_M09 database (SQL Server). "
         "Generate ONLY the SQL query. Do not explain."
@@ -255,8 +273,6 @@ def build_chat_text(system_prompt, question, sql, tokenizer):
 # Data Loading & Split
 # ============================================================
 def load_and_split_data(tokenizer, include_rules=True):
-    """載入 20K 資料，80/10/10 分層切分，建立 chat template"""
-
     # 1. 載入
     with open(DATA_PATH, "r", encoding="utf-8") as f:
         raw = json.load(f)
@@ -281,7 +297,7 @@ def load_and_split_data(tokenizer, include_rules=True):
     print(f"    Val:   {len(val_data)} ({len(val_data)/len(deduped)*100:.1f}%)")
     print(f"    Test:  {len(test_data)} ({len(test_data)/len(deduped)*100:.1f}%)")
 
-    # 4. 存檔 val/test（供後續評估使用，存完整版）
+    # 4. 存檔 val/test
     os.makedirs(os.path.dirname(SPLIT_VAL_PATH), exist_ok=True)
     with open(SPLIT_VAL_PATH, "w", encoding="utf-8") as f:
         json.dump(val_data, f, ensure_ascii=False, indent=2)
@@ -332,7 +348,7 @@ def load_and_split_data(tokenizer, include_rules=True):
     train_texts = build_dataset(train_data, "Train dataset")
     val_texts = build_dataset(val_data, "Val dataset")
 
-    # 7. Val 抽樣（訓練中 eval 用，減少 eval 時間）
+    # 7. Val 抽樣
     if len(val_texts) > VAL_EVAL_MAX:
         rng = random.Random(SPLIT_SEED)
         val_texts_eval = rng.sample(val_texts, VAL_EVAL_MAX)
@@ -353,12 +369,15 @@ def load_and_split_data(tokenizer, include_rules=True):
 
 
 # ============================================================
-# Model loading（Blackwell 優化）
+# Model loading
 # ============================================================
-def load_model_and_tokenizer():
-    print(f"\nLoading base model: {MODEL_PATH} ...")
+def load_model_and_tokenizer(model_info: dict):
+    model_path = model_info["path"]
+    family = model_info["family"]
 
-    # 顯示 GPU 資訊
+    print(f"\nLoading base model: {model_path} (family: {family}) ...")
+
+    # GPU 資訊
     if torch.cuda.is_available():
         gpu_name = torch.cuda.get_device_name(0)
         cc = torch.cuda.get_device_capability(0)
@@ -372,40 +391,73 @@ def load_model_and_tokenizer():
         bnb_4bit_compute_dtype=torch.bfloat16,
         bnb_4bit_use_double_quant=True,
     )
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, use_fast=True)
-    tokenizer.pad_token        = tokenizer.eos_token
-    tokenizer.padding_side     = "right"
+
+    tokenizer = AutoTokenizer.from_pretrained(model_path, use_fast=True)
+
+    # ---- Tokenizer 設定（Qwen vs Llama 差異處理）----
+    if tokenizer.pad_token is None:
+        if family == "qwen":
+            # Qwen 系列通常有 <|endoftext|> 或 <|end|> 作為 eos
+            # 使用 eos_token 作為 pad_token
+            tokenizer.pad_token = tokenizer.eos_token
+            print(f"  Tokenizer: pad_token set to eos_token = {repr(tokenizer.eos_token)}")
+        else:
+            tokenizer.pad_token = tokenizer.eos_token
+            print(f"  Tokenizer: pad_token set to eos_token = {repr(tokenizer.eos_token)}")
+    else:
+        print(f"  Tokenizer: pad_token = {repr(tokenizer.pad_token)}, eos_token = {repr(tokenizer.eos_token)}")
+
+    tokenizer.padding_side = "right"
     tokenizer.model_max_length = MAX_SEQ_LEN
 
-    # SDPA: PyTorch 原生 Scaled Dot-Product Attention（不需安裝 flash_attn）
-    # 在 Blackwell 上自動使用最快的 kernel（FlashAttention 或 Memory-Efficient）
+    # 載入模型
     model = AutoModelForCausalLM.from_pretrained(
-        MODEL_PATH,
+        model_path,
         quantization_config=bnb_cfg,
         device_map="auto",
         dtype=torch.bfloat16,
-        attn_implementation="sdpa",       # eager→sdpa: 顯著加速 attention 計算
+        attn_implementation="sdpa",
     )
     model.config.use_cache = False
 
-    # Gradient checkpointing：以時間換空間，省 ~40% activation VRAM
+    # Gradient checkpointing
     model.gradient_checkpointing_enable(
         gradient_checkpointing_kwargs={"use_reentrant": False}
     )
-    print(f"  Attention: SDPA (PyTorch native, auto kernel selection)")
+
+    print(f"  Attention: SDPA")
     print(f"  Gradient checkpointing: enabled")
+
+    # 驗證 chat template
+    try:
+        test_msgs = [
+            {"role": "system", "content": "Test"},
+            {"role": "user", "content": "Hello"},
+        ]
+        test_prompt = tokenizer.apply_chat_template(test_msgs, tokenize=False, add_generation_prompt=True)
+        test_tokens = len(tokenizer(test_prompt)["input_ids"])
+        print(f"  Chat template: OK (test prompt = {test_tokens} tokens)")
+    except Exception as e:
+        print(f"  [WARN] Chat template test failed: {e}")
+        print(f"  This model may not support chat template properly.")
+
     print("Base model loaded")
     return tokenizer, model
 
 
 # ============================================================
-# DoRA setup
+# DoRA / LoRA setup
 # ============================================================
-def apply_dora(model):
+def apply_dora(model, model_info: dict):
+    family = model_info["family"]
+
+    # Qwen 和 Llama 的 target modules 名稱相同（都是 q/k/v/o/gate/up/down_proj）
+    target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
     lora_cfg = LoraConfig(
         r=LORA_R,
         lora_alpha=LORA_ALPHA,
-        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
+        target_modules=target_modules,
         lora_dropout=LORA_DROPOUT,
         bias="none",
         task_type=TaskType.CAUSAL_LM,
@@ -426,7 +478,7 @@ def train(model, tokenizer, dataset, output_dir, val_dataset=None):
 
     eff_batch = BATCH_SIZE * GRAD_ACCUM
     steps_per_epoch = max(1, len(dataset) // eff_batch)
-    eval_save_steps = max(1, steps_per_epoch // 4)  # 每 0.25 epoch eval 一次
+    eval_save_steps = max(1, steps_per_epoch // 4)
 
     sft_cfg = SFTConfig(
         output_dir=output_dir,
@@ -450,11 +502,11 @@ def train(model, tokenizer, dataset, output_dir, val_dataset=None):
         greater_is_better=False,
         report_to="none",
         # --- Blackwell 加速 ---
-        dataloader_num_workers=2,       # 多 worker 預載資料
-        dataloader_pin_memory=True,     # pin memory 加速 CPU→GPU 傳輸
-        gradient_checkpointing=True,    # 省 VRAM
+        dataloader_num_workers=2,
+        dataloader_pin_memory=True,
+        gradient_checkpointing=True,
         gradient_checkpointing_kwargs={"use_reentrant": False},
-        torch_compile=False,            # Windows 無 Triton，無法使用 torch.compile
+        torch_compile=False,           # Windows 無 Triton
         dataset_text_field="text",
         packing=False,
     )
@@ -496,7 +548,7 @@ def train(model, tokenizer, dataset, output_dir, val_dataset=None):
 # ============================================================
 # Save
 # ============================================================
-def save_model(trainer, tokenizer, n_samples, output_dir, args):
+def save_model(trainer, tokenizer, n_samples, output_dir, args, model_info):
     final_dir = os.path.join(output_dir, "final_model")
     os.makedirs(final_dir, exist_ok=True)
 
@@ -504,8 +556,9 @@ def save_model(trainer, tokenizer, n_samples, output_dir, args):
     tokenizer.save_pretrained(final_dir)
 
     info = {
-        "base_model":       MODEL_PATH,
-        "train_script":     "train__9views_20k_v0325.py",
+        "base_model":       model_info["path"],
+        "model_family":     model_info["family"],
+        "train_script":     "train__qwen_9views_v0326.py",
         "methodology":      "Spider/BIRD-style: Full-DB 9-view schema + Business rules + Chat Template",
         "include_rules":    not args.no_rules,
         "method":           "DoRA" if USE_DORA else "LoRA",
@@ -551,31 +604,56 @@ def save_model(trainer, tokenizer, n_samples, output_dir, args):
 # Main
 # ============================================================
 def parse_args():
-    p = argparse.ArgumentParser(description="9 Views x 20K Training (v0325 Blackwell)")
-    p.add_argument("--no-rules", action="store_true", help="Disable business rules (ablation)")
-    p.add_argument("--epochs", type=int, default=None, help=f"Override NUM_EPOCHS (default: {NUM_EPOCHS})")
-    p.add_argument("--lr", type=float, default=None, help=f"Override learning rate (default: {LEARNING_RATE})")
-    p.add_argument("--output-suffix", type=str, default="", help="Custom output directory suffix")
+    p = argparse.ArgumentParser(
+        description="Qwen/Llama × 9 Views × 20K Training (v0326)",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+模型預設名稱:
+  qwen3.5-9b        Qwen/Qwen3.5-9B               (首選推薦)
+  qwen2.5-coder-7b  Qwen/Qwen2.5-Coder-7B-Instruct (保守穩定)
+  llama3.1-8b       meta-llama/Llama-3.1-8B-Instruct (舊版基線)
+
+範例:
+  python train__qwen_9views_v0326.py                           # Qwen3.5-9B
+  python train__qwen_9views_v0326.py --model qwen2.5-coder-7b
+  python train__qwen_9views_v0326.py --model Qwen/Qwen3.5-4B  # 自訂路徑
+        """
+    )
+    p.add_argument("--model", type=str, default="qwen3.5-9b",
+                   help="模型名稱或 HuggingFace 路徑 (default: qwen3.5-9b)")
+    p.add_argument("--no-rules", action="store_true",
+                   help="Disable business rules (ablation)")
+    p.add_argument("--epochs", type=int, default=None,
+                   help=f"Override NUM_EPOCHS (default: {NUM_EPOCHS})")
+    p.add_argument("--lr", type=float, default=None,
+                   help=f"Override learning rate (default: {LEARNING_RATE})")
+    p.add_argument("--output-suffix", type=str, default="",
+                   help="Custom output directory suffix")
     return p.parse_args()
 
 
 def main():
     args = parse_args()
 
-    # 允許命令列覆蓋超參數
+    # 解析模型
+    model_info = resolve_model(args.model)
+
+    # 覆蓋超參數
     global NUM_EPOCHS, LEARNING_RATE
     if args.epochs is not None:
         NUM_EPOCHS = args.epochs
     if args.lr is not None:
         LEARNING_RATE = args.lr
 
-    suffix = args.output_suffix or "9views_20k"
+    # 輸出目錄
+    suffix = args.output_suffix or f"{model_info['short_name']}_9views"
     if args.no_rules:
         suffix += "_norule"
     output_dir = f"outputs/models/{suffix}_{DATE_STR}"
 
     print("=" * 70)
-    print(f"9 Views x 20K Training v{DATE_STR} (Blackwell Optimized)")
+    print(f"Qwen/Llama × 9 Views Training v{DATE_STR}")
+    print(f"  Model:   {model_info['path']} ({model_info['family']})")
     print(f"  Data:    {DATA_PATH}")
     print(f"  Split:   {TRAIN_RATIO}/{VAL_RATIO}/{TEST_RATIO} (stratified)")
     print(f"  Views:   9 (7 original + MemberDeposit + PdCombine)")
@@ -586,30 +664,30 @@ def main():
     print(f"  Output:  {output_dir}")
     print("=" * 70)
 
-    tokenizer, model = load_model_and_tokenizer()
+    tokenizer, model = load_model_and_tokenizer(model_info)
     dataset, n_samples, val_dataset = load_and_split_data(
         tokenizer, include_rules=not args.no_rules
     )
-    model = apply_dora(model)
+    model = apply_dora(model, model_info)
     trainer = train(model, tokenizer, dataset, output_dir, val_dataset=val_dataset)
-    final_dir = save_model(trainer, tokenizer, n_samples, output_dir, args)
+    final_dir = save_model(trainer, tokenizer, n_samples, output_dir, args, model_info)
 
     # 印出評估指令
     print("\n" + "=" * 70)
     print("Training complete! Evaluation commands:")
     print("=" * 70)
 
-    print(f"\n# Val 評估（訓練過程中已用，確認基本品質）:")
-    print(f"python eval__9views_v0325.py `")
+    print(f"\n# Val 評估:")
+    print(f"python eval__9views_v0326.py `")
     print(f"    --model {final_dir} `")
     print(f"    --gold {SPLIT_VAL_PATH} `")
-    print(f"    --output outputs/eval_9views_20k_{DATE_STR}_val.json")
+    print(f"    --output outputs/eval_{model_info['short_name']}_{DATE_STR}_val.json")
 
-    print(f"\n# Test 評估（最終成績，訓練過程中未見過）:")
-    print(f"python eval__9views_v0325.py `")
+    print(f"\n# Test 評估:")
+    print(f"python eval__9views_v0326.py `")
     print(f"    --model {final_dir} `")
     print(f"    --gold {SPLIT_TEST_PATH} `")
-    print(f"    --output outputs/eval_9views_20k_{DATE_STR}_test.json")
+    print(f"    --output outputs/eval_{model_info['short_name']}_{DATE_STR}_test.json")
 
     print()
 
