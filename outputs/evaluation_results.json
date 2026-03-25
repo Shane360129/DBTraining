@@ -1,0 +1,400 @@
+{
+  "overall": {
+    "total": 34,
+    "exact_match": 22,
+    "exact_match_accuracy": 64.70588235294117,
+    "execution_accuracy_count": null,
+    "execution_accuracy": null
+  },
+  "by_difficulty": {
+    "easy": {
+      "total": 12,
+      "em": 6,
+      "ex": 0
+    },
+    "medium": {
+      "total": 22,
+      "em": 16,
+      "ex": 0
+    }
+  },
+  "by_query_type": {
+    "simple_count": {
+      "total": 6,
+      "em": 5,
+      "ex": 0
+    },
+    "simple_list": {
+      "total": 3,
+      "em": 0,
+      "ex": 0
+    },
+    "select_column": {
+      "total": 3,
+      "em": 1,
+      "ex": 0
+    },
+    "distinct": {
+      "total": 3,
+      "em": 3,
+      "ex": 0
+    },
+    "aggregation": {
+      "total": 6,
+      "em": 6,
+      "ex": 0
+    },
+    "conditional": {
+      "total": 7,
+      "em": 7,
+      "ex": 0
+    },
+    "order_by": {
+      "total": 6,
+      "em": 0,
+      "ex": 0
+    }
+  },
+  "detailed_results": [
+    {
+      "question": "How many products are there?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_vProduct",
+      "pred_sql": "SELECT COUNT(*) FROM WP_vProduct",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy",
+      "query_type": "simple_count"
+    },
+    {
+      "question": "Count all products",
+      "gold_sql": "SELECT COUNT(*) FROM WP_vProduct",
+      "pred_sql": "SELECT COUNT(*) FROM WP_vProduct",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy",
+      "query_type": "simple_count"
+    },
+    {
+      "question": "Show all products",
+      "gold_sql": "SELECT * FROM WP_vProduct",
+      "pred_sql": "SELECT * FROM WP_vProduct ORDER BY pNameS ASC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy",
+      "query_type": "simple_list"
+    },
+    {
+      "question": "List all products names",
+      "gold_sql": "SELECT pName FROM WP_vProduct",
+      "pred_sql": "SELECT pName FROM WP_vProduct",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy",
+      "query_type": "select_column"
+    },
+    {
+      "question": "Show distinct products names",
+      "gold_sql": "SELECT DISTINCT pName FROM WP_vProduct",
+      "pred_sql": "SELECT DISTINCT pName FROM WP_vProduct",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "distinct"
+    },
+    {
+      "question": "What is the total pricestd of products?",
+      "gold_sql": "SELECT SUM(priceStd) FROM WP_vProduct",
+      "pred_sql": "SELECT SUM(priceStd) FROM WP_vProduct",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "aggregation"
+    },
+    {
+      "question": "What is the average pricestd of products?",
+      "gold_sql": "SELECT AVG(priceStd) FROM WP_vProduct",
+      "pred_sql": "SELECT AVG(priceStd) FROM WP_vProduct",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "aggregation"
+    },
+    {
+      "question": "Show products with pricestd greater than 1000",
+      "gold_sql": "SELECT * FROM WP_vProduct WHERE priceStd > 1000",
+      "pred_sql": "SELECT * FROM WP_vProduct WHERE priceStd > 1000",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "conditional"
+    },
+    {
+      "question": "What is the total qtynow?",
+      "gold_sql": "SELECT SUM(qtyNow) FROM WP_vProduct",
+      "pred_sql": "SELECT SUM(qtynow) FROM WP_vProduct",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "aggregation"
+    },
+    {
+      "question": "Show products with zero qtynow",
+      "gold_sql": "SELECT * FROM WP_vProduct WHERE qtyNow = 0",
+      "pred_sql": "SELECT * FROM WP_vProduct WHERE qtynow = 0",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "conditional"
+    },
+    {
+      "question": "Show recent products",
+      "gold_sql": "SELECT TOP 10 * FROM WP_vProduct ORDER BY timeCreate DESC",
+      "pred_sql": "SELECT TOP 10 * FROM WP_vProduct ORDER BY timeUpdate DESC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "order_by"
+    },
+    {
+      "question": "Show latest products",
+      "gold_sql": "SELECT TOP 1 * FROM WP_vProduct ORDER BY timeCreate DESC",
+      "pred_sql": "SELECT TOP 10 * FROM WP_vProduct ORDER BY timeUpdate DESC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "order_by"
+    },
+    {
+      "question": "Show products where isPvDiscount is true",
+      "gold_sql": "SELECT * FROM WP_vProduct WHERE isPvDiscount = 1",
+      "pred_sql": "SELECT * FROM WP_vProduct WHERE isPvDiscount = 1",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "conditional"
+    },
+    {
+      "question": "Show the most expensive products",
+      "gold_sql": "SELECT TOP 10 * FROM WP_vProduct ORDER BY priceStd DESC",
+      "pred_sql": "SELECT TOP 10 * FROM WP_vProduct ORDER BY priceMem DESC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "order_by"
+    },
+    {
+      "question": "Show the cheapest products",
+      "gold_sql": "SELECT TOP 10 * FROM WP_vProduct ORDER BY priceStd ASC",
+      "pred_sql": "SELECT TOP 10 * FROM WP_vProduct ORDER BY priceMem ASC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium",
+      "query_type": "order_by"
+    },
+    {
+      "question": "How many accounts are there?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_vAcctIn",
+      "pred_sql": "SELECT COUNT(*) FROM WP_vAcctIn WHERE isDel = 0 AND oStkAmtTotal > 0 AND dtlIsDel = 0 AND memAmtTotal > 0 AND oStkIsDel = 0 AND memIsDel = 0 AND dtlOStkIsDel =",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy",
+      "query_type": "simple_count"
+    },
+    {
+      "question": "Count all accounts",
+      "gold_sql": "SELECT COUNT(*) FROM WP_vAcctIn",
+      "pred_sql": "SELECT COUNT(*) FROM WP_vAcctIn",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy",
+      "query_type": "simple_count"
+    },
+    {
+      "question": "Show all accounts",
+      "gold_sql": "SELECT * FROM WP_vAcctIn",
+      "pred_sql": "SELECT * FROM WP_vAcctIn ORDER BY acctInDate DESC LIMIT 10;",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy",
+      "query_type": "simple_list"
+    },
+    {
+      "question": "List all accounts names",
+      "gold_sql": "SELECT memName FROM WP_vAcctIn",
+      "pred_sql": "SELECT pName FROM WP_vAcctIn WHERE isDel = 0 GROUP BY pName ORDER BY count(*) DESC LIMIT 1",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy",
+      "query_type": "select_column"
+    },
+    {
+      "question": "Show distinct accounts names",
+      "gold_sql": "SELECT DISTINCT memName FROM WP_vAcctIn",
+      "pred_sql": "SELECT DISTINCT memName FROM WP_vAcctIn",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "distinct"
+    },
+    {
+      "question": "What is the total amount of accounts?",
+      "gold_sql": "SELECT SUM(amount) FROM WP_vAcctIn",
+      "pred_sql": "SELECT SUM(amount) FROM WP_vAcctIn",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "aggregation"
+    },
+    {
+      "question": "What is the average amount of accounts?",
+      "gold_sql": "SELECT AVG(amount) FROM WP_vAcctIn",
+      "pred_sql": "SELECT AVG(amount) FROM WP_vAcctIn",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "aggregation"
+    },
+    {
+      "question": "Show accounts with amount greater than 1000",
+      "gold_sql": "SELECT * FROM WP_vAcctIn WHERE amount > 1000",
+      "pred_sql": "SELECT * FROM WP_vAcctIn WHERE amount > 1000",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "conditional"
+    },
+    {
+      "question": "What is the total ostkdtlqty?",
+      "gold_sql": "SELECT SUM(oStkDtlQty) FROM WP_vAcctIn",
+      "pred_sql": "SELECT SUM(ostkdtlqty) FROM WP_vAcctIn",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "aggregation"
+    },
+    {
+      "question": "Show accounts with zero ostkdtlqty",
+      "gold_sql": "SELECT * FROM WP_vAcctIn WHERE oStkDtlQty = 0",
+      "pred_sql": "SELECT * FROM WP_vAcctIn WHERE oStkDtlQty = 0",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "conditional"
+    },
+    {
+      "question": "Show recent accounts",
+      "gold_sql": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+      "pred_sql": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY timeCreate DESC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "order_by"
+    },
+    {
+      "question": "Show latest accounts",
+      "gold_sql": "SELECT TOP 1 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+      "pred_sql": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "order_by"
+    },
+    {
+      "question": "Show accounts where isDel is true",
+      "gold_sql": "SELECT * FROM WP_vAcctIn WHERE isDel = 1",
+      "pred_sql": "SELECT * FROM WP_vAcctIn WHERE isDel = 1",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium",
+      "query_type": "conditional"
+    },
+    {
+      "question": "How many employees are there?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_vEmployee",
+      "pred_sql": "SELECT COUNT(*) FROM WP_vEmployee",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vEmployee",
+      "difficulty": "easy",
+      "query_type": "simple_count"
+    },
+    {
+      "question": "Count all employees",
+      "gold_sql": "SELECT COUNT(*) FROM WP_vEmployee",
+      "pred_sql": "SELECT COUNT(*) FROM WP_vEmployee",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vEmployee",
+      "difficulty": "easy",
+      "query_type": "simple_count"
+    },
+    {
+      "question": "Show all employees",
+      "gold_sql": "SELECT * FROM WP_vEmployee",
+      "pred_sql": "SELECT * FROM WP_vEmployee ORDER BY empName ASC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vEmployee",
+      "difficulty": "easy",
+      "query_type": "simple_list"
+    },
+    {
+      "question": "List all employees names",
+      "gold_sql": "SELECT empName FROM WP_vEmployee",
+      "pred_sql": "SELECT empName FROM WP_vEmployee ORDER BY empName ASC",
+      "exact_match": false,
+      "execution_accuracy": null,
+      "table": "WP_vEmployee",
+      "difficulty": "easy",
+      "query_type": "select_column"
+    },
+    {
+      "question": "Show distinct employees names",
+      "gold_sql": "SELECT DISTINCT empName FROM WP_vEmployee",
+      "pred_sql": "SELECT DISTINCT empName FROM WP_vEmployee",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vEmployee",
+      "difficulty": "medium",
+      "query_type": "distinct"
+    },
+    {
+      "question": "Show employees where isStop is true",
+      "gold_sql": "SELECT * FROM WP_vEmployee WHERE isStop = 1",
+      "pred_sql": "SELECT * FROM WP_vEmployee WHERE isStop = 1",
+      "exact_match": true,
+      "execution_accuracy": null,
+      "table": "WP_vEmployee",
+      "difficulty": "medium",
+      "query_type": "conditional"
+    }
+  ]
+}

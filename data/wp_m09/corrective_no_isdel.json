@@ -1,0 +1,1511 @@
+[
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "目前所有商品的總庫存數量是多少",
+    "question_toks": [
+      "目前所有商品的總庫存數量是多少"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "計算所有產品的庫存總量",
+    "question_toks": [
+      "計算所有產品的庫存總量"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "COUNT",
+      "(",
+      "DISTINCT",
+      "pNo",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "COUNT",
+      "(",
+      "DISTINCT",
+      "pNo",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "查詢目前商品總數",
+    "question_toks": [
+      "查詢目前商品總數"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "COUNT",
+      "(",
+      "DISTINCT",
+      "pNo",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "COUNT",
+      "(",
+      "DISTINCT",
+      "pNo",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "有幾種不同的商品在庫存中",
+    "question_toks": [
+      "有幾種不同的商品在庫存中"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT SUM(qty * costAvg) FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qty",
+      "*",
+      "costAvg",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qty",
+      "*",
+      "costAvg",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "查詢所有倉庫的庫存總金額",
+    "question_toks": [
+      "查詢所有倉庫的庫存總金額"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "列出所有庫存商品的名稱",
+    "question_toks": [
+      "列出所有庫存商品的名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pNo, pName FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "查詢所有庫存中的產品編號和名稱",
+    "question_toks": [
+      "查詢所有庫存中的產品編號和名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT WarehouseName FROM WP_M09.dbo.WP_vInventory;",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "WarehouseName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "WarehouseName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      ";"
+    ],
+    "question": "顯示所有倉庫名稱",
+    "question_toks": [
+      "顯示所有倉庫名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "WarehouseName",
+      "=",
+      "N",
+      "'特產中心'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "WarehouseName",
+      "=",
+      "N",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢倉庫 '特產中心' 的所有庫存商品",
+    "question_toks": [
+      "查詢倉庫",
+      "'特產中心'",
+      "的所有庫存商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vInventory WHERE qty = 0;",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "qty",
+      "=",
+      "0",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "qty",
+      "=",
+      "0",
+      ";"
+    ],
+    "question": "列出庫存數量為零的商品名稱",
+    "question_toks": [
+      "列出庫存數量為零的商品名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, qty, qtySafe FROM WP_M09.dbo.WP_vInventory WHERE qty < qtySafe;",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      ",",
+      "qtySafe",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "qty",
+      "<",
+      "qtySafe",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      ",",
+      "qtySafe",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "qty",
+      "<",
+      "qtySafe",
+      ";"
+    ],
+    "question": "查詢庫存低於安全庫存量的商品",
+    "question_toks": [
+      "查詢庫存低於安全庫存量的商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 10;",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "qty",
+      "<",
+      "10",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "qty",
+      "<",
+      "10",
+      ";"
+    ],
+    "question": "哪些產品的庫存數量低於 10",
+    "question_toks": [
+      "哪些產品的庫存數量低於",
+      "10"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT TOP 10 pNo, pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY pNo, pName ORDER BY total_qty DESC;",
+    "query_toks": [
+      "SELECT",
+      "TOP",
+      "10",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "AS",
+      "total_qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "GROUP",
+      "BY",
+      "pNo",
+      ",",
+      "pName",
+      "ORDER",
+      "BY",
+      "total_qty",
+      "DESC",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "TOP",
+      "10",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "AS",
+      "total_qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "GROUP",
+      "BY",
+      "pNo",
+      ",",
+      "pName",
+      "ORDER",
+      "BY",
+      "total_qty",
+      "DESC",
+      ";"
+    ],
+    "question": "庫存最多的前 10 項產品",
+    "question_toks": [
+      "庫存最多的前",
+      "10",
+      "項產品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT qty FROM WP_M09.dbo.WP_vInventory WHERE pBarcode = '4710632001318';",
+    "query_toks": [
+      "SELECT",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pBarcode",
+      "=",
+      "'4710632001318'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pBarcode",
+      "=",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢產品條碼 '4710632001318' 的庫存數量",
+    "question_toks": [
+      "查詢產品條碼",
+      "'4710632001318'",
+      "的庫存數量"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%';",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'%茶%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'value'",
+      ";"
+    ],
+    "question": "有包含茶名稱的商品有哪些",
+    "question_toks": [
+      "有包含茶名稱的商品有哪些"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%水%';",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'%水%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢名稱含有「水」的商品庫存",
+    "question_toks": [
+      "查詢名稱含有「水」的商品庫存"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vInventory WHERE pvSn = '21';",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pvSn",
+      "=",
+      "'21'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pvSn",
+      "=",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢供應商編號 '21' 提供的所有庫存商品",
+    "question_toks": [
+      "查詢供應商編號",
+      "'21'",
+      "提供的所有庫存商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT WarehouseName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY total_qty DESC;",
+    "query_toks": [
+      "SELECT",
+      "WarehouseName",
+      ",",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "AS",
+      "total_qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "GROUP",
+      "BY",
+      "WarehouseName",
+      "ORDER",
+      "BY",
+      "total_qty",
+      "DESC",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "WarehouseName",
+      ",",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "AS",
+      "total_qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "GROUP",
+      "BY",
+      "WarehouseName",
+      "ORDER",
+      "BY",
+      "total_qty",
+      "DESC",
+      ";"
+    ],
+    "question": "各倉庫的庫存總量分別是多少",
+    "question_toks": [
+      "各倉庫的庫存總量分別是多少"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pkName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY pkName ORDER BY total_qty DESC;",
+    "query_toks": [
+      "SELECT",
+      "pkName",
+      ",",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "AS",
+      "total_qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "GROUP",
+      "BY",
+      "pkName",
+      "ORDER",
+      "BY",
+      "total_qty",
+      "DESC",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pkName",
+      ",",
+      "SUM",
+      "(",
+      "qty",
+      ")",
+      "AS",
+      "total_qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "GROUP",
+      "BY",
+      "pkName",
+      "ORDER",
+      "BY",
+      "total_qty",
+      "DESC",
+      ";"
+    ],
+    "question": "各商品類別的庫存總量",
+    "question_toks": [
+      "各商品類別的庫存總量"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pNo, pName, priceStd FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 100;",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "priceStd",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "priceStd",
+      ">",
+      "100",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "priceStd",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "priceStd",
+      ">",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢標準售價高於 100 的商品",
+    "question_toks": [
+      "查詢標準售價高於",
+      "100",
+      "的商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pNo LIKE '20241201%';",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pNo",
+      "LIKE",
+      "'20241201%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qty",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pNo",
+      "LIKE",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢 2024 年 12 月的庫存記錄",
+    "question_toks": [
+      "查詢",
+      "2024",
+      "年",
+      "12",
+      "月的庫存記錄"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pNo, pName FROM WP_M09.dbo.WP_vInventory WHERE pNo LIKE '202501%';",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pNo",
+      "LIKE",
+      "'202501%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vInventory",
+      "WHERE",
+      "pNo",
+      "LIKE",
+      "'value'",
+      ";"
+    ],
+    "question": "列出 2025 年 1 月入庫的商品",
+    "question_toks": [
+      "列出",
+      "2025",
+      "年",
+      "1",
+      "月入庫的商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vProduct;",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "question": "查詢所有商品的名稱",
+    "question_toks": [
+      "查詢所有商品的名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct;",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "question": "列出所有產品的編號和名稱",
+    "question_toks": [
+      "列出所有產品的編號和名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT COUNT(*) AS total_products FROM WP_M09.dbo.WP_vProduct;",
+    "query_toks": [
+      "SELECT",
+      "COUNT",
+      "(*)",
+      "AS",
+      "total_products",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "COUNT",
+      "(*)",
+      "AS",
+      "total_products",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "question": "商品總數有幾項",
+    "question_toks": [
+      "商品總數有幾項"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT SUM(qtyNow) FROM WP_M09.dbo.WP_vProduct;",
+    "query_toks": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qtyNow",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qtyNow",
+      ")",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "question": "查詢所有商品的當前庫存總量",
+    "question_toks": [
+      "查詢所有商品的當前庫存總量"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT TOP 5 pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct ORDER BY qtyNow DESC;",
+    "query_toks": [
+      "SELECT",
+      "TOP",
+      "5",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qtyNow",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "ORDER",
+      "BY",
+      "qtyNow",
+      "DESC",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "TOP",
+      "5",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qtyNow",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "ORDER",
+      "BY",
+      "qtyNow",
+      "DESC",
+      ";"
+    ],
+    "question": "目前庫存最多的前 5 項產品",
+    "question_toks": [
+      "目前庫存最多的前",
+      "5",
+      "項產品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%茶%';",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'%茶%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢名稱含有「茶」的商品",
+    "question_toks": [
+      "查詢名稱含有「茶」的商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%茶%';",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'%茶%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pName",
+      "LIKE",
+      "N",
+      "'value'",
+      ";"
+    ],
+    "question": "有包含茶名稱的商品有哪些",
+    "question_toks": [
+      "有包含茶名稱的商品有哪些"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 50;",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "priceStd",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "priceStd",
+      ">",
+      "50",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "priceStd",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "priceStd",
+      ">",
+      "50",
+      ";"
+    ],
+    "question": "查詢標準售價大於 50 的商品",
+    "question_toks": [
+      "查詢標準售價大於",
+      "50",
+      "的商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < qtySafe;",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qtyNow",
+      ",",
+      "qtySafe",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "qtyNow",
+      "<",
+      "qtySafe",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "qtyNow",
+      ",",
+      "qtySafe",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "qtyNow",
+      "<",
+      "qtySafe",
+      ";"
+    ],
+    "question": "庫存低於安全存量的商品有哪些",
+    "question_toks": [
+      "庫存低於安全存量的商品有哪些"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName = N'實垣有限公司';",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pvName",
+      "=",
+      "N",
+      "'實垣有限公司'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pvName",
+      "=",
+      "N",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢供應商名稱 '實垣有限公司' 供應的所有商品",
+    "question_toks": [
+      "查詢供應商名稱",
+      "'實垣有限公司'",
+      "供應的所有商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName, priceStd, costAvg FROM WP_M09.dbo.WP_vProduct WHERE pBarcode = '4710632001318';",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "priceStd",
+      ",",
+      "costAvg",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pBarcode",
+      "=",
+      "'4710632001318'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "priceStd",
+      ",",
+      "costAvg",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pBarcode",
+      "=",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢條碼 '4710632001318' 的商品資料",
+    "question_toks": [
+      "查詢條碼",
+      "'4710632001318'",
+      "的商品資料"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pkName, AVG(priceStd) AS avg_price FROM WP_M09.dbo.WP_vProduct GROUP BY pkName ORDER BY avg_price DESC;",
+    "query_toks": [
+      "SELECT",
+      "pkName",
+      ",",
+      "AVG",
+      "(",
+      "priceStd",
+      ")",
+      "AS",
+      "avg_price",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "GROUP",
+      "BY",
+      "pkName",
+      "ORDER",
+      "BY",
+      "avg_price",
+      "DESC",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pkName",
+      ",",
+      "AVG",
+      "(",
+      "priceStd",
+      ")",
+      "AS",
+      "avg_price",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "GROUP",
+      "BY",
+      "pkName",
+      "ORDER",
+      "BY",
+      "avg_price",
+      "DESC",
+      ";"
+    ],
+    "question": "各類別商品的平均售價是多少",
+    "question_toks": [
+      "各類別商品的平均售價是多少"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT TOP 10 pNo, pName, costAvg FROM WP_M09.dbo.WP_vProduct ORDER BY costAvg DESC;",
+    "query_toks": [
+      "SELECT",
+      "TOP",
+      "10",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "costAvg",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "ORDER",
+      "BY",
+      "costAvg",
+      "DESC",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "TOP",
+      "10",
+      "pNo",
+      ",",
+      "pName",
+      ",",
+      "costAvg",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "ORDER",
+      "BY",
+      "costAvg",
+      "DESC",
+      ";"
+    ],
+    "question": "成本最高的前 10 項商品",
+    "question_toks": [
+      "成本最高的前",
+      "10",
+      "項商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT SUM(qtyNow * costAvg) AS total_value FROM WP_M09.dbo.WP_vProduct;",
+    "query_toks": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qtyNow",
+      "*",
+      "costAvg",
+      ")",
+      "AS",
+      "total_value",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "SUM",
+      "(",
+      "qtyNow",
+      "*",
+      "costAvg",
+      ")",
+      "AS",
+      "total_value",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      ";"
+    ],
+    "question": "查詢所有商品的庫存總金額",
+    "question_toks": [
+      "查詢所有商品的庫存總金額"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202412%';",
+    "query_toks": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pNo",
+      "LIKE",
+      "'202412%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pNo",
+      ",",
+      "pName",
+      "FROM",
+      "WP_M09.dbo.WP_vProduct",
+      "WHERE",
+      "pNo",
+      "LIKE",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢 2024 年 12 月新增的商品",
+    "question_toks": [
+      "查詢",
+      "2024",
+      "年",
+      "12",
+      "月新增的商品"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vProvider;",
+    "query_toks": [
+      "SELECT",
+      "DISTINCT",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "DISTINCT",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      ";"
+    ],
+    "question": "查詢所有供應商的名稱",
+    "question_toks": [
+      "查詢所有供應商的名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider;",
+    "query_toks": [
+      "SELECT",
+      "pvSn",
+      ",",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pvSn",
+      ",",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      ";"
+    ],
+    "question": "列出所有供應商的編號和名稱",
+    "question_toks": [
+      "列出所有供應商的編號和名稱"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT COUNT(*) AS total_providers FROM WP_M09.dbo.WP_vProvider;",
+    "query_toks": [
+      "SELECT",
+      "COUNT",
+      "(*)",
+      "AS",
+      "total_providers",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "COUNT",
+      "(*)",
+      "AS",
+      "total_providers",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      ";"
+    ],
+    "question": "共有幾個供應商",
+    "question_toks": [
+      "共有幾個供應商"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%有限公司%';",
+    "query_toks": [
+      "SELECT",
+      "pvSn",
+      ",",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      "WHERE",
+      "pvName",
+      "LIKE",
+      "N",
+      "'%有限公司%'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pvSn",
+      ",",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      "WHERE",
+      "pvName",
+      "LIKE",
+      "N",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢供應商名稱含有「有限公司」的廠商",
+    "question_toks": [
+      "查詢供應商名稱含有「有限公司」的廠商"
+    ]
+  },
+  {
+    "db_id": "WP_M09",
+    "query": "SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvSn = '21';",
+    "query_toks": [
+      "SELECT",
+      "pvSn",
+      ",",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      "WHERE",
+      "pvSn",
+      "=",
+      "'21'",
+      ";"
+    ],
+    "query_toks_no_value": [
+      "SELECT",
+      "pvSn",
+      ",",
+      "pvName",
+      "FROM",
+      "WP_M09.dbo.WP_vProvider",
+      "WHERE",
+      "pvSn",
+      "=",
+      "'value'",
+      ";"
+    ],
+    "question": "查詢供應商編號為 '21' 的廠商資料",
+    "question_toks": [
+      "查詢供應商編號為",
+      "'21'",
+      "的廠商資料"
+    ]
+  }
+]

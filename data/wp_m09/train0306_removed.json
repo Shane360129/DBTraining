@@ -1,0 +1,626 @@
+[
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the account date and amount for transactions with detail serial number 'D555'.",
+    "query": "SELECT acctInDate, amount FROM WP_vAcctIn WHERE dtlSn = 'D555' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'D555' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the difference between out stock detail amount total and detail amount for product P005.",
+    "query": "SELECT oStkDtlAmtTotal - oStkDtlAmt FROM WP_vAcctIn WHERE pNo = 'P005' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P005' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the out stock detail total amounts for out stock sequence 'SQ999', ordered from highest to lowest.",
+    "query": "SELECT oStkDtlAmtTotal FROM WP_vAcctIn WHERE oStkSn = 'SQ999' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY oStkDtlAmtTotal DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'SQ999' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the account date and transfer amount for transactions with detail serial number 'D555'.",
+    "query": "SELECT acctOutDate, transAmt FROM WP_vAcctOut WHERE dtlSn = 'D555' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'D555' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all active warehouse IDs and their names.",
+    "query": "SELECT DISTINCT WarehouseId, WarehouseName FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseId'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseName'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show valid records with an average cost between 100 and 500.",
+    "query": "SELECT * FROM WP_vInStock WHERE costAvg BETWEEN 100 AND 500 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total quantity processed by each warehouse?",
+    "query": "SELECT WarehouseId, WarehouseName, SUM(qty) FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY WarehouseId, WarehouseName",
+    "table": "WP_vInStock",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseId'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseName'。 (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseId'。 (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseName'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the warehouses whose average detail amount is higher than the overall average detail amount.",
+    "query": "SELECT WarehouseId, WarehouseName FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY WarehouseId, WarehouseName HAVING AVG(dtlAmt) > (SELECT AVG(dtlAmt) FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N')",
+    "table": "WP_vInStock",
+    "difficulty": "hard",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseId'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseName'。 (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseId'。 (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseName'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show warehouses that received stock in Q1 2024.",
+    "query": "SELECT DISTINCT WarehouseId FROM WP_vInStock WHERE LEFT(InStkId, 8) BETWEEN '20240101' AND '20240331' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseId'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the lowest 5 average costs that are valid.",
+    "query": "SELECT TOP 5 costAvg FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg ASC",
+    "table": "WP_vInStock",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the top 5 highest average costs ever applied to a single entry.",
+    "query": "SELECT TOP 5 costAvg FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg DESC",
+    "table": "WP_vInStock",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the minimum and maximum pay left recorded for warehouse ID 'W001'.",
+    "query": "SELECT MIN(payLeft), MAX(payLeft) FROM WP_vInStock WHERE WarehouseId = 'W001' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseId'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many unique production provider IDs were processed for each warehouse name?",
+    "query": "SELECT WarehouseName, COUNT(DISTINCT pdPvId) FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY WarehouseName",
+    "table": "WP_vInStock",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseName'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'WarehouseName'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display the top 5 product names with the highest average cost.",
+    "query": "SELECT TOP 5 pName, AVG(costAvg) FROM WP_vInStock WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName ORDER BY AVG(costAvg) DESC",
+    "table": "WP_vInStock",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the difference between the original total amount and total amount for product number P010.",
+    "query": "SELECT amtTotalOrgnl - amtTotal FROM WP_vInStock WHERE pNo = 'P010' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P010' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the standard price and member price for product number 'P001'.",
+    "query": "SELECT priceStd, priceMem FROM WP_vInventory WHERE pNo = 'P001'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P001' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the difference between the standard price and batch price for product code 'A001'.",
+    "query": "SELECT priceStd - priceBat FROM WP_vInventory WHERE pCode = 'A001'",
+    "table": "WP_vInventory",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the unique store codes that update their stock.",
+    "query": "SELECT DISTINCT pCode FROM WP_vInventory WHERE isUpdStock = 'Y'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the provider names that supply product code 'B002'.",
+    "query": "SELECT DISTINCT pvName FROM WP_vInventory WHERE pCode = 'B002'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Who are the vendors for the item with store code B002?",
+    "query": "SELECT DISTINCT pvName FROM WP_vInventory WHERE pCode = 'B002'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List product names and codes whose standard price is at least twice their average cost.",
+    "query": "SELECT pName, pCode FROM WP_vInventory WHERE priceStd >= (costAvg * 2)",
+    "table": "WP_vInventory",
+    "difficulty": "hard",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which items (name and code) have a standard selling price that is double or more than their average cost?",
+    "query": "SELECT pName, pCode FROM WP_vInventory WHERE priceStd >= (costAvg * 2)",
+    "table": "WP_vInventory",
+    "difficulty": "hard",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the product numbers and names that use the unit 'BOX'.",
+    "query": "SELECT pNo, pName FROM WP_vInventory WHERE pUnit = 'BOX'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'BOX' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the IDs and names of items measured in unit BOX.",
+    "query": "SELECT pNo, pName FROM WP_vInventory WHERE pUnit = 'BOX'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'BOX' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the product codes where the member price is less than 100.",
+    "query": "SELECT pCode FROM WP_vInventory WHERE priceMem < 100",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which store codes belong to items with a membership price under 100?",
+    "query": "SELECT pCode FROM WP_vInventory WHERE priceMem < 100",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the product short name and provider short name for product number 'P999'.",
+    "query": "SELECT pNameS, pvNameS FROM WP_vInventory WHERE pNo = 'P999'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P999' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the item short name and vendor short name for product P999?",
+    "query": "SELECT pNameS, pvNameS FROM WP_vInventory WHERE pNo = 'P999'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P999' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the warehouse name that holds the highest current quantity of product code 'A123'.",
+    "query": "SELECT TOP 1 WarehouseName FROM WP_vInventory WHERE pCode = 'A123' ORDER BY qtyNow DESC",
+    "table": "WP_vInventory",
+    "difficulty": "hard",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which warehouse has the most stock right now for the item with store code A123?",
+    "query": "SELECT TOP 1 WarehouseName FROM WP_vInventory WHERE pCode = 'A123' ORDER BY qtyNow DESC",
+    "table": "WP_vInventory",
+    "difficulty": "hard",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the product names and codes where the standard cost is 0.",
+    "query": "SELECT pName, pCode FROM WP_vInventory WHERE costStd = 0",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the items (by name and code) that have a standard cost of exactly zero.",
+    "query": "SELECT pName, pCode FROM WP_vInventory WHERE costStd = 0",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the names of products where the product code contains 'K01'.",
+    "query": "SELECT pName FROM WP_vInventory WHERE pCode LIKE '%K01%'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the items named whose store code includes the substring K01?",
+    "query": "SELECT pName FROM WP_vInventory WHERE pCode LIKE '%K01%'",
+    "table": "WP_vInventory",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'pCode'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the product numbers and detail standard costs for member ID 'M005'.",
+    "query": "SELECT pNo, dtlCostStd FROM WP_vOutStockUnion WHERE memId = 'M005' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records where the detail average cost exactly matches the detail standard cost.",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE dtlCostAvg = dtlCostStd AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show valid records with an initial cost between 1000 and 2000.",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE costInitial BETWEEN 1000 AND 2000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the details for products NOT IN number list 'P10' or 'P20'?",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE pNo NOT IN ('P10', 'P20') AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P20' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the total detail discount share given per warehouse serial number.",
+    "query": "SELECT whSn, SUM(dtlDiscntShare) FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY whSn",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the minimum initial cost recorded for active sales?",
+    "query": "SELECT MIN(costInitial) FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the out-stock IDs for warehouse serial number 150.",
+    "query": "SELECT OutStkId FROM WP_vOutStockUnion WHERE whSn = '150' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total detail discount distributed per warehouse serial number.",
+    "query": "SELECT whSn, SUM(dtlDiscnt) FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY whSn",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the lowest 5 initial costs that are valid.",
+    "query": "SELECT TOP 5 costInitial FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' ORDER BY costInitial ASC",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find valid entries where the product short name is not empty and warehouse serial number is 'WH1'.",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE pNameS <> '' AND whSn = 'WH1' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the total quantities grouped by member kind ID and warehouse serial number?",
+    "query": "SELECT memKId, whSn, SUM(qty) FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY memKId, whSn",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find all valid sales where the detail average cost does not match the detail standard cost.",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE dtlCostAvg <> dtlCostStd AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the average standard cost for products that have a short name.",
+    "query": "SELECT AVG(dtlCostStd) FROM WP_vOutStockUnion WHERE pNameS IS NOT NULL AND pNameS <> '' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum detail average cost ever given for product number P005?",
+    "query": "SELECT MAX(dtlCostAvg) FROM WP_vOutStockUnion WHERE pNo = 'P005' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P005' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which members bought product number 'P001' and 'P002'?",
+    "query": "SELECT DISTINCT memId FROM WP_vOutStockUnion WHERE pNo = 'P001' AND isDel = 'N' AND dtlIsDel = 'N' AND memId IN (SELECT memId FROM WP_vOutStockUnion WHERE pNo = 'P002' AND isDel = 'N' AND dtlIsDel = 'N')",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P001' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show active records where the initial cost and detail standard cost are identical.",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE costInitial = dtlCostStd AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the top 5 highest detail standard costs ever applied.",
+    "query": "SELECT TOP 5 dtlCostStd FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' ORDER BY dtlCostStd DESC",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve valid entries where the total amount equals the quantity multiplied by the detail standard cost.",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE amtTotal = (qty * dtlCostStd) AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count how many active sales include product number 'A' but not product number 'B'.",
+    "query": "SELECT COUNT(DISTINCT OutStkId) FROM WP_vOutStockUnion WHERE pNo = 'A' AND isDel = 'N' AND dtlIsDel = 'N' AND OutStkId NOT IN (SELECT OutStkId FROM WP_vOutStockUnion WHERE pNo = 'B' AND isDel = 'N' AND dtlIsDel = 'N')",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'A' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the product numbers associated with the highest initial cost.",
+    "query": "SELECT pNo FROM WP_vOutStockUnion WHERE costInitial = (SELECT MAX(costInitial) FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N') AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the minimum and maximum initial quantity recorded for warehouse serial number 'WH001'.",
+    "query": "SELECT MIN(qtyInitial), MAX(qtyInitial) FROM WP_vOutStockUnion WHERE whSn = 'WH001' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many unique POS out-stock IDs were processed for each warehouse serial number?",
+    "query": "SELECT whSn, COUNT(DISTINCT PosOutStkId) FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY whSn",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'whSn'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display the top 5 product short names with the highest average detail standard cost.",
+    "query": "SELECT TOP 5 pNameS, AVG(dtlCostStd) FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pNameS ORDER BY AVG(dtlCostStd) DESC",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Pull up the top 10 records with the highest initial costs.",
+    "query": "SELECT TOP 10 * FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' ORDER BY costInitial DESC",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the detail serial number and product short name for items with a product number of 'X1' or 'Y2'?",
+    "query": "SELECT dtlsn, pNameS FROM WP_vOutStockUnion WHERE pNo IN ('X1', 'Y2') AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'Y2' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the difference between the initial quantity and current quantity for product number P010.",
+    "query": "SELECT qtyInitial - qty FROM WP_vOutStockUnion WHERE pNo = 'P010' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P010' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum detail standard cost assigned in February 2024?",
+    "query": "SELECT MAX(dtlCostStd) FROM WP_vOutStockUnion WHERE LEFT(OutStkId, 8) BETWEEN '20240201' AND '20240229' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'dtlCostStd'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which product numbers have an average initial cost greater than 50?",
+    "query": "SELECT pNo FROM WP_vOutStockUnion WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pNo HAVING AVG(costInitial) > 50",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard",
+    "_removed_reason": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costInitial'。 (207) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the current quantity and safe quantity for product number 'P001'.",
+    "query": "SELECT qtyNow, qtySafe FROM WP_vProduct WHERE pNo = 'P001'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P001' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the difference between the standard price and the lowest price for product 'P888'.",
+    "query": "SELECT (priceStd - priceLow) FROM WP_vProduct WHERE pNo = 'P888'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P888' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the creation and update times for product number 'P100'.",
+    "query": "SELECT timeCreate, timeUpdate FROM WP_vProduct WHERE pNo = 'P100'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P100' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which products belong to units 'BOX', 'PCS', or 'SET'?",
+    "query": "SELECT * FROM WP_vProduct WHERE pUnit IN ('BOX', 'PCS', 'SET')",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'SET' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the member price and batch price for product number P2024.",
+    "query": "SELECT priceMem, priceBat FROM WP_vProduct WHERE pNo = 'P2024'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P2024' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the creation and update times for product number 'P999'.",
+    "query": "SELECT timeCreate, timeUpdate FROM WP_vProduct WHERE pNo = 'P999'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P999' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count how many providers supply product unit 'BOX' but do not supply unit 'PCS'.",
+    "query": "SELECT COUNT(DISTINCT pvId) FROM WP_vProduct WHERE pUnit = 'BOX' AND pvId NOT IN (SELECT pvId FROM WP_vProduct WHERE pUnit = 'PCS')",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'BOX' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the minimum and maximum batch price recorded for product unit 'PCS'.",
+    "query": "SELECT MIN(priceBat), MAX(priceBat) FROM WP_vProduct WHERE pUnit = 'PCS'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'PCS' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the difference between the safe quantity and current quantity for product number P010.",
+    "query": "SELECT qtySafe - qtyNow FROM WP_vProduct WHERE pNo = 'P010'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P010' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the transfer date and quantity for transactions with detail serial number 'D555'.",
+    "query": "SELECT TransferDate, qty FROM WP_vTransfer WHERE dtlSn = 'D555' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'D555' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count how many active transfers include product number 'A' but not product number 'B'.",
+    "query": "SELECT COUNT(DISTINCT TransferId) FROM WP_vTransfer WHERE pNo = 'A' AND isDel = 'N' AND dtlIsDel = 'N' AND TransferId NOT IN (SELECT TransferId FROM WP_vTransfer WHERE pNo = 'B' AND isDel = 'N' AND dtlIsDel = 'N')",
+    "table": "WP_vTransfer",
+    "difficulty": "hard",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'A' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the highest single transfer quantity for product number 'P-123'?",
+    "query": "SELECT MAX(qty) FROM WP_vTransfer WHERE pNo = 'P-123' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P-123' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the lowest single transfer quantity for product number 'P-456'.",
+    "query": "SELECT MIN(qty) FROM WP_vTransfer WHERE pNo = 'P-456' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "medium",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P-456' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the transfer ID and transfer date for product number 'P001'.",
+    "query": "SELECT TransferId, TransferDate FROM WP_vTransfer WHERE pNo = 'P001' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'P001' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get the quantity and transfer date for the specific detail serial number 'SN-001'.",
+    "query": "SELECT qty, TransferDate FROM WP_vTransfer WHERE dtlSn = 'SN-001' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'SN-001' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the quantity and transfer date for detail serial number 'SN-002'.",
+    "query": "SELECT qty, TransferDate FROM WP_vTransfer WHERE dtlSn = 'SN-002' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy",
+    "_removed_reason": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'SN-002' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+  }
+]

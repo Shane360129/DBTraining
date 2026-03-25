@@ -1,0 +1,1471 @@
+{
+  "test_set": "上傳測試集 (182樣本)",
+  "path": "data\\wp_m09\\test.json",
+  "total": 182,
+  "success": 162,
+  "fail": 20,
+  "accuracy": 89.01,
+  "error_summary": {
+    "('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server": 2,
+    "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server": 10,
+    "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server": 8
+  },
+  "details": [
+    {
+      "index": 0,
+      "table": "WP_vAcctIn",
+      "question": "What is the maximum amount recorded on 2026-02-14?",
+      "sql": "SELECT MAX(amount) FROM WP_vAcctIn WHERE acctInId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 1,
+      "table": "WP_vAcctIn",
+      "question": "List empId and their total amount during February 2026.",
+      "sql": "SELECT empId, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '202602%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY empId",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 2,
+      "table": "WP_vAcctIn",
+      "question": "Calculate the total amount for each memName in the year 2026.",
+      "sql": "SELECT memName, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 3,
+      "table": "WP_vAcctIn",
+      "question": "Identify memo categories that had more than 4 transactions in 2024.",
+      "sql": "SELECT memo FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo HAVING COUNT(*) > 4",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 4,
+      "table": "WP_vAcctIn",
+      "question": "What is the percentage of total amount contributed by memName 'Shane' in March 2026?",
+      "sql": "SELECT (SUM(CASE WHEN memName = 'Shane' THEN amount ELSE 0 END) / SUM(amount)) * 100 FROM WP_vAcctIn WHERE acctInId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 5,
+      "table": "WP_vAcctIn",
+      "question": "Show the top 5 empId sorted by amount in descending order for 2025-10-01.",
+      "sql": "SELECT TOP 5 empId FROM WP_vAcctIn WHERE acctInId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 6,
+      "table": "WP_vAcctIn",
+      "question": "List the acctInId where amount is less than 10000.",
+      "sql": "SELECT acctInId FROM WP_vAcctIn WHERE amount < 10000 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 7,
+      "table": "WP_vAcctIn",
+      "question": "List the unique pName in WP_vAcctIn.",
+      "sql": "SELECT DISTINCT pName FROM WP_vAcctIn WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 8,
+      "table": "WP_vAcctIn",
+      "question": "What is the maximum amount recorded on 2026-01-01?",
+      "sql": "SELECT MAX(amount) FROM WP_vAcctIn WHERE acctInId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 9,
+      "table": "WP_vAcctIn",
+      "question": "Show all columns for WP_vAcctIn from the year 2024.",
+      "sql": "SELECT * FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 10,
+      "table": "WP_vAcctIn",
+      "question": "Calculate the total amount for each memName in the year 2024.",
+      "sql": "SELECT memName, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 11,
+      "table": "WP_vAcctIn",
+      "question": "How many WP_vAcctIn records exist for the date 2025-10-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vAcctIn WHERE acctInId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 12,
+      "table": "WP_vAcctIn",
+      "question": "Count the WP_vAcctIn items that have a memo equal to 'Main Office'.",
+      "sql": "SELECT COUNT(*) FROM WP_vAcctIn WHERE memo = 'Main Office' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 13,
+      "table": "WP_vAcctIn",
+      "question": "What is the total amount for memo 'EMP001'?",
+      "sql": "SELECT SUM(amount) FROM WP_vAcctIn WHERE memo = 'EMP001' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 14,
+      "table": "WP_vAcctIn",
+      "question": "Calculate the total amount for each memName in the year 2026.",
+      "sql": "SELECT memName, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 15,
+      "table": "WP_vAcctIn",
+      "question": "Calculate the total amount for each memo in the year 2024.",
+      "sql": "SELECT memo, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 16,
+      "table": "WP_vAcctIn",
+      "question": "Show memName and amount for the entry with the highest amount in the first half of 2025.",
+      "sql": "SELECT memName, amount FROM WP_vAcctIn WHERE acctInId >= 202501010000 AND acctInId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 17,
+      "table": "WP_vAcctIn",
+      "question": "List the pName where amount is less than 50000.",
+      "sql": "SELECT pName FROM WP_vAcctIn WHERE amount < 50000 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 18,
+      "table": "WP_vAcctIn",
+      "question": "Show all columns for WP_vAcctIn from the year 2025.",
+      "sql": "SELECT * FROM WP_vAcctIn WHERE acctInId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 19,
+      "table": "WP_vAcctIn",
+      "question": "Show the top 5 empId sorted by amount in descending order for 2026-03-05.",
+      "sql": "SELECT TOP 5 empId FROM WP_vAcctIn WHERE acctInId LIKE '20260305%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 20,
+      "table": "WP_vAcctIn",
+      "question": "What is the maximum amount recorded on 2025-12-31?",
+      "sql": "SELECT MAX(amount) FROM WP_vAcctIn WHERE acctInId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 21,
+      "table": "WP_vAcctIn",
+      "question": "Show the memo where the average amount in 2025 is higher than the average in the previous year 2024.",
+      "sql": "SELECT memo FROM WP_vAcctIn WHERE acctInId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo HAVING AVG(amount) > (SELECT AVG(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N')",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 22,
+      "table": "WP_vAcctIn",
+      "question": "What is the percentage of total amount contributed by memName 'Warehouse A' in February 2026?",
+      "sql": "SELECT (SUM(CASE WHEN memName = 'Warehouse A' THEN amount ELSE 0 END) / SUM(amount)) * 100 FROM WP_vAcctIn WHERE acctInId LIKE '202602%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 23,
+      "table": "WP_vAcctIn",
+      "question": "How many WP_vAcctIn records exist for the date 2025-10-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vAcctIn WHERE acctInId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 24,
+      "table": "WP_vAcctIn",
+      "question": "Show all columns for WP_vAcctIn from the year 2025.",
+      "sql": "SELECT * FROM WP_vAcctIn WHERE acctInId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 25,
+      "table": "WP_vAcctIn",
+      "question": "Identify memo categories that had more than 17 transactions in 2024.",
+      "sql": "SELECT memo FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo HAVING COUNT(*) > 17",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 26,
+      "table": "WP_vAcctOut",
+      "question": "What is the maximum transAmt recorded on 2025-12-31?",
+      "sql": "SELECT MAX(transAmt) FROM WP_vAcctOut WHERE acctOutId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 27,
+      "table": "WP_vAcctOut",
+      "question": "List the unique pvName in WP_vAcctOut.",
+      "sql": "SELECT DISTINCT pvName FROM WP_vAcctOut WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 28,
+      "table": "WP_vAcctOut",
+      "question": "What is the percentage of total transAmt contributed by pvName 'Alice' in March 2026?",
+      "sql": "SELECT (SUM(CASE WHEN pvName = 'Alice' THEN transAmt ELSE 0 END) / SUM(transAmt)) * 100 FROM WP_vAcctOut WHERE acctOutId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 29,
+      "table": "WP_vAcctOut",
+      "question": "Identify pvName categories that had more than 13 transactions in 2025.",
+      "sql": "SELECT pvName FROM WP_vAcctOut WHERE acctOutId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 13",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 30,
+      "table": "WP_vAcctOut",
+      "question": "Show all columns for WP_vAcctOut from the year 2024.",
+      "sql": "SELECT * FROM WP_vAcctOut WHERE acctOutId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 31,
+      "table": "WP_vAcctOut",
+      "question": "What is the maximum transAmt recorded on 2026-01-01?",
+      "sql": "SELECT MAX(transAmt) FROM WP_vAcctOut WHERE acctOutId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 32,
+      "table": "WP_vAcctOut",
+      "question": "Find the average amount for Shane transactions in January 2026.",
+      "sql": "SELECT AVG(amount) FROM WP_vAcctOut WHERE pvName = 'Shane' AND acctOutId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 33,
+      "table": "WP_vAcctOut",
+      "question": "Calculate the total amount for each pvName in the year 2026.",
+      "sql": "SELECT pvName, SUM(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 34,
+      "table": "WP_vAcctOut",
+      "question": "Show the top 5 acctOutId sorted by transAmt in descending order for 2026-02-14.",
+      "sql": "SELECT TOP 5 acctOutId FROM WP_vAcctOut WHERE acctOutId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY transAmt DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 35,
+      "table": "WP_vAcctOut",
+      "question": "List the pvName where transAmt is less than 50000.",
+      "sql": "SELECT pvName FROM WP_vAcctOut WHERE transAmt < 50000 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 36,
+      "table": "WP_vAcctOut",
+      "question": "Find the average transAmt for Alice transactions in December 2025.",
+      "sql": "SELECT AVG(transAmt) FROM WP_vAcctOut WHERE pvName = 'Alice' AND acctOutId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 37,
+      "table": "WP_vAcctOut",
+      "question": "How many WP_vAcctOut records exist for the date 2025-12-31?",
+      "sql": "SELECT COUNT(*) FROM WP_vAcctOut WHERE acctOutId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 38,
+      "table": "WP_vAcctOut",
+      "question": "Compare the sum of amount between Main Office and EMP001 for the year 2024.",
+      "sql": "SELECT pvName, SUM(amount) FROM WP_vAcctOut WHERE pvName IN ('Main Office', 'EMP001') AND acctOutId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 39,
+      "table": "WP_vAcctOut",
+      "question": "How many WP_vAcctOut records exist for the date 2026-02-14?",
+      "sql": "SELECT COUNT(*) FROM WP_vAcctOut WHERE acctOutId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 40,
+      "table": "WP_vAcctOut",
+      "question": "Identify pvName categories that had more than 3 transactions in 2026.",
+      "sql": "SELECT pvName FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 3",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 41,
+      "table": "WP_vAcctOut",
+      "question": "What is the percentage of total transAmt contributed by pvName 'Main Office' in October 2025?",
+      "sql": "SELECT (SUM(CASE WHEN pvName = 'Main Office' THEN transAmt ELSE 0 END) / SUM(transAmt)) * 100 FROM WP_vAcctOut WHERE acctOutId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 42,
+      "table": "WP_vAcctOut",
+      "question": "Find the average transAmt for Warehouse A transactions in December 2025.",
+      "sql": "SELECT AVG(transAmt) FROM WP_vAcctOut WHERE pvName = 'Warehouse A' AND acctOutId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 43,
+      "table": "WP_vAcctOut",
+      "question": "List pvName whose amount is above the overall average for 2026.",
+      "sql": "SELECT pvName FROM WP_vAcctOut WHERE amount > (SELECT AVG(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 44,
+      "table": "WP_vAcctOut",
+      "question": "Identify pvName categories that had more than 12 transactions in 2026.",
+      "sql": "SELECT pvName FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 12",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 45,
+      "table": "WP_vAcctOut",
+      "question": "List pvName and their total amount during October 2025.",
+      "sql": "SELECT pvName, SUM(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 46,
+      "table": "WP_vAcctOut",
+      "question": "How many WP_vAcctOut records exist for the date 2026-02-14?",
+      "sql": "SELECT COUNT(*) FROM WP_vAcctOut WHERE acctOutId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 47,
+      "table": "WP_vAcctOut",
+      "question": "Show pName and amount for the entry with the highest amount in the first half of 2025.",
+      "sql": "SELECT pName, amount FROM WP_vAcctOut WHERE acctOutId >= 202501010000 AND acctOutId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "FAIL",
+      "error": "('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將資料類型從 varchar 轉換到 numeric 時發生錯誤。 (8114) (SQLExecDirectW)')"
+    },
+    {
+      "index": 48,
+      "table": "WP_vAcctOut",
+      "question": "Count the WP_vAcctOut items that have a pvName equal to 'EMP001'.",
+      "sql": "SELECT COUNT(*) FROM WP_vAcctOut WHERE pvName = 'EMP001' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 49,
+      "table": "WP_vAcctOut",
+      "question": "List acctOutId and their total amount during October 2025.",
+      "sql": "SELECT acctOutId, SUM(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY acctOutId",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 50,
+      "table": "WP_vAcctOut",
+      "question": "Show pvName and transAmt for the entry with the highest transAmt in the first half of 2025.",
+      "sql": "SELECT pvName, transAmt FROM WP_vAcctOut WHERE acctOutId >= 202501010000 AND acctOutId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY transAmt DESC",
+      "status": "FAIL",
+      "error": "('42000', '[42000] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將資料類型從 varchar 轉換到 numeric 時發生錯誤。 (8114) (SQLExecDirectW)')"
+    },
+    {
+      "index": 51,
+      "table": "WP_vAcctOut",
+      "question": "List the acctOutId where transAmt is less than 50000.",
+      "sql": "SELECT acctOutId FROM WP_vAcctOut WHERE transAmt < 50000 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 52,
+      "table": "WP_vInStock",
+      "question": "List pvName whose amtNoneTax is above the overall average for 2026.",
+      "sql": "SELECT pvName FROM WP_vInStock WHERE amtNoneTax > (SELECT AVG(amtNoneTax) FROM WP_vInStock WHERE InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 53,
+      "table": "WP_vInStock",
+      "question": "What is the total amount for pvName 'Alice'?",
+      "sql": "SELECT SUM(amount) FROM WP_vInStock WHERE pvName = 'Alice' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 54,
+      "table": "WP_vInStock",
+      "question": "What is the percentage of total amtNoneTax contributed by pvName 'Alice' in March 2026?",
+      "sql": "SELECT (SUM(CASE WHEN pvName = 'Alice' THEN amtNoneTax ELSE 0 END) / SUM(amtNoneTax)) * 100 FROM WP_vInStock WHERE InStkId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 55,
+      "table": "WP_vInStock",
+      "question": "Calculate the total amtNoneTax for each pvName in the year 2026.",
+      "sql": "SELECT pvName, SUM(amtNoneTax) FROM WP_vInStock WHERE InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 56,
+      "table": "WP_vInStock",
+      "question": "List the InStkId where amtNoneTax is less than 5000.",
+      "sql": "SELECT InStkId FROM WP_vInStock WHERE amtNoneTax < 5000 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 57,
+      "table": "WP_vInStock",
+      "question": "What is the maximum amount recorded on 2025-12-31?",
+      "sql": "SELECT MAX(amount) FROM WP_vInStock WHERE InStkId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 58,
+      "table": "WP_vInStock",
+      "question": "Show the top 5 pvName sorted by amount in descending order for 2026-01-01.",
+      "sql": "SELECT TOP 5 pvName FROM WP_vInStock WHERE InStkId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 59,
+      "table": "WP_vInStock",
+      "question": "List pName and their total amount during October 2025.",
+      "sql": "SELECT pName, SUM(amount) FROM WP_vInStock WHERE InStkId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 60,
+      "table": "WP_vInStock",
+      "question": "List the pName where amount is less than 1000.",
+      "sql": "SELECT pName FROM WP_vInStock WHERE amount < 1000 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 61,
+      "table": "WP_vInStock",
+      "question": "How many WP_vInStock records exist for the date 2025-10-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vInStock WHERE InStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 62,
+      "table": "WP_vInStock",
+      "question": "Show all columns for WP_vInStock from the year 2025.",
+      "sql": "SELECT * FROM WP_vInStock WHERE InStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 63,
+      "table": "WP_vInStock",
+      "question": "List the unique InStkId in WP_vInStock.",
+      "sql": "SELECT DISTINCT InStkId FROM WP_vInStock WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 64,
+      "table": "WP_vInStock",
+      "question": "List pName and their total amtNoneTax during December 2025.",
+      "sql": "SELECT pName, SUM(amtNoneTax) FROM WP_vInStock WHERE InStkId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 65,
+      "table": "WP_vInStock",
+      "question": "What is the percentage of total amtNoneTax contributed by pvName 'Main Office' in October 2025?",
+      "sql": "SELECT (SUM(CASE WHEN pvName = 'Main Office' THEN amtNoneTax ELSE 0 END) / SUM(amtNoneTax)) * 100 FROM WP_vInStock WHERE InStkId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 66,
+      "table": "WP_vInStock",
+      "question": "Show all columns for WP_vInStock from the year 2024.",
+      "sql": "SELECT * FROM WP_vInStock WHERE InStkId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 67,
+      "table": "WP_vInStock",
+      "question": "Show the top 5 pvName sorted by amount in descending order for 2026-03-05.",
+      "sql": "SELECT TOP 5 pvName FROM WP_vInStock WHERE InStkId LIKE '20260305%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 68,
+      "table": "WP_vInStock",
+      "question": "Find the average amtNoneTax for Alice transactions in January 2026.",
+      "sql": "SELECT AVG(amtNoneTax) FROM WP_vInStock WHERE pvName = 'Alice' AND InStkId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 69,
+      "table": "WP_vInStock",
+      "question": "Identify pvName categories that had more than 8 transactions in 2024.",
+      "sql": "SELECT pvName FROM WP_vInStock WHERE InStkId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 8",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 70,
+      "table": "WP_vInStock",
+      "question": "Show pName and amtNoneTax for the entry with the highest amtNoneTax in the first half of 2024.",
+      "sql": "SELECT pName, amtNoneTax FROM WP_vInStock WHERE InStkId >= 202401010000 AND InStkId <= 202406309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amtNoneTax DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 71,
+      "table": "WP_vInStock",
+      "question": "Show the top 5 pName sorted by amount in descending order for 2026-02-14.",
+      "sql": "SELECT TOP 5 pName FROM WP_vInStock WHERE InStkId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 72,
+      "table": "WP_vInStock",
+      "question": "How many WP_vInStock records exist for the date 2026-02-14?",
+      "sql": "SELECT COUNT(*) FROM WP_vInStock WHERE InStkId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 73,
+      "table": "WP_vInStock",
+      "question": "What is the percentage of total amtNoneTax contributed by pvName 'Alice' in December 2025?",
+      "sql": "SELECT (SUM(CASE WHEN pvName = 'Alice' THEN amtNoneTax ELSE 0 END) / SUM(amtNoneTax)) * 100 FROM WP_vInStock WHERE InStkId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 74,
+      "table": "WP_vInStock",
+      "question": "List InStkId and their total amount during January 2026.",
+      "sql": "SELECT InStkId, SUM(amount) FROM WP_vInStock WHERE InStkId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY InStkId",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 75,
+      "table": "WP_vInStock",
+      "question": "Show the top 5 pName sorted by amount in descending order for 2026-02-14.",
+      "sql": "SELECT TOP 5 pName FROM WP_vInStock WHERE InStkId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 76,
+      "table": "WP_vInStock",
+      "question": "List the unique pName in WP_vInStock.",
+      "sql": "SELECT DISTINCT pName FROM WP_vInStock WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 77,
+      "table": "WP_vInStock",
+      "question": "Identify pvName categories that had more than 14 transactions in 2026.",
+      "sql": "SELECT pvName FROM WP_vInStock WHERE InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 14",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 78,
+      "table": "WP_vProduct",
+      "question": "Count the WP_vProduct items that have a priceMem equal to 'Global'.",
+      "sql": "SELECT COUNT(*) FROM WP_vProduct WHERE priceMem = 'Global'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'Global' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 79,
+      "table": "WP_vProduct",
+      "question": "Count the WP_vProduct items that have a priceMem equal to 'VIP'.",
+      "sql": "SELECT COUNT(*) FROM WP_vProduct WHERE priceMem = 'VIP'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'VIP' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 80,
+      "table": "WP_vProduct",
+      "question": "What is the total priceMem for priceMem 'Shane'?",
+      "sql": "SELECT SUM(priceMem) FROM WP_vProduct WHERE priceMem = 'Shane'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'Shane' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 81,
+      "table": "WP_vProduct",
+      "question": "What is the total priceStd for priceMem 'Shane'?",
+      "sql": "SELECT SUM(priceStd) FROM WP_vProduct WHERE priceMem = 'Shane'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'Shane' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 82,
+      "table": "WP_vProduct",
+      "question": "How many WP_vProduct records exist for the date 2025-10-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vProduct WHERE pNo LIKE '20251001%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 83,
+      "table": "WP_vProduct",
+      "question": "List pNo and their total qtySafe during October 2025.",
+      "sql": "SELECT pNo, SUM(qtySafe) FROM WP_vProduct WHERE pNo LIKE '202510%' GROUP BY pNo",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 84,
+      "table": "WP_vProduct",
+      "question": "List the unique pName in WP_vProduct.",
+      "sql": "SELECT DISTINCT pName FROM WP_vProduct WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 85,
+      "table": "WP_vProduct",
+      "question": "List the unique pName in WP_vProduct.",
+      "sql": "SELECT DISTINCT pName FROM WP_vProduct WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 86,
+      "table": "WP_vProduct",
+      "question": "Find the average qtyNow for Warehouse A transactions in January 2026.",
+      "sql": "SELECT AVG(qtyNow) FROM WP_vProduct WHERE priceMem = 'Warehouse A' AND pNo LIKE '202601%'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'Warehouse A' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 87,
+      "table": "WP_vProduct",
+      "question": "List pName whose priceMem is above the overall average for 2024.",
+      "sql": "SELECT pName FROM WP_vProduct WHERE priceMem > (SELECT AVG(priceMem) FROM WP_vProduct WHERE pNo LIKE '2024%') AND pNo LIKE '2024%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 88,
+      "table": "WP_vProduct",
+      "question": "List pName and their total qtySafe during February 2026.",
+      "sql": "SELECT pName, SUM(qtySafe) FROM WP_vProduct WHERE pNo LIKE '202602%' GROUP BY pName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 89,
+      "table": "WP_vProduct",
+      "question": "List the unique pName in WP_vProduct.",
+      "sql": "SELECT DISTINCT pName FROM WP_vProduct WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 90,
+      "table": "WP_vProduct",
+      "question": "Compare the sum of qtySafe between MemberX and Shane for the year 2024.",
+      "sql": "SELECT priceMem, SUM(qtySafe) FROM WP_vProduct WHERE priceMem IN ('MemberX', 'Shane') AND pNo LIKE '2024%' GROUP BY priceMem",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'Shane' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 91,
+      "table": "WP_vProduct",
+      "question": "Calculate the total priceStd for each priceMem in the year 2026.",
+      "sql": "SELECT priceMem, SUM(priceStd) FROM WP_vProduct WHERE pNo LIKE '2026%' GROUP BY priceMem",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 92,
+      "table": "WP_vProduct",
+      "question": "Show all columns for WP_vProduct from the year 2024.",
+      "sql": "SELECT * FROM WP_vProduct WHERE pNo LIKE '2024%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 93,
+      "table": "WP_vProduct",
+      "question": "Count the WP_vProduct items that have a priceMem equal to 'MemberX'.",
+      "sql": "SELECT COUNT(*) FROM WP_vProduct WHERE priceMem = 'MemberX'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'MemberX' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 94,
+      "table": "WP_vProduct",
+      "question": "List pNo whose costAvg is above the overall average for 2025.",
+      "sql": "SELECT pNo FROM WP_vProduct WHERE costAvg > (SELECT AVG(costAvg) FROM WP_vProduct WHERE pNo LIKE '2025%') AND pNo LIKE '2025%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 95,
+      "table": "WP_vProduct",
+      "question": "What is the maximum qtySafe recorded on 2025-12-31?",
+      "sql": "SELECT MAX(qtySafe) FROM WP_vProduct WHERE pNo LIKE '20251231%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 96,
+      "table": "WP_vProduct",
+      "question": "List the pName where costAvg is less than 5000.",
+      "sql": "SELECT pName FROM WP_vProduct WHERE costAvg < 5000",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 97,
+      "table": "WP_vProduct",
+      "question": "List pName and their total costAvg during December 2025.",
+      "sql": "SELECT pName, SUM(costAvg) FROM WP_vProduct WHERE pNo LIKE '202512%' GROUP BY pName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 98,
+      "table": "WP_vProduct",
+      "question": "Show all columns for WP_vProduct from the year 2026.",
+      "sql": "SELECT * FROM WP_vProduct WHERE pNo LIKE '2026%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 99,
+      "table": "WP_vProduct",
+      "question": "Calculate the total qtySafe for each priceMem in the year 2026.",
+      "sql": "SELECT priceMem, SUM(qtySafe) FROM WP_vProduct WHERE pNo LIKE '2026%' GROUP BY priceMem",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 100,
+      "table": "WP_vProduct",
+      "question": "Show pName and qtySafe for the entry with the highest qtySafe in the first half of 2025.",
+      "sql": "SELECT pName, qtySafe FROM WP_vProduct WHERE pNo >= 202501010000 AND pNo <= 202506309999 ORDER BY qtySafe DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 101,
+      "table": "WP_vProduct",
+      "question": "Identify priceMem categories that had more than 3 transactions in 2024.",
+      "sql": "SELECT priceMem FROM WP_vProduct WHERE pNo LIKE '2024%' GROUP BY priceMem HAVING COUNT(*) > 3",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 102,
+      "table": "WP_vProduct",
+      "question": "Identify priceMem categories that had more than 18 transactions in 2025.",
+      "sql": "SELECT priceMem FROM WP_vProduct WHERE pNo LIKE '2025%' GROUP BY priceMem HAVING COUNT(*) > 18",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 103,
+      "table": "WP_vProduct",
+      "question": "What is the total costAvg for priceMem 'Shane'?",
+      "sql": "SELECT SUM(costAvg) FROM WP_vProduct WHERE priceMem = 'Shane'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'Shane' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 104,
+      "table": "WP_vOutStockUnion",
+      "question": "What is the total dtlCostAvg for memName 'Shane'?",
+      "sql": "SELECT SUM(dtlCostAvg) FROM WP_vOutStockUnion WHERE memName = 'Shane' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 105,
+      "table": "WP_vOutStockUnion",
+      "question": "Identify memName categories that had more than 17 transactions in 2026.",
+      "sql": "SELECT memName FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName HAVING COUNT(*) > 17",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 106,
+      "table": "WP_vOutStockUnion",
+      "question": "Calculate the total qty for each memName in the year 2025.",
+      "sql": "SELECT memName, SUM(qty) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 107,
+      "table": "WP_vOutStockUnion",
+      "question": "Compare the sum of qty between Main Office and Warehouse A for the year 2025.",
+      "sql": "SELECT memName, SUM(qty) FROM WP_vOutStockUnion WHERE memName IN ('Main Office', 'Warehouse A') AND OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 108,
+      "table": "WP_vOutStockUnion",
+      "question": "Show all columns for WP_vOutStockUnion from the year 2025.",
+      "sql": "SELECT * FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 109,
+      "table": "WP_vOutStockUnion",
+      "question": "What is the maximum amtTotal recorded on 2025-10-01?",
+      "sql": "SELECT MAX(amtTotal) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 110,
+      "table": "WP_vOutStockUnion",
+      "question": "List the unique memName in WP_vOutStockUnion.",
+      "sql": "SELECT DISTINCT memName FROM WP_vOutStockUnion WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 111,
+      "table": "WP_vOutStockUnion",
+      "question": "Calculate the total qty for each memName in the year 2025.",
+      "sql": "SELECT memName, SUM(qty) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 112,
+      "table": "WP_vOutStockUnion",
+      "question": "Show OutStkId and dtlCostAvg for the entry with the highest dtlCostAvg in the first half of 2025.",
+      "sql": "SELECT OutStkId, dtlCostAvg FROM WP_vOutStockUnion WHERE OutStkId >= 202501010000 AND OutStkId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY dtlCostAvg DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 113,
+      "table": "WP_vOutStockUnion",
+      "question": "Find the average qty for VIP transactions in February 2026.",
+      "sql": "SELECT AVG(qty) FROM WP_vOutStockUnion WHERE memName = 'VIP' AND OutStkId LIKE '202602%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 114,
+      "table": "WP_vOutStockUnion",
+      "question": "Calculate the total dtlCostAvg for each memName in the year 2026.",
+      "sql": "SELECT memName, SUM(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 115,
+      "table": "WP_vOutStockUnion",
+      "question": "List OutStkId whose dtlCostAvg is above the overall average for 2026.",
+      "sql": "SELECT OutStkId FROM WP_vOutStockUnion WHERE dtlCostAvg > (SELECT AVG(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 116,
+      "table": "WP_vOutStockUnion",
+      "question": "What is the percentage of total amtTotal contributed by memName 'Global' in March 2026?",
+      "sql": "SELECT (SUM(CASE WHEN memName = 'Global' THEN amtTotal ELSE 0 END) / SUM(amtTotal)) * 100 FROM WP_vOutStockUnion WHERE OutStkId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 117,
+      "table": "WP_vOutStockUnion",
+      "question": "List OutStkId and their total amtTotal during October 2025.",
+      "sql": "SELECT OutStkId, SUM(amtTotal) FROM WP_vOutStockUnion WHERE OutStkId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY OutStkId",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 118,
+      "table": "WP_vOutStockUnion",
+      "question": "How many WP_vOutStockUnion records exist for the date 2025-10-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 119,
+      "table": "WP_vOutStockUnion",
+      "question": "List OutStkId whose dtlCostAvg is above the overall average for 2025.",
+      "sql": "SELECT OutStkId FROM WP_vOutStockUnion WHERE dtlCostAvg > (SELECT AVG(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N') AND OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 120,
+      "table": "WP_vOutStockUnion",
+      "question": "Count the WP_vOutStockUnion items that have a memName equal to 'Global'.",
+      "sql": "SELECT COUNT(*) FROM WP_vOutStockUnion WHERE memName = 'Global' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 121,
+      "table": "WP_vOutStockUnion",
+      "question": "Show the top 5 pNameS sorted by qty in descending order for 2025-12-31.",
+      "sql": "SELECT TOP 5 pNameS FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY qty DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 122,
+      "table": "WP_vOutStockUnion",
+      "question": "Find the average qty for Alice transactions in January 2026.",
+      "sql": "SELECT AVG(qty) FROM WP_vOutStockUnion WHERE memName = 'Alice' AND OutStkId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 123,
+      "table": "WP_vOutStockUnion",
+      "question": "Identify memName categories that had more than 17 transactions in 2026.",
+      "sql": "SELECT memName FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName HAVING COUNT(*) > 17",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 124,
+      "table": "WP_vOutStockUnion",
+      "question": "Identify memName categories that had more than 19 transactions in 2025.",
+      "sql": "SELECT memName FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName HAVING COUNT(*) > 19",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 125,
+      "table": "WP_vOutStockUnion",
+      "question": "Show pNameS and amtTotal for the entry with the highest amtTotal in the first half of 2025.",
+      "sql": "SELECT pNameS, amtTotal FROM WP_vOutStockUnion WHERE OutStkId >= 202501010000 AND OutStkId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amtTotal DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 126,
+      "table": "WP_vOutStockUnion",
+      "question": "What is the maximum qty recorded on 2026-01-01?",
+      "sql": "SELECT MAX(qty) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 127,
+      "table": "WP_vOutStockUnion",
+      "question": "How many WP_vOutStockUnion records exist for the date 2025-10-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 128,
+      "table": "WP_vOutStockUnion",
+      "question": "Compare the sum of dtlCostAvg between Global and Alice for the year 2025.",
+      "sql": "SELECT memName, SUM(dtlCostAvg) FROM WP_vOutStockUnion WHERE memName IN ('Global', 'Alice') AND OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 129,
+      "table": "WP_vOutStockUnion",
+      "question": "What is the maximum dtlCostAvg recorded on 2026-03-05?",
+      "sql": "SELECT MAX(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20260305%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 130,
+      "table": "WP_vTransfer",
+      "question": "Show all columns for WP_vTransfer from the year 2025.",
+      "sql": "SELECT * FROM WP_vTransfer WHERE TransferId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 131,
+      "table": "WP_vTransfer",
+      "question": "Compare the sum of costAvg between Global and Alice for the year 2024.",
+      "sql": "SELECT TransferId, SUM(costAvg) FROM WP_vTransfer WHERE TransferId IN ('Global', 'Alice') AND TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 132,
+      "table": "WP_vTransfer",
+      "question": "What is the total qty for TransferId 'Shane'?",
+      "sql": "SELECT SUM(qty) FROM WP_vTransfer WHERE TransferId = 'Shane' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 133,
+      "table": "WP_vTransfer",
+      "question": "List pNo whose costAvg is above the overall average for 2024.",
+      "sql": "SELECT pNo FROM WP_vTransfer WHERE costAvg > (SELECT AVG(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N') AND TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207)\")"
+    },
+    {
+      "index": 134,
+      "table": "WP_vTransfer",
+      "question": "Find the average qty for Shane transactions in March 2026.",
+      "sql": "SELECT AVG(qty) FROM WP_vTransfer WHERE TransferId = 'Shane' AND TransferId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 135,
+      "table": "WP_vTransfer",
+      "question": "List the pNo where qty is less than 1000.",
+      "sql": "SELECT pNo FROM WP_vTransfer WHERE qty < 1000 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 136,
+      "table": "WP_vTransfer",
+      "question": "What is the total qty for TransferId 'Alice'?",
+      "sql": "SELECT SUM(qty) FROM WP_vTransfer WHERE TransferId = 'Alice' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 137,
+      "table": "WP_vTransfer",
+      "question": "Show TransferId and qty for the entry with the highest qty in the first half of 2025.",
+      "sql": "SELECT TransferId, qty FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY qty DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 138,
+      "table": "WP_vTransfer",
+      "question": "List pNo and their total costAvg during October 2025.",
+      "sql": "SELECT pNo, SUM(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pNo",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 139,
+      "table": "WP_vTransfer",
+      "question": "Show the TransferId where the average costAvg in 2024 is higher than the average in the previous year 2023.",
+      "sql": "SELECT TransferId FROM WP_vTransfer WHERE TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId HAVING AVG(costAvg) > (SELECT AVG(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '2023%' AND isDel = 'N' AND dtlIsDel = 'N')",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207)\")"
+    },
+    {
+      "index": 140,
+      "table": "WP_vTransfer",
+      "question": "Count the WP_vTransfer items that have a TransferId equal to 'Main Office'.",
+      "sql": "SELECT COUNT(*) FROM WP_vTransfer WHERE TransferId = 'Main Office' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 141,
+      "table": "WP_vTransfer",
+      "question": "Show the top 5 fWhName sorted by costAvg in descending order for 2025-12-31.",
+      "sql": "SELECT TOP 5 fWhName FROM WP_vTransfer WHERE TransferId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg DESC",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 142,
+      "table": "WP_vTransfer",
+      "question": "Find the TransferId that appeared in October 2025 but did not appear in December 2025.",
+      "sql": "SELECT DISTINCT TransferId FROM WP_vTransfer WHERE TransferId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' EXCEPT SELECT DISTINCT TransferId FROM WP_vTransfer WHERE TransferId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 143,
+      "table": "WP_vTransfer",
+      "question": "List TransferId and their total qty during October 2025.",
+      "sql": "SELECT TransferId, SUM(qty) FROM WP_vTransfer WHERE TransferId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 144,
+      "table": "WP_vTransfer",
+      "question": "How many WP_vTransfer records exist for the date 2026-02-14?",
+      "sql": "SELECT COUNT(*) FROM WP_vTransfer WHERE TransferId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 145,
+      "table": "WP_vTransfer",
+      "question": "List TransferId whose qty is above the overall average for 2026.",
+      "sql": "SELECT TransferId FROM WP_vTransfer WHERE qty > (SELECT AVG(qty) FROM WP_vTransfer WHERE TransferId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND TransferId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 146,
+      "table": "WP_vTransfer",
+      "question": "Show all columns for WP_vTransfer from the year 2026.",
+      "sql": "SELECT * FROM WP_vTransfer WHERE TransferId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 147,
+      "table": "WP_vTransfer",
+      "question": "List the unique pNo in WP_vTransfer.",
+      "sql": "SELECT DISTINCT pNo FROM WP_vTransfer WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 148,
+      "table": "WP_vTransfer",
+      "question": "Show pNo and qty for the entry with the highest qty in the first half of 2025.",
+      "sql": "SELECT pNo, qty FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY qty DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 149,
+      "table": "WP_vTransfer",
+      "question": "Show pNo and costAvg for the entry with the highest costAvg in the first half of 2025.",
+      "sql": "SELECT pNo, costAvg FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg DESC",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 150,
+      "table": "WP_vTransfer",
+      "question": "Identify TransferId categories that had more than 7 transactions in 2025.",
+      "sql": "SELECT TransferId FROM WP_vTransfer WHERE TransferId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId HAVING COUNT(*) > 7",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 151,
+      "table": "WP_vTransfer",
+      "question": "What is the maximum costAvg recorded on 2025-10-01?",
+      "sql": "SELECT MAX(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 152,
+      "table": "WP_vTransfer",
+      "question": "Show fWhName and costAvg for the entry with the highest costAvg in the first half of 2025.",
+      "sql": "SELECT fWhName, costAvg FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg DESC",
+      "status": "FAIL",
+      "error": "('42S22', \"[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]無效的資料行名稱 'costAvg'。 (207) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 153,
+      "table": "WP_vTransfer",
+      "question": "How many WP_vTransfer records exist for the date 2026-01-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vTransfer WHERE TransferId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 154,
+      "table": "WP_vTransfer",
+      "question": "List the unique tfWhName in WP_vTransfer.",
+      "sql": "SELECT DISTINCT tfWhName FROM WP_vTransfer WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 155,
+      "table": "WP_vTransfer",
+      "question": "List the unique pNo in WP_vTransfer.",
+      "sql": "SELECT DISTINCT pNo FROM WP_vTransfer WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 156,
+      "table": "WP_vInventory",
+      "question": "List pName whose qtyNow is above the overall average for 2024.",
+      "sql": "SELECT pName FROM WP_vInventory WHERE qtyNow > (SELECT AVG(qtyNow) FROM WP_vInventory WHERE pNo LIKE '2024%') AND pNo LIKE '2024%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 157,
+      "table": "WP_vInventory",
+      "question": "List the unique pNo in WP_vInventory.",
+      "sql": "SELECT DISTINCT pNo FROM WP_vInventory WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 158,
+      "table": "WP_vInventory",
+      "question": "Count the WP_vInventory items that have a WarehouseName equal to 'MemberX'.",
+      "sql": "SELECT COUNT(*) FROM WP_vInventory WHERE WarehouseName = 'MemberX'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 159,
+      "table": "WP_vInventory",
+      "question": "How many WP_vInventory records exist for the date 2026-01-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vInventory WHERE pNo LIKE '20260101%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 160,
+      "table": "WP_vInventory",
+      "question": "Show the top 5 WarehouseName sorted by qtySafe in descending order for 2025-12-31.",
+      "sql": "SELECT TOP 5 WarehouseName FROM WP_vInventory WHERE pNo LIKE '20251231%' ORDER BY qtySafe DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 161,
+      "table": "WP_vInventory",
+      "question": "List the pNo where priceStd is less than 10000.",
+      "sql": "SELECT pNo FROM WP_vInventory WHERE priceStd < 10000",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 162,
+      "table": "WP_vInventory",
+      "question": "Show pName and qtySafe for the entry with the highest qtySafe in the first half of 2025.",
+      "sql": "SELECT pName, qtySafe FROM WP_vInventory WHERE pNo >= 202501010000 AND pNo <= 202506309999 ORDER BY qtySafe DESC",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 163,
+      "table": "WP_vInventory",
+      "question": "How many WP_vInventory records exist for the date 2026-03-05?",
+      "sql": "SELECT COUNT(*) FROM WP_vInventory WHERE pNo LIKE '20260305%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 164,
+      "table": "WP_vInventory",
+      "question": "What is the percentage of total qtyNow contributed by WarehouseName 'Global' in October 2025?",
+      "sql": "SELECT (SUM(CASE WHEN WarehouseName = 'Global' THEN qtyNow ELSE 0 END) / SUM(qtyNow)) * 100 FROM WP_vInventory WHERE pNo LIKE '202510%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 165,
+      "table": "WP_vInventory",
+      "question": "List the unique pName in WP_vInventory.",
+      "sql": "SELECT DISTINCT pName FROM WP_vInventory WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 166,
+      "table": "WP_vInventory",
+      "question": "List the unique WarehouseName in WP_vInventory.",
+      "sql": "SELECT DISTINCT WarehouseName FROM WP_vInventory WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 167,
+      "table": "WP_vInventory",
+      "question": "Calculate the total priceStd for each WarehouseName in the year 2026.",
+      "sql": "SELECT WarehouseName, SUM(priceStd) FROM WP_vInventory WHERE pNo LIKE '2026%' GROUP BY WarehouseName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 168,
+      "table": "WP_vInventory",
+      "question": "Identify WarehouseName categories that had more than 15 transactions in 2024.",
+      "sql": "SELECT WarehouseName FROM WP_vInventory WHERE pNo LIKE '2024%' GROUP BY WarehouseName HAVING COUNT(*) > 15",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 169,
+      "table": "WP_vInventory",
+      "question": "How many WP_vInventory records exist for the date 2025-10-01?",
+      "sql": "SELECT COUNT(*) FROM WP_vInventory WHERE pNo LIKE '20251001%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 170,
+      "table": "WP_vInventory",
+      "question": "List the unique WarehouseName in WP_vInventory.",
+      "sql": "SELECT DISTINCT WarehouseName FROM WP_vInventory WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 171,
+      "table": "WP_vInventory",
+      "question": "What is the percentage of total qtyNow contributed by WarehouseName 'Main Office' in December 2025?",
+      "sql": "SELECT (SUM(CASE WHEN WarehouseName = 'Main Office' THEN qtyNow ELSE 0 END) / SUM(qtyNow)) * 100 FROM WP_vInventory WHERE pNo LIKE '202512%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 172,
+      "table": "WP_vInventory",
+      "question": "List pNo whose costAvg is above the overall average for 2024.",
+      "sql": "SELECT pNo FROM WP_vInventory WHERE costAvg > (SELECT AVG(costAvg) FROM WP_vInventory WHERE pNo LIKE '2024%') AND pNo LIKE '2024%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 173,
+      "table": "WP_vInventory",
+      "question": "Show all columns for WP_vInventory from the year 2025.",
+      "sql": "SELECT * FROM WP_vInventory WHERE pNo LIKE '2025%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 174,
+      "table": "WP_vInventory",
+      "question": "List the pNo where qtySafe is less than 10000.",
+      "sql": "SELECT pNo FROM WP_vInventory WHERE qtySafe < 10000",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 175,
+      "table": "WP_vInventory",
+      "question": "Count the WP_vInventory items that have a priceMem equal to 'EMP001'.",
+      "sql": "SELECT COUNT(*) FROM WP_vInventory WHERE priceMem = 'EMP001'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'EMP001' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 176,
+      "table": "WP_vInventory",
+      "question": "List WarehouseName and their total priceStd during December 2025.",
+      "sql": "SELECT WarehouseName, SUM(priceStd) FROM WP_vInventory WHERE pNo LIKE '202512%' GROUP BY WarehouseName",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 177,
+      "table": "WP_vInventory",
+      "question": "List the unique pName in WP_vInventory.",
+      "sql": "SELECT DISTINCT pName FROM WP_vInventory WHERE 1=1",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 178,
+      "table": "WP_vInventory",
+      "question": "Find the pName that appeared in January 2026 but did not appear in December 2025.",
+      "sql": "SELECT DISTINCT pName FROM WP_vInventory WHERE pNo LIKE '202601%' EXCEPT SELECT DISTINCT pName FROM WP_vInventory WHERE pNo LIKE '202512%'",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 179,
+      "table": "WP_vInventory",
+      "question": "Calculate the total qtyNow for each priceMem in the year 2026.",
+      "sql": "SELECT priceMem, SUM(qtyNow) FROM WP_vInventory WHERE pNo LIKE '2026%' GROUP BY priceMem",
+      "status": "OK",
+      "error": ""
+    },
+    {
+      "index": 180,
+      "table": "WP_vInventory",
+      "question": "Count the WP_vInventory items that have a priceMem equal to 'MemberX'.",
+      "sql": "SELECT COUNT(*) FROM WP_vInventory WHERE priceMem = 'MemberX'",
+      "status": "FAIL",
+      "error": "('22018', \"[22018] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]將 varchar 值 'MemberX' 轉換成資料類型 int 時，轉換失敗。 (245) (SQLExecDirectW)\")"
+    },
+    {
+      "index": 181,
+      "table": "WP_vInventory",
+      "question": "Show all columns for WP_vInventory from the year 2026.",
+      "sql": "SELECT * FROM WP_vInventory WHERE pNo LIKE '2026%'",
+      "status": "OK",
+      "error": ""
+    }
+  ]
+}

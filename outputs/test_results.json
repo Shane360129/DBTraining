@@ -1,0 +1,32 @@
+[
+  {
+    "question": "How many singers are there?",
+    "sql": "costLow (number), costMem (number), costBat (number), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text), isTax (text), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text)",
+    "valid": false,
+    "error": "Missing SELECT keyword"
+  },
+  {
+    "question": "Show all concerts",
+    "sql": "costLow (number), costMem (number), costBat (number), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text), isTax (text), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text)",
+    "valid": false,
+    "error": "Missing SELECT keyword"
+  },
+  {
+    "question": "What is the average age?",
+    "sql": "costLow (number), costMem (number), costBat (number), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text), isTax (text), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text)",
+    "valid": false,
+    "error": "Missing SELECT keyword"
+  },
+  {
+    "question": "List all stadium names",
+    "sql": "costLow (number), costMem (number), costBat (number), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text), isTax (text), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text)",
+    "valid": false,
+    "error": "Missing SELECT keyword"
+  },
+  {
+    "question": "Show top 5 by capacity",
+    "sql": "costLow (number), costMem (number), costBat (number), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text), isTax (text), isDel (text), timeCreate (time), timeUpdate (time), memo (text), isStop (text), isSale (text), pName (text), pNameS (text), pBarcode (text), pCode (text)",
+    "valid": false,
+    "error": "Missing SELECT keyword"
+  }
+]

@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# PyCharm
+.idea/
+
+# Data
+data/spider/database/
+data/processed/
+*.db
+*.sqlite
+
+# Outputs — exclude all model files
+outputs/models/
+outputs/predictions/*.txt
+outputs/logs/
+
+# Wandb
+wandb/
+
+# System
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Large files
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.gguf
+
+# HuggingFace credentials
+.huggingface/
+huggingface_token*
+.hf_token
+.env
+.env.*
+
+data/spider/
+data/data/spider/
+
+# BIRD dataset (large zip files)
+data/bird/dev/dev_20240627/dev_databases.zip
+data/bird/train/train/train_databases.zip
+data/bird/train/__MACOSX/

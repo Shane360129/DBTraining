@@ -1,0 +1,2144 @@
+[
+  {
+    "id": 0,
+    "question": "List all active accounts receivable IDs.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List all active accounts receivable IDs.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 1,
+    "question": "How many active accounts receivable records are there?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: How many active accounts receivable records are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 2,
+    "question": "Show the details of accounts receivable ID '202602090001'.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the details of accounts receivable ID '202602090001'.\nSQL:",
+    "pred_sql": "SELECT dtlAmt, isDel, dtlIsDel FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId = '202602090001' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202602090001' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 3,
+    "question": "What is the total amount of all active accounts receivable?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the total amount of all active accounts receivable?\nSQL:",
+    "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctInId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' GROUP BY acctInId) AS AR_Totals;",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N') sub"
+  },
+  {
+    "id": 4,
+    "question": "List accounts receivable for member '會員'.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List accounts receivable for member '會員'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE memName = N'會員' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'會員' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 5,
+    "question": "How many accounts receivable were created in month 202512?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: How many accounts receivable were created in month 202512?\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 6) = '202512' AND isDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202512' AND isDel='N'"
+  },
+  {
+    "id": 6,
+    "question": "List all distinct member names in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List all distinct member names in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT DISTINCT memName FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT memName FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' AND memName IS NOT NULL"
+  },
+  {
+    "id": 7,
+    "question": "Show accounts receivable created on date 20251205.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show accounts receivable created on date 20251205.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 8) = '20251205' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,8)='20251205' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 8,
+    "question": "What is the maximum amount in a single accounts receivable record?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the maximum amount in a single accounts receivable record?\nSQL:",
+    "pred_sql": "SELECT MAX(amount) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N';",
+    "gold_sql": "SELECT MAX(amount) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N'"
+  },
+  {
+    "id": 9,
+    "question": "What is the minimum amount in accounts receivable?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the minimum amount in accounts receivable?\nSQL:",
+    "pred_sql": "SELECT MIN(amount) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N';",
+    "gold_sql": "SELECT MIN(amount) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N'"
+  },
+  {
+    "id": 10,
+    "question": "List accounts receivable handled by employee '001'.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List accounts receivable handled by employee '001'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE empId = '001' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE empId='001' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 11,
+    "question": "Show all distinct employee IDs in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show all distinct employee IDs in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND empId IS NOT NULL"
+  },
+  {
+    "id": 12,
+    "question": "Show the total amount for member '遊獵羊灣' in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the total amount for member '遊獵羊灣' in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctInId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctIn WHERE memName = N'遊獵羊灣' AND isDel = 'N' GROUP BY acctInId) AS AR_Totals;",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'遊獵羊灣' AND isDel='N') sub"
+  },
+  {
+    "id": 13,
+    "question": "List accounts receivable with product names containing '茶'.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List accounts receivable with product names containing '茶'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%茶%' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctInId, pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%茶%' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 14,
+    "question": "What is the total amount of accounts receivable in month 202512?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the total amount of accounts receivable in month 202512?\nSQL:",
+    "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctInId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 6) = '202512' AND isDel = 'N' GROUP BY acctInId) AS AR_Totals;",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202512' AND isDel='N') sub"
+  },
+  {
+    "id": 15,
+    "question": "Show the count of accounts receivable grouped by member name.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the count of accounts receivable grouped by member name.\nSQL:",
+    "pred_sql": "SELECT memName, COUNT(*) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' GROUP BY memName;",
+    "gold_sql": "SELECT memName, COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' AND memName IS NOT NULL GROUP BY memName"
+  },
+  {
+    "id": 16,
+    "question": "List the total amount per member in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List the total amount per member in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT memName, SUM(oStkDtlAmtTotal) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName;",
+    "gold_sql": "SELECT memName, SUM(amt) FROM (SELECT DISTINCT acctInId, memName, amount AS amt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND memName IS NOT NULL) sub GROUP BY memName"
+  },
+  {
+    "id": 17,
+    "question": "Show accounts receivable sorted by amount in descending order, top 5.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show accounts receivable sorted by amount in descending order, top 5.\nSQL:",
+    "pred_sql": "SELECT TOP 5 acctInId, SUM(oStkDtlAmtTotal) AS receivableAmt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY acctInId ORDER BY receivableAmt DESC;",
+    "gold_sql": "SELECT DISTINCT TOP 5 acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' ORDER BY amount DESC"
+  },
+  {
+    "id": 18,
+    "question": "Count the number of distinct products in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Count the number of distinct products in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vAcctIn WHERE dtlIsDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 19,
+    "question": "List accounts receivable created between months 202602 and 202512.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List accounts receivable created between months 202602 and 202512.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 6) BETWEEN '202512' AND '202602' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6) BETWEEN '202602' AND '202512' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 20,
+    "question": "Show the total quantity per product in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the total quantity per product in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT pNo, SUM(oStkDtlQty) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pNo;",
+    "gold_sql": "SELECT pName, SUM(oStkDtlQty) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName"
+  },
+  {
+    "id": 21,
+    "question": "Count accounts receivable per month.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Count accounts receivable per month.\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT LEFT(acctInId,6), COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' GROUP BY LEFT(acctInId,6)"
+  },
+  {
+    "id": 22,
+    "question": "What is the average amount of accounts receivable?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the average amount of accounts receivable?\nSQL:",
+    "pred_sql": "SELECT AVG(UniqueAmount) FROM (SELECT acctInId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' GROUP BY acctInId) AS AR_Totals;",
+    "gold_sql": "SELECT AVG(amount) FROM (SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N') sub"
+  },
+  {
+    "id": 23,
+    "question": "Show the product details for accounts receivable '202602050001'.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the product details for accounts receivable '202602050001'.\nSQL:",
+    "pred_sql": "SELECT dtlQty, dtlAmt FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId = '202602050001' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT pNo, pName, oStkDtlQty, oStkDtlAmtTotal FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202602050001' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 24,
+    "question": "List distinct member IDs and names in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List distinct member IDs and names in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT DISTINCT memId, memName FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT memId, memName FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' AND memId IS NOT NULL"
+  },
+  {
+    "id": 25,
+    "question": "Show accounts receivable with amount greater than 1000.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show accounts receivable with amount greater than 1000.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 1000 AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND amount > 1000"
+  },
+  {
+    "id": 26,
+    "question": "Which member has the highest total accounts receivable amount?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Which member has the highest total accounts receivable amount?\nSQL:",
+    "pred_sql": "SELECT TOP 1 memName, SUM(oStkDtlAmtTotal) AS totalAmt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName ORDER BY totalAmt DESC;",
+    "gold_sql": "SELECT TOP 1 memName, SUM(amt) AS total FROM (SELECT DISTINCT acctInId, memName, amount AS amt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND memName IS NOT NULL) sub GROUP BY memName ORDER BY total DESC"
+  },
+  {
+    "id": 27,
+    "question": "List members who have more than 1 accounts receivable record.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List members who have more than 1 accounts receivable record.\nSQL:",
+    "pred_sql": "SELECT memName FROM WP_M09.dbo.WP_vAcctIn WHERE memName IN (SELECT memName FROM WP_M09.dbo.WP_vAcctIn GROUP BY memName HAVING COUNT(*) > 1) AND isDel = 'N';",
+    "gold_sql": "SELECT memName, COUNT(DISTINCT acctInId) AS cnt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND memName IS NOT NULL GROUP BY memName HAVING COUNT(DISTINCT acctInId) > 1"
+  },
+  {
+    "id": 28,
+    "question": "Show accounts receivable whose amount is above the average.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show accounts receivable whose amount is above the average.\nSQL:",
+    "pred_sql": "SELECT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE amount > (SELECT AVG(amount) FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N');",
+    "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND amount > (SELECT AVG(amount) FROM (SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N') sub)"
+  },
+  {
+    "id": 29,
+    "question": "What products did member '會員' purchase across all accounts receivable?",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What products did member '會員' purchase across all accounts receivable?\nSQL:",
+    "pred_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vAcctIn WHERE memName = N'會員' AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pNo, pName FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'會員' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 30,
+    "question": "Show the month with the highest total accounts receivable amount.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the month with the highest total accounts receivable amount.\nSQL:",
+    "pred_sql": "SELECT TOP 1 LEFT(acctInId, 6), SUM(oStkDtlAmtTotal) AS totalAmt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY LEFT(acctInId, 6) ORDER BY totalAmt DESC;",
+    "gold_sql": "SELECT TOP 1 LEFT(acctInId,6) AS mon, SUM(amt) AS total FROM (SELECT DISTINCT acctInId, amount AS amt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N') sub GROUP BY LEFT(acctInId,6) ORDER BY total DESC"
+  },
+  {
+    "id": 31,
+    "question": "List products that appear in more than 2 accounts receivable records.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List products that appear in more than 2 accounts receivable records.\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName IN (SELECT pName FROM WP_M09.dbo.WP_vAcctIn GROUP BY pName COUNT(*) > 2) AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT pName, COUNT(DISTINCT acctInId) AS cnt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' AND pName IS NOT NULL GROUP BY pName HAVING COUNT(DISTINCT acctInId) > 2"
+  },
+  {
+    "id": 32,
+    "question": "Show the top 3 products by total quantity in accounts receivable.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the top 3 products by total quantity in accounts receivable.\nSQL:",
+    "pred_sql": "SELECT TOP 3 pName, SUM(oStkDtlQty) AS totalQty FROM WP_M09.dbo.WP_vAcctIn WHERE dtlIsDel = 'N' GROUP BY pName ORDER BY totalQty DESC;",
+    "gold_sql": "SELECT TOP 3 pName, SUM(oStkDtlQty) AS totalQty FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName ORDER BY totalQty DESC"
+  },
+  {
+    "id": 33,
+    "question": "List members whose total accounts receivable amount exceeds 5000.",
+    "inferred_table": "WP_vAcctIn",
+    "gold_table": "WP_vAcctIn",
+    "prompt": "Table: WP_vAcctIn\nNote: Filter by date using LEFT(acctInId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List members whose total accounts receivable amount exceeds 5000.\nSQL:",
+    "pred_sql": "SELECT memName FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId IN (SELECT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel = 'N' GROUP BY acctInId HAVING MAX(amount) > 5000) AND isDel = 'N';",
+    "gold_sql": "SELECT memName, SUM(amt) AS total FROM (SELECT DISTINCT acctInId, memName, amount AS amt FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND memName IS NOT NULL) sub GROUP BY memName HAVING SUM(amt) > 5000"
+  },
+  {
+    "id": 34,
+    "question": "List all active accounts payable IDs.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List all active accounts payable IDs.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 35,
+    "question": "How many active accounts payable records are there?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: How many active accounts payable records are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT acctOutId) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 36,
+    "question": "Show the details of accounts payable ID '202603110002'.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the details of accounts payable ID '202603110002'.\nSQL:",
+    "pred_sql": "SELECT detailId, dtlAmt, dtlTax FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId = '202603110002' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202603110002' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 37,
+    "question": "What is the total amount of all active accounts payable?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the total amount of all active accounts payable?\nSQL:",
+    "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctOutId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' GROUP BY acctOutId) AS AP_Totals;",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N') sub"
+  },
+  {
+    "id": 38,
+    "question": "List accounts payable for vendor '宏碁蜂蜜'.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List accounts payable for vendor '宏碁蜂蜜'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE pvName = N'宏碁蜂蜜' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'宏碁蜂蜜' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 39,
+    "question": "How many accounts payable were created in month 202512?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: How many accounts payable were created in month 202512?\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT acctOutId) FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 6) = '202512' AND isDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT acctOutId) FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202512' AND isDel='N'"
+  },
+  {
+    "id": 40,
+    "question": "List all distinct vendor names in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List all distinct vendor names in accounts payable.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N' AND pvName IS NOT NULL"
+  },
+  {
+    "id": 41,
+    "question": "Show accounts payable created on date 20260311.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show accounts payable created on date 20260311.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 8) = '20260311' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,8)='20260311' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 42,
+    "question": "What is the maximum amount in accounts payable?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the maximum amount in accounts payable?\nSQL:",
+    "pred_sql": "SELECT MAX(amount) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N';",
+    "gold_sql": "SELECT MAX(amount) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N'"
+  },
+  {
+    "id": 43,
+    "question": "What is the minimum accounts payable amount?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the minimum accounts payable amount?\nSQL:",
+    "pred_sql": "SELECT MIN(UniqueAmount) FROM (SELECT acctOutId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' GROUP BY acctOutId) AS AP_Totals;",
+    "gold_sql": "SELECT MIN(amount) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N'"
+  },
+  {
+    "id": 44,
+    "question": "List accounts payable handled by employee '系統管理者'.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List accounts payable handled by employee '系統管理者'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE empName = N'系統管理者' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE empName=N'系統管理者' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 45,
+    "question": "Show all distinct employee names in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show all distinct employee names in accounts payable.\nSQL:",
+    "pred_sql": "SELECT DISTINCT empName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT empName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND empName IS NOT NULL"
+  },
+  {
+    "id": 46,
+    "question": "Show the total amount for vendor '南投縣農會' in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the total amount for vendor '南投縣農會' in accounts payable.\nSQL:",
+    "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctOutId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctOut WHERE pvName = N'南投縣農會' AND isDel = 'N' GROUP BY acctOutId) AS AP_Totals;",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'南投縣農會' AND isDel='N') sub"
+  },
+  {
+    "id": 47,
+    "question": "Show all distinct product names in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show all distinct product names in accounts payable.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vAcctOut WHERE dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N' AND pName IS NOT NULL"
+  },
+  {
+    "id": 48,
+    "question": "What is the total amount of accounts payable in month 202512?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the total amount of accounts payable in month 202512?\nSQL:",
+    "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctOutId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 6) = '202512' AND isDel = 'N' GROUP BY acctOutId) AS AP_Totals;",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202512' AND isDel='N') sub"
+  },
+  {
+    "id": 49,
+    "question": "Show the count of accounts payable grouped by vendor.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the count of accounts payable grouped by vendor.\nSQL:",
+    "pred_sql": "SELECT pvName, COUNT(*) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' GROUP BY pvName;",
+    "gold_sql": "SELECT pvName, COUNT(DISTINCT acctOutId) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N' AND pvName IS NOT NULL GROUP BY pvName"
+  },
+  {
+    "id": 50,
+    "question": "List the total amount per vendor in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List the total amount per vendor in accounts payable.\nSQL:",
+    "pred_sql": "SELECT pvName, SUM(qty * dtlAmt) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName;",
+    "gold_sql": "SELECT pvName, SUM(amt) FROM (SELECT DISTINCT acctOutId, pvName, amount AS amt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND pvName IS NOT NULL) sub GROUP BY pvName"
+  },
+  {
+    "id": 51,
+    "question": "Show the top 5 accounts payable by amount.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the top 5 accounts payable by amount.\nSQL:",
+    "pred_sql": "SELECT TOP 5 acctOutId, SUM(qty * dtlAmt) AS totalAmt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY acctOutId ORDER BY totalAmt DESC;",
+    "gold_sql": "SELECT DISTINCT TOP 5 acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' ORDER BY amount DESC"
+  },
+  {
+    "id": 52,
+    "question": "Count the number of distinct products in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Count the number of distinct products in accounts payable.\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vAcctOut WHERE dtlIsDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 53,
+    "question": "List accounts payable created between months 202512 and 202603.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List accounts payable created between months 202512 and 202603.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 6) BETWEEN '202512' AND '202603' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6) BETWEEN '202512' AND '202603' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 54,
+    "question": "Show the total quantity per product in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the total quantity per product in accounts payable.\nSQL:",
+    "pred_sql": "SELECT pName, SUM(qty) FROM WP_M09.dbo.WP_vAcctOut WHERE dtlIsDel = 'N' GROUP BY pName;",
+    "gold_sql": "SELECT pName, SUM(qty) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName"
+  },
+  {
+    "id": 55,
+    "question": "Count accounts payable per month.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Count accounts payable per month.\nSQL:",
+    "pred_sql": "SELECT LEFT(acctOutId, 6), COUNT(*) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY LEFT(acctOutId, 6);",
+    "gold_sql": "SELECT LEFT(acctOutId,6), COUNT(DISTINCT acctOutId) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' GROUP BY LEFT(acctOutId,6)"
+  },
+  {
+    "id": 56,
+    "question": "What is the average amount of accounts payable?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What is the average amount of accounts payable?\nSQL:",
+    "pred_sql": "SELECT AVG(UniqueAmount) FROM (SELECT acctOutId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' GROUP BY acctOutId) AS AP_Amounts;",
+    "gold_sql": "SELECT AVG(amount) FROM (SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N') sub"
+  },
+  {
+    "id": 57,
+    "question": "Show the product details for accounts payable to vendor '信義鄉農會'.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the product details for accounts payable to vendor '信義鄉農會'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pName, qty, dtlAmt FROM WP_M09.dbo.WP_vAcctOut WHERE pvName = N'信義鄉農會' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pNo, pName, qty, amtTotal FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'信義鄉農會' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 58,
+    "question": "List distinct vendor IDs and names in accounts payable.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List distinct vendor IDs and names in accounts payable.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pvId, pvName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pvId, pvName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N' AND pvId IS NOT NULL"
+  },
+  {
+    "id": 59,
+    "question": "Show accounts payable with amount greater than 5000.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show accounts payable with amount greater than 5000.\nSQL:",
+    "pred_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE amount > 5000 AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND amount > 5000"
+  },
+  {
+    "id": 60,
+    "question": "Which vendor has the highest total accounts payable amount?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Which vendor has the highest total accounts payable amount?\nSQL:",
+    "pred_sql": "SELECT TOP 1 pvName, SUM(qty * dtlAmt) AS totalAmt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName ORDER BY totalAmt DESC;",
+    "gold_sql": "SELECT TOP 1 pvName, SUM(amt) AS total FROM (SELECT DISTINCT acctOutId, pvName, amount AS amt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND pvName IS NOT NULL) sub GROUP BY pvName ORDER BY total DESC"
+  },
+  {
+    "id": 61,
+    "question": "List vendors who have more than 3 accounts payable records.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List vendors who have more than 3 accounts payable records.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' GROUP BY pvName HAVING COUNT(DISTINCT acctOutId) > 3;",
+    "gold_sql": "SELECT pvName, COUNT(DISTINCT acctOutId) AS cnt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND pvName IS NOT NULL GROUP BY pvName HAVING COUNT(DISTINCT acctOutId) > 3"
+  },
+  {
+    "id": 62,
+    "question": "Show accounts payable whose amount is above the average.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show accounts payable whose amount is above the average.\nSQL:",
+    "pred_sql": "SELECT acctOutId, amt FROM WP_M09.dbo.WP_vAcctOut WHERE amt > (SELECT AVG(amt) FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N');",
+    "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND amount > (SELECT AVG(amount) FROM (SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N') sub)"
+  },
+  {
+    "id": 63,
+    "question": "What products were purchased from vendor '宏碁蜂蜜' in accounts payable?",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: What products were purchased from vendor '宏碁蜂蜜' in accounts payable?\nSQL:",
+    "pred_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vAcctOut WHERE pvName = N'宏碁蜂蜜' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pNo, pName FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'宏碁蜂蜜' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 64,
+    "question": "Show the month with the highest total accounts payable amount.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the month with the highest total accounts payable amount.\nSQL:",
+    "pred_sql": "SELECT TOP 1 LEFT(acctOutId, 6), SUM(amount) AS totalApvmt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY LEFT(acctOutId, 6) ORDER BY totalApvmt DESC;",
+    "gold_sql": "SELECT TOP 1 LEFT(acctOutId,6) AS mon, SUM(amt) AS total FROM (SELECT DISTINCT acctOutId, amount AS amt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N') sub GROUP BY LEFT(acctOutId,6) ORDER BY total DESC"
+  },
+  {
+    "id": 65,
+    "question": "List products that appear in more than 5 accounts payable records.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List products that appear in more than 5 accounts payable records.\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName HAVING COUNT(DISTINCT acctOutId) > 5;",
+    "gold_sql": "SELECT pName, COUNT(DISTINCT acctOutId) AS cnt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N' AND pName IS NOT NULL GROUP BY pName HAVING COUNT(DISTINCT acctOutId) > 5"
+  },
+  {
+    "id": 66,
+    "question": "Show the top 3 vendors by total accounts payable amount.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show the top 3 vendors by total accounts payable amount.\nSQL:",
+    "pred_sql": "SELECT TOP 3 pvName, SUM(qty * dtlAmt) AS totalAmt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName ORDER BY totalAmt DESC;",
+    "gold_sql": "SELECT TOP 3 pvName, SUM(amt) AS total FROM (SELECT DISTINCT acctOutId, pvName, amount AS amt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND pvName IS NOT NULL) sub GROUP BY pvName ORDER BY total DESC"
+  },
+  {
+    "id": 67,
+    "question": "List vendors whose total accounts payable amount exceeds 10000.",
+    "inferred_table": "WP_vAcctOut",
+    "gold_table": "WP_vAcctOut",
+    "prompt": "Table: WP_vAcctOut\nNote: Filter by date using LEFT(acctOutId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List vendors whose total accounts payable amount exceeds 10000.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' AND acctOutId IN (SELECT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE isDel = 'N' GROUP BY acctOutId HAVING MAX(amount) > 10000) GROUP BY pvName;",
+    "gold_sql": "SELECT pvName, SUM(amt) AS total FROM (SELECT DISTINCT acctOutId, pvName, amount AS amt FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND pvName IS NOT NULL) sub GROUP BY pvName HAVING SUM(amt) > 10000"
+  },
+  {
+    "id": 68,
+    "question": "List all active outbound stock IDs.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: List all active outbound stock IDs.\nSQL:",
+    "pred_sql": "SELECT DISTINCT outStkId FROM WP_M09 WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT OutStkId FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 69,
+    "question": "How many active outbound stock records are there?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: How many active outbound stock records are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT OutStkId) FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 70,
+    "question": "Show the details of outbound stock ID '202603120002'.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show the details of outbound stock ID '202603120002'.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09.dbo.WP_M09 WHERE OutStkId = '202603120002';",
+    "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202603120002' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 71,
+    "question": "What is the total amount of all active outbound stock?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: What is the total amount of all active outbound stock?\nSQL:",
+    "pred_sql": "SELECT SUM(qty) FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N') sub"
+  },
+  {
+    "id": 72,
+    "question": "List outbound stock for member '王植民'.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: List outbound stock for member '王植民'.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09 WHERE memName = N'王植民' AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memName=N'王植民' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 73,
+    "question": "How many outbound stock records were created in month 202510?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: How many outbound stock records were created in month 202510?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09 WHERE LEFT(OutStkId, 6) = '202510' AND isDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT OutStkId) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202510' AND isDel='N'"
+  },
+  {
+    "id": 74,
+    "question": "List all distinct member names in outbound stock.",
+    "inferred_table": "WP_vOutStock",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vOutStock\nNote: Filter by date using LEFT(OutStkId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List all distinct member names in outbound stock.\nSQL:",
+    "pred_sql": "SELECT DISTINCT memName FROM WP_M09.dbo.WP_vOutStock WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT memName FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N' AND memName IS NOT NULL"
+  },
+  {
+    "id": 75,
+    "question": "Show outbound stock created on date 20260312.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show outbound stock created on date 20260312.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09 WHERE outStkDt = '20260312';",
+    "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,8)='20260312' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 76,
+    "question": "What is the maximum amount in outbound stock?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: What is the maximum amount in outbound stock?\nSQL:",
+    "pred_sql": "SELECT MAX(amount) FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT MAX(amount) FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N'"
+  },
+  {
+    "id": 77,
+    "question": "What is the minimum outbound stock amount?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: What is the minimum outbound stock amount?\nSQL:",
+    "pred_sql": "SELECT MIN(amt) FROM WP_M09 WHERE outStkId = 'OUTSTK001';",
+    "gold_sql": "SELECT MIN(amount) FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N'"
+  },
+  {
+    "id": 78,
+    "question": "List outbound stock handled by employee '永隆分部'.",
+    "inferred_table": "WP_vOutStock",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vOutStock\nNote: Filter by date using LEFT(OutStkId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: List outbound stock handled by employee '永隆分部'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT OutStkId FROM WP_M09.dbo.WP_vOutStock WHERE empName = N'永隆分部' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE empName=N'永隆分部' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 79,
+    "question": "Show all distinct employee names in outbound stock.",
+    "inferred_table": "WP_vOutStock",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vOutStock\nNote: Filter by date using LEFT(OutStkId,8)='YYYYMMDD'. isDel='N' AND dtlIsDel='N' for active records.\nQuestion: Show all distinct employee names in outbound stock.\nSQL:",
+    "pred_sql": "SELECT DISTINCT empName FROM WP_M09.dbo.WP_vOutStock WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT empName FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND empName IS NOT NULL"
+  },
+  {
+    "id": 80,
+    "question": "Show the total amount for member '周慧瑛' in outbound stock.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show the total amount for member '周慧瑛' in outbound stock.\nSQL:",
+    "pred_sql": "SELECT SUM(qty * costAvg) FROM WP_M09 WHERE memName = N'周慧瑛' AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memName=N'周慧瑛' AND isDel='N') sub"
+  },
+  {
+    "id": 81,
+    "question": "List outbound stock with product names containing '米'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List outbound stock with product names containing '米'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%米%';",
+    "gold_sql": "SELECT DISTINCT OutStkId, pName FROM WP_M09.dbo.WP_vOutStock WHERE pName LIKE N'%米%' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 82,
+    "question": "What is the total outbound stock amount in month 202510?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: What is the total outbound stock amount in month 202510?\nSQL:",
+    "pred_sql": "SELECT SUM(amtOut) FROM WP_M09 WHERE LEFT(CONCAT(OutStkId, '0'), 6) = '202510';",
+    "gold_sql": "SELECT SUM(amount) FROM (SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202510' AND isDel='N') sub"
+  },
+  {
+    "id": 83,
+    "question": "Show the count of outbound stock records grouped by member.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show the count of outbound stock records grouped by member.\nSQL:",
+    "pred_sql": "SELECT mem_name, COUNT(*) FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY mem_name;",
+    "gold_sql": "SELECT memName, COUNT(DISTINCT OutStkId) FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N' AND memName IS NOT NULL GROUP BY memName"
+  },
+  {
+    "id": 84,
+    "question": "List the total amount per member in outbound stock.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: List the total amount per member in outbound stock.\nSQL:",
+    "pred_sql": "SELECT SUM(amt_total) FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT memName, SUM(amt) FROM (SELECT DISTINCT OutStkId, memName, amount AS amt FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND memName IS NOT NULL) sub GROUP BY memName"
+  },
+  {
+    "id": 85,
+    "question": "Show the top 5 outbound stock records by amount.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show the top 5 outbound stock records by amount.\nSQL:",
+    "pred_sql": "SELECT TOP 5 outStkId, empId, outAmt FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N' ORDER BY outAmt DESC;",
+    "gold_sql": "SELECT DISTINCT TOP 5 OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' ORDER BY amount DESC"
+  },
+  {
+    "id": 86,
+    "question": "Count the number of distinct products in outbound stock.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Count the number of distinct products in outbound stock.\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 87,
+    "question": "List outbound stock created between months 202510 and 202603.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: List outbound stock created between months 202510 and 202603.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09.dbo.WP_M09 WHERE LEFT(OutStkId, 6) LIKE '202510%' AND LEFT(OutStkId, 6) LIKE '202603%';",
+    "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6) BETWEEN '202510' AND '202603' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 88,
+    "question": "Show the total quantity per product in outbound stock.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show the total quantity per product in outbound stock.\nSQL:",
+    "pred_sql": "SELECT pNo, SUM(qty) FROM WP_M09.dbo.WP_vProduct WHERE isSale = 'Y' GROUP BY pNo;",
+    "gold_sql": "SELECT pName, SUM(qty) FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName"
+  },
+  {
+    "id": 89,
+    "question": "Count outbound stock records per month.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Count outbound stock records per month.\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT LEFT(OutStkId,6), COUNT(DISTINCT OutStkId) FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' GROUP BY LEFT(OutStkId,6)"
+  },
+  {
+    "id": 90,
+    "question": "What is the average outbound stock amount?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: What is the average outbound stock amount?\nSQL:",
+    "pred_sql": "SELECT AVG(amt) FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT AVG(amount) FROM (SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N') sub"
+  },
+  {
+    "id": 91,
+    "question": "Show product details for outbound stock '202603120001'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show product details for outbound stock '202603120001'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, price, isSale FROM WP_M09.dbo.WP_vProduct WHERE outStkId = '202603120001';",
+    "gold_sql": "SELECT pNo, pName, qty, dtlAmt FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202603120001' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 92,
+    "question": "List distinct member IDs and names in outbound stock.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: List distinct member IDs and names in outbound stock.\nSQL:",
+    "pred_sql": "SELECT DISTINCT memId, memName FROM WP_M09 WHERE isOut = 'Y';",
+    "gold_sql": "SELECT DISTINCT memId, memName FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N' AND memId IS NOT NULL"
+  },
+  {
+    "id": 93,
+    "question": "Show outbound stock records with outType='0'.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show outbound stock records with outType='0'.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09 WHERE outType = '0';",
+    "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE outType='0' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 94,
+    "question": "Which member has the highest total outbound stock amount?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Which member has the highest total outbound stock amount?\nSQL:",
+    "pred_sql": "SELECT TOP 1 memName, SUM(qty * costAvg) AS totalOutboundStock FROM WP_M09 GROUP BY memName ORDER BY totalOutboundStock DESC;",
+    "gold_sql": "SELECT TOP 1 memName, SUM(amt) AS total FROM (SELECT DISTINCT OutStkId, memName, amount AS amt FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND memName IS NOT NULL) sub GROUP BY memName ORDER BY total DESC"
+  },
+  {
+    "id": 95,
+    "question": "List members who have more than 5 outbound stock records.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: List members who have more than 5 outbound stock records.\nSQL:",
+    "pred_sql": "SELECT mem_name FROM WP_M09 WHERE out_stk_ct > 5;",
+    "gold_sql": "SELECT memName, COUNT(DISTINCT OutStkId) AS cnt FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND memName IS NOT NULL GROUP BY memName HAVING COUNT(DISTINCT OutStkId) > 5"
+  },
+  {
+    "id": 96,
+    "question": "Show outbound stock records whose amount is above the average.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show outbound stock records whose amount is above the average.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09 WHERE outStkAmt > (SELECT AVG(outStkAmt) FROM WP_M09);",
+    "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND amount > (SELECT AVG(amount) FROM (SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N') sub)"
+  },
+  {
+    "id": 97,
+    "question": "What products did member '王植民' buy in outbound stock?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: What products did member '王植民' buy in outbound stock?\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vProduct WHERE memName = N'王植民' AND isSale = 'Y' AND pNo IN (SELECT posId FROM WP_M09.dbo.WP_M09_OutStock WHERE memName = N'王植民');",
+    "gold_sql": "SELECT DISTINCT pNo, pName FROM WP_M09.dbo.WP_vOutStock WHERE memName=N'王植民' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 98,
+    "question": "Show the month with the highest total outbound stock amount.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: Show the month with the highest total outbound stock amount.\nSQL:",
+    "pred_sql": "SELECT TOP 1 LEFT(OutStkId, 6) AS month, SUM(qty) AS total_outbound FROM WP_M09 WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY LEFT(OutStkId, 6) ORDER BY total_outbound DESC;",
+    "gold_sql": "SELECT TOP 1 LEFT(OutStkId,6) AS mon, SUM(amt) AS total FROM (SELECT DISTINCT OutStkId, amount AS amt FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N') sub GROUP BY LEFT(OutStkId,6) ORDER BY total DESC"
+  },
+  {
+    "id": 99,
+    "question": "List products that appear in more than 10 outbound stock records.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products that appear in more than 10 outbound stock records.\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vProduct WHERE outStkCnt > 10;",
+    "gold_sql": "SELECT pName, COUNT(DISTINCT OutStkId) AS cnt FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N' AND pName IS NOT NULL GROUP BY pName HAVING COUNT(DISTINCT OutStkId) > 10"
+  },
+  {
+    "id": 100,
+    "question": "Show the top 3 products by total quantity sold in outbound stock.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show the top 3 products by total quantity sold in outbound stock.\nSQL:",
+    "pred_sql": "SELECT TOP 3 pName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vProduct LEFT OUTER JOIN WP_M09.dbo.WP_M09Inventory ON pNo = pNo LEFT OUTER JOIN WP_M09.dbo.WP_M09OutStk ON pNo = pNo AND dtlIsDel = 'N' GROUP BY pName ORDER BY totalQty DESC;",
+    "gold_sql": "SELECT TOP 3 pName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName ORDER BY totalQty DESC"
+  },
+  {
+    "id": 101,
+    "question": "List members whose total outbound stock amount exceeds 50000.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vOutStock",
+    "prompt": "Table: WP_M09\nQuestion: List members whose total outbound stock amount exceeds 50000.\nSQL:",
+    "pred_sql": "SELECT mem_name FROM WP_M09 WHERE outStkAmtTotal > 50000;",
+    "gold_sql": "SELECT memName, SUM(amt) AS total FROM (SELECT DISTINCT OutStkId, memName, amount AS amt FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND memName IS NOT NULL) sub GROUP BY memName HAVING SUM(amt) > 50000"
+  },
+  {
+    "id": 102,
+    "question": "List all active transfer IDs.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List all active transfer IDs.\nSQL:",
+    "pred_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 103,
+    "question": "How many active transfer records are there?",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: How many active transfer records are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT TransferId) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 104,
+    "question": "Show the details of transfer ID '202603110007'.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show the details of transfer ID '202603110007'.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09.dbo.WP_vTransfer WHERE TransferId = '202603110007' AND isDel = 'N';",
+    "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vTransfer WHERE TransferId='202603110007' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 105,
+    "question": "List transfers from warehouse '特產中心'.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List transfers from warehouse '特產中心'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE fWhName = N'特產中心' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'特產中心' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 106,
+    "question": "List transfers to warehouse '特產中心'.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List transfers to warehouse '特產中心'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE tfWhName = N'特產中心' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE tfWhName=N'特產中心' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 107,
+    "question": "How many transfers were created in month 202510?",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: How many transfers were created in month 202510?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT TransferId) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202510' AND isDel='N'"
+  },
+  {
+    "id": 108,
+    "question": "List all distinct source warehouse names in transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List all distinct source warehouse names in transfers.\nSQL:",
+    "pred_sql": "SELECT DISTINCT fWhName FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT fWhName FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' AND fWhName IS NOT NULL"
+  },
+  {
+    "id": 109,
+    "question": "List all distinct destination warehouse names in transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List all distinct destination warehouse names in transfers.\nSQL:",
+    "pred_sql": "SELECT DISTINCT tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' AND tfWhName IS NOT NULL"
+  },
+  {
+    "id": 110,
+    "question": "Show transfers created on date 20260311.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show transfers created on date 20260311.\nSQL:",
+    "pred_sql": "SELECT TransferId, empId, empName FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 8) = '20260311' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,8)='20260311' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 111,
+    "question": "What is the total quantity of all active transfers?",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: What is the total quantity of all active transfers?\nSQL:",
+    "pred_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 112,
+    "question": "List transfers handled by employee '0000'.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List transfers handled by employee '0000'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE empId = '0000' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE empId='0000' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 113,
+    "question": "Show all distinct employee IDs in transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show all distinct employee IDs in transfers.\nSQL:",
+    "pred_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND empId IS NOT NULL"
+  },
+  {
+    "id": 114,
+    "question": "Show all distinct product names in transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show all distinct product names in transfers.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' AND pName IS NOT NULL"
+  },
+  {
+    "id": 115,
+    "question": "List transfers with product names containing '水'.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List transfers with product names containing '水'.\nSQL:",
+    "pred_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE pName LIKE N'%水%' AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT TransferId, pName FROM WP_M09.dbo.WP_vTransfer WHERE pName LIKE N'%水%' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 116,
+    "question": "What is the total transfer quantity in month 202510?",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: What is the total transfer quantity in month 202510?\nSQL:",
+    "pred_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202510' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 117,
+    "question": "Show the count of transfers grouped by source warehouse.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show the count of transfers grouped by source warehouse.\nSQL:",
+    "pred_sql": "SELECT fWhName, COUNT(*) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY fWhName;",
+    "gold_sql": "SELECT fWhName, COUNT(DISTINCT TransferId) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY fWhName"
+  },
+  {
+    "id": 118,
+    "question": "List the total quantity per destination warehouse in transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List the total quantity per destination warehouse in transfers.\nSQL:",
+    "pred_sql": "SELECT tfWhName, SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY tfWhName;",
+    "gold_sql": "SELECT tfWhName, SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY tfWhName"
+  },
+  {
+    "id": 119,
+    "question": "Show the top 5 transfers by quantity.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show the top 5 transfers by quantity.\nSQL:",
+    "pred_sql": "SELECT TOP 5 TransferId, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId ORDER BY totalQty DESC;",
+    "gold_sql": "SELECT TOP 5 TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' ORDER BY qty DESC"
+  },
+  {
+    "id": 120,
+    "question": "Count the number of distinct products in transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Count the number of distinct products in transfers.\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 121,
+    "question": "List transfers created between months 202510 and 202603.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List transfers created between months 202510 and 202603.\nSQL:",
+    "pred_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) >= '202510' AND LEFT(TransferId, 6) < '202611' AND isDel = 'N';",
+    "gold_sql": "SELECT DISTINCT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6) BETWEEN '202510' AND '202603' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 122,
+    "question": "Show the total quantity per product in transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show the total quantity per product in transfers.\nSQL:",
+    "pred_sql": "SELECT pName, SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName;",
+    "gold_sql": "SELECT pName, SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName"
+  },
+  {
+    "id": 123,
+    "question": "Count transfer records per month.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Count transfer records per month.\nSQL:",
+    "pred_sql": "SELECT LEFT(TransferId, 6), COUNT(*) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY LEFT(TransferId, 6);",
+    "gold_sql": "SELECT LEFT(TransferId,6), COUNT(DISTINCT TransferId) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' GROUP BY LEFT(TransferId,6)"
+  },
+  {
+    "id": 124,
+    "question": "What is the average costAvg of transfer items?",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: What is the average costAvg of transfer items?\nSQL:",
+    "pred_sql": "SELECT AVG(costAvg) FROM WP_M09.dbo.WP_vTransfer WHERE dtlIsDel = 'N';",
+    "gold_sql": "SELECT AVG(costAvg) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 125,
+    "question": "Show product details for transfer '202603110006'.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show product details for transfer '202603110006'.\nSQL:",
+    "pred_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE TransferId = '202603110006' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT pNo, pName, qty, costAvg FROM WP_M09.dbo.WP_vTransfer WHERE TransferId='202603110006' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 126,
+    "question": "Show the total costAvg value per source warehouse.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show the total costAvg value per source warehouse.\nSQL:",
+    "pred_sql": "SELECT DISTINCT costAvg FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT fWhName, SUM(costAvg * qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY fWhName"
+  },
+  {
+    "id": 127,
+    "question": "Show transfers from warehouse '廣興分部' with quantity greater than 5.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show transfers from warehouse '廣興分部' with quantity greater than 5.\nSQL:",
+    "pred_sql": "SELECT TransferId, fWhName, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName = N'廣興分部' AND qty > 5 AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'廣興分部' AND qty > 5 AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 128,
+    "question": "Which source warehouse has the most transfer records?",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Which source warehouse has the most transfer records?\nSQL:",
+    "pred_sql": "SELECT TOP 1 fWhName, COUNT(*) AS recCount FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' GROUP BY fWhName ORDER BY recCount DESC;",
+    "gold_sql": "SELECT TOP 1 fWhName, COUNT(DISTINCT TransferId) AS cnt FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY fWhName ORDER BY cnt DESC"
+  },
+  {
+    "id": 129,
+    "question": "List products transferred more than 3 times.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List products transferred more than 3 times.\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName HAVING COUNT(DISTINCT TransferId) > 3;",
+    "gold_sql": "SELECT pName, COUNT(DISTINCT TransferId) AS cnt FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' AND pName IS NOT NULL GROUP BY pName HAVING COUNT(DISTINCT TransferId) > 3"
+  },
+  {
+    "id": 130,
+    "question": "Show transfers whose total costAvg per item exceeds the average.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show transfers whose total costAvg per item exceeds the average.\nSQL:",
+    "pred_sql": "SELECT TransferId, pName FROM WP_M09.dbo.WP_vTransfer WHERE costAvg > costAvgPerItem AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT TransferId, pName, costAvg FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' AND costAvg > (SELECT AVG(costAvg) FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N')"
+  },
+  {
+    "id": 131,
+    "question": "What products were transferred from warehouse '特產中心'?",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: What products were transferred from warehouse '特產中心'?\nSQL:",
+    "pred_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vTransfer WHERE fWhName = N'特產中心' AND isDel = 'N' AND dtlIsDel = 'N';",
+    "gold_sql": "SELECT DISTINCT pNo, pName FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'特產中心' AND isDel='N' AND dtlIsDel='N'"
+  },
+  {
+    "id": 132,
+    "question": "Show the month with the most transfers.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show the month with the most transfers.\nSQL:",
+    "pred_sql": "SELECT TOP 1 LEFT(TransferId, 6) AS transferMonth, COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY LEFT(TransferId, 6) ORDER BY count DESC;",
+    "gold_sql": "SELECT TOP 1 LEFT(TransferId,6) AS mon, COUNT(DISTINCT TransferId) AS cnt FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' GROUP BY LEFT(TransferId,6) ORDER BY cnt DESC"
+  },
+  {
+    "id": 133,
+    "question": "Show the top 3 products by total quantity transferred.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: Show the top 3 products by total quantity transferred.\nSQL:",
+    "pred_sql": "SELECT TOP 3 pName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName ORDER BY totalQty DESC;",
+    "gold_sql": "SELECT TOP 3 pName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName ORDER BY totalQty DESC"
+  },
+  {
+    "id": 134,
+    "question": "List source warehouses that have transferred more than 2 distinct products.",
+    "inferred_table": "WP_vTransfer",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vTransfer\nNote: Filter by date using LEFT(TransferId,8)='YYYYMMDD' or LEFT(TransferId,6)='YYYYMM'.\nQuestion: List source warehouses that have transferred more than 2 distinct products.\nSQL:",
+    "pred_sql": "SELECT DISTINCT fWhName FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY fWhName HAVING COUNT(DISTINCT pNo) > 2;",
+    "gold_sql": "SELECT fWhName, COUNT(DISTINCT pNo) AS productCount FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY fWhName HAVING COUNT(DISTINCT pNo) > 2"
+  },
+  {
+    "id": 135,
+    "question": "Which destination warehouse received the highest total quantity?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vTransfer",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Which destination warehouse received the highest total quantity?\nSQL:",
+    "pred_sql": "SELECT TOP 1 tfWhName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vInventory GROUP BY tfWhName ORDER BY totalQty DESC;",
+    "gold_sql": "SELECT TOP 1 tfWhName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY tfWhName ORDER BY totalQty DESC"
+  },
+  {
+    "id": 136,
+    "question": "How many inventory records are there?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: How many inventory records are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vInventory"
+  },
+  {
+    "id": 137,
+    "question": "List all distinct warehouse names in inventory.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List all distinct warehouse names in inventory.\nSQL:",
+    "pred_sql": "SELECT DISTINCT WarehouseName FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT DISTINCT WarehouseName FROM WP_M09.dbo.WP_vInventory"
+  },
+  {
+    "id": 138,
+    "question": "List all products in warehouse '特產中心'.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List all products in warehouse '特產中心'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+    "gold_sql": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心'"
+  },
+  {
+    "id": 139,
+    "question": "Show the inventory for product '悅氏小水'.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show the inventory for product '悅氏小水'.\nSQL:",
+    "pred_sql": "SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName = N'悅氏小水';",
+    "gold_sql": "SELECT WarehouseName, qty, costAvg FROM WP_M09.dbo.WP_vInventory WHERE pName=N'悅氏小水'"
+  },
+  {
+    "id": 140,
+    "question": "What is the total quantity of all inventory?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: What is the total quantity of all inventory?\nSQL:",
+    "pred_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vInventory"
+  },
+  {
+    "id": 141,
+    "question": "Show distinct vendor names in inventory.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show distinct vendor names in inventory.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vInventory WHERE pvName IS NOT NULL"
+  },
+  {
+    "id": 142,
+    "question": "List inventory items from vendor '實垣有限公司'.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List inventory items from vendor '實垣有限公司'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vInventory WHERE pvName = N'實垣有限公司';",
+    "gold_sql": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'實垣有限公司'"
+  },
+  {
+    "id": 143,
+    "question": "What is the maximum quantity of a single inventory record?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: What is the maximum quantity of a single inventory record?\nSQL:",
+    "pred_sql": "SELECT MAX(qty) FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT MAX(qty) FROM WP_M09.dbo.WP_vInventory"
+  },
+  {
+    "id": 144,
+    "question": "What is the minimum costAvg in inventory?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: What is the minimum costAvg in inventory?\nSQL:",
+    "pred_sql": "SELECT MIN(costAvg) FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT MIN(costAvg) FROM WP_M09.dbo.WP_vInventory WHERE costAvg > 0"
+  },
+  {
+    "id": 145,
+    "question": "List inventory items with product names containing '茶'.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List inventory items with product names containing '茶'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%';",
+    "gold_sql": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%'"
+  },
+  {
+    "id": 146,
+    "question": "How many distinct products are in inventory?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: How many distinct products are in inventory?\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vInventory"
+  },
+  {
+    "id": 147,
+    "question": "Show all distinct product units in inventory.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show all distinct product units in inventory.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pUnit FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT DISTINCT pUName FROM WP_M09.dbo.WP_vInventory WHERE pUName IS NOT NULL"
+  },
+  {
+    "id": 148,
+    "question": "List inventory items where quantity is zero.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List inventory items where quantity is zero.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vInventory WHERE qty = 0;",
+    "gold_sql": "SELECT pNo, pName, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE qty = 0"
+  },
+  {
+    "id": 149,
+    "question": "What is the average costStd in inventory?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: What is the average costStd in inventory?\nSQL:",
+    "pred_sql": "SELECT AVG(costStd) FROM WP_M09.dbo.WP_vInventory;",
+    "gold_sql": "SELECT AVG(costStd) FROM WP_M09.dbo.WP_vInventory WHERE costStd > 0"
+  },
+  {
+    "id": 150,
+    "question": "Show the total quantity per warehouse in inventory.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show the total quantity per warehouse in inventory.\nSQL:",
+    "pred_sql": "SELECT WarehouseName, SUM(qty) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName;",
+    "gold_sql": "SELECT WarehouseName, SUM(qty) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName"
+  },
+  {
+    "id": 151,
+    "question": "Show the count of products per warehouse.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show the count of products per warehouse.\nSQL:",
+    "pred_sql": "SELECT WarehouseName, COUNT(*) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName;",
+    "gold_sql": "SELECT WarehouseName, COUNT(*) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName"
+  },
+  {
+    "id": 152,
+    "question": "List the total inventory quantity per vendor.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List the total inventory quantity per vendor.\nSQL:",
+    "pred_sql": "SELECT pvName, SUM(qty) FROM WP_M09.dbo.WP_vInventory GROUP BY pvName;",
+    "gold_sql": "SELECT pvName, SUM(qty) FROM WP_M09.dbo.WP_vInventory WHERE pvName IS NOT NULL GROUP BY pvName"
+  },
+  {
+    "id": 153,
+    "question": "Show the top 10 products by quantity in inventory.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show the top 10 products by quantity in inventory.\nSQL:",
+    "pred_sql": "SELECT TOP 10 pName, qty FROM WP_M09.dbo.WP_vInventory ORDER BY qty DESC;",
+    "gold_sql": "SELECT TOP 10 pName, qty FROM WP_M09.dbo.WP_vInventory ORDER BY qty DESC"
+  },
+  {
+    "id": 154,
+    "question": "Count distinct products in warehouse '特產中心'.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Count distinct products in warehouse '特產中心'.\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+    "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心'"
+  },
+  {
+    "id": 155,
+    "question": "Show inventory items with quantity greater than 100.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show inventory items with quantity greater than 100.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty > 100;",
+    "gold_sql": "SELECT pNo, pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE qty > 100"
+  },
+  {
+    "id": 156,
+    "question": "List the average costAvg per warehouse.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List the average costAvg per warehouse.\nSQL:",
+    "pred_sql": "SELECT WarehouseName, AVG(costAvg) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName;",
+    "gold_sql": "SELECT WarehouseName, AVG(costAvg) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName"
+  },
+  {
+    "id": 157,
+    "question": "Show inventory items where isSale is '1'.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show inventory items where isSale is '1'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vInventory WHERE isSale = '1';",
+    "gold_sql": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE isSale='1'"
+  },
+  {
+    "id": 158,
+    "question": "List inventory items with costAvg greater than 500.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List inventory items with costAvg greater than 500.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, costAvg FROM WP_M09.dbo.WP_vInventory WHERE costAvg > 500;",
+    "gold_sql": "SELECT pNo, pName, costAvg, qty FROM WP_M09.dbo.WP_vInventory WHERE costAvg > 500"
+  },
+  {
+    "id": 159,
+    "question": "Show inventory for vendor '新福華商行' sorted by quantity descending.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show inventory for vendor '新福華商行' sorted by quantity descending.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, qty, qtySafe FROM WP_M09.dbo.WP_vInventory WHERE pvName = N'新福華商行' ORDER BY qty DESC;",
+    "gold_sql": "SELECT pNo, pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'新福華商行' ORDER BY qty DESC"
+  },
+  {
+    "id": 160,
+    "question": "Count distinct vendors per warehouse in inventory.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Count distinct vendors per warehouse in inventory.\nSQL:",
+    "pred_sql": "SELECT WarehouseName, COUNT(DISTINCT pvName) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName;",
+    "gold_sql": "SELECT WarehouseName, COUNT(DISTINCT pvName) FROM WP_M09.dbo.WP_vInventory WHERE pvName IS NOT NULL GROUP BY WarehouseName"
+  },
+  {
+    "id": 161,
+    "question": "Show inventory items where qtySafe is greater than qtyNow.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show inventory items where qtySafe is greater than qtyNow.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vInventory WHERE qtySafe > qtyNow;",
+    "gold_sql": "SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vInventory WHERE qtySafe > qtyNow"
+  },
+  {
+    "id": 162,
+    "question": "Which warehouse has the highest total inventory quantity?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Which warehouse has the highest total inventory quantity?\nSQL:",
+    "pred_sql": "SELECT TOP 1 WarehouseName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY totalQty DESC;",
+    "gold_sql": "SELECT TOP 1 WarehouseName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY totalQty DESC"
+  },
+  {
+    "id": 163,
+    "question": "List vendors who have more than 20 products in inventory.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List vendors who have more than 20 products in inventory.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vInventory GROUP BY pvName HAVING COUNT(DISTINCT pNo) > 20;",
+    "gold_sql": "SELECT pvName, COUNT(DISTINCT pNo) AS cnt FROM WP_M09.dbo.WP_vInventory WHERE pvName IS NOT NULL GROUP BY pvName HAVING COUNT(DISTINCT pNo) > 20"
+  },
+  {
+    "id": 164,
+    "question": "Show inventory items with costAvg above the overall average.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show inventory items with costAvg above the overall average.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, costAvg FROM WP_M09.dbo.WP_vInventory WHERE costAvg > (SELECT AVG(costAvg) FROM WP_M09.dbo.WP_vInventory);",
+    "gold_sql": "SELECT pNo, pName, costAvg FROM WP_M09.dbo.WP_vInventory WHERE costAvg > (SELECT AVG(costAvg) FROM WP_M09.dbo.WP_vInventory WHERE costAvg > 0)"
+  },
+  {
+    "id": 165,
+    "question": "What is the total inventory value (costAvg * qty) for warehouse '特產中心'?",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: What is the total inventory value (costAvg * qty) for warehouse '特產中心'?\nSQL:",
+    "pred_sql": "SELECT SUM(costAvg * qty) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+    "gold_sql": "SELECT SUM(costAvg * qty) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心'"
+  },
+  {
+    "id": 166,
+    "question": "Show the warehouse with the most distinct products.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show the warehouse with the most distinct products.\nSQL:",
+    "pred_sql": "SELECT TOP 1 WarehouseName, COUNT(DISTINCT pNo) AS productCount FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY productCount DESC;",
+    "gold_sql": "SELECT TOP 1 WarehouseName, COUNT(DISTINCT pNo) AS cnt FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY cnt DESC"
+  },
+  {
+    "id": 167,
+    "question": "List products that appear in more than 1 warehouse.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List products that appear in more than 1 warehouse.\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vInventory WHERE qty > 0 GROUP BY pName HAVING COUNT(DISTINCT WarehouseId) > 1;",
+    "gold_sql": "SELECT pName, COUNT(DISTINCT WarehouseName) AS whCount FROM WP_M09.dbo.WP_vInventory GROUP BY pName HAVING COUNT(DISTINCT WarehouseName) > 1"
+  },
+  {
+    "id": 168,
+    "question": "Show the top 3 vendors by total inventory quantity.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: Show the top 3 vendors by total inventory quantity.\nSQL:",
+    "pred_sql": "SELECT TOP 3 pvName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vInventory GROUP BY pvName ORDER BY totalQty DESC;",
+    "gold_sql": "SELECT TOP 3 pvName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vInventory WHERE pvName IS NOT NULL GROUP BY pvName ORDER BY totalQty DESC"
+  },
+  {
+    "id": 169,
+    "question": "List warehouses where average costAvg exceeds 300.",
+    "inferred_table": "WP_vInventory",
+    "gold_table": "WP_vInventory",
+    "prompt": "Table: WP_vInventory\nNote: pNo is a sequential product number, not a date. This view has no date filtering capability.\nQuestion: List warehouses where average costAvg exceeds 300.\nSQL:",
+    "pred_sql": "SELECT WarehouseName FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName HAVING AVG(costAvg) > 300;",
+    "gold_sql": "SELECT WarehouseName, AVG(costAvg) AS avgCost FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName HAVING AVG(costAvg) > 300"
+  },
+  {
+    "id": 170,
+    "question": "How many products are there?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: How many products are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProduct"
+  },
+  {
+    "id": 171,
+    "question": "List all distinct product names.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List all distinct product names.\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vProduct"
+  },
+  {
+    "id": 172,
+    "question": "Show the details of product '悅氏小水'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show the details of product '悅氏小水'.\nSQL:",
+    "pred_sql": "SELECT * FROM WP_M09.dbo.WP_vProduct WHERE pName = N'悅氏小水';",
+    "gold_sql": "SELECT pNo, pName, priceStd, costAvg, pvName FROM WP_M09.dbo.WP_vProduct WHERE pName=N'悅氏小水'"
+  },
+  {
+    "id": 173,
+    "question": "List all distinct vendor names in products.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List all distinct vendor names in products.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL"
+  },
+  {
+    "id": 174,
+    "question": "List products from vendor '實垣有限公司'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products from vendor '實垣有限公司'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName = N'實垣有限公司';",
+    "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'實垣有限公司'"
+  },
+  {
+    "id": 175,
+    "question": "What is the maximum standard price among all products?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: What is the maximum standard price among all products?\nSQL:",
+    "pred_sql": "SELECT MAX(priceStd) FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT MAX(priceStd) FROM WP_M09.dbo.WP_vProduct"
+  },
+  {
+    "id": 176,
+    "question": "What is the minimum standard price among all products?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: What is the minimum standard price among all products?\nSQL:",
+    "pred_sql": "SELECT MIN(priceStd) FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT MIN(priceStd) FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 0"
+  },
+  {
+    "id": 177,
+    "question": "List products with names containing '茶'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products with names containing '茶'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%茶%';",
+    "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%茶%'"
+  },
+  {
+    "id": 178,
+    "question": "Show all distinct product units.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show all distinct product units.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pUnit FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT DISTINCT pUName FROM WP_M09.dbo.WP_vProduct WHERE pUName IS NOT NULL"
+  },
+  {
+    "id": 179,
+    "question": "Find the product with barcode '4710632001318'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Find the product with barcode '4710632001318'.\nSQL:",
+    "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vProduct WHERE pBarcode = '4710632001318';",
+    "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pBarcode='4710632001318'"
+  },
+  {
+    "id": 180,
+    "question": "How many distinct vendors supply products?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: How many distinct vendors supply products?\nSQL:",
+    "pred_sql": "SELECT COUNT(DISTINCT pvId) FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT COUNT(DISTINCT pvName) FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL"
+  },
+  {
+    "id": 181,
+    "question": "List products where isSale is '3'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products where isSale is '3'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE isSale = '3';",
+    "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE isSale='3'"
+  },
+  {
+    "id": 182,
+    "question": "What is the average standard price of all products?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: What is the average standard price of all products?\nSQL:",
+    "pred_sql": "SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 0"
+  },
+  {
+    "id": 183,
+    "question": "List products with names containing '冬'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products with names containing '冬'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%冬%';",
+    "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%冬%'"
+  },
+  {
+    "id": 184,
+    "question": "Show the count of products per vendor.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show the count of products per vendor.\nSQL:",
+    "pred_sql": "SELECT pvName, COUNT(*) FROM WP_M09.dbo.WP_vProduct GROUP BY pvName;",
+    "gold_sql": "SELECT pvName, COUNT(*) FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL GROUP BY pvName"
+  },
+  {
+    "id": 185,
+    "question": "List the average standard price per vendor.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List the average standard price per vendor.\nSQL:",
+    "pred_sql": "SELECT pvName, AVG(priceStd) FROM WP_M09.dbo.WP_vProvider GROUP BY pvName;",
+    "gold_sql": "SELECT pvName, AVG(priceStd) FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL GROUP BY pvName"
+  },
+  {
+    "id": 186,
+    "question": "Show the top 10 most expensive products by standard price.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show the top 10 most expensive products by standard price.\nSQL:",
+    "pred_sql": "SELECT TOP 10 pName, priceStd FROM WP_M09.dbo.WP_vProduct ORDER BY priceStd DESC;",
+    "gold_sql": "SELECT TOP 10 pName, priceStd FROM WP_M09.dbo.WP_vProduct ORDER BY priceStd DESC"
+  },
+  {
+    "id": 187,
+    "question": "Count products per unit type.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Count products per unit type.\nSQL:",
+    "pred_sql": "SELECT pUName, COUNT(*) FROM WP_M09.dbo.WP_vProduct GROUP BY pUName;",
+    "gold_sql": "SELECT pUName, COUNT(*) FROM WP_M09.dbo.WP_vProduct WHERE pUName IS NOT NULL GROUP BY pUName"
+  },
+  {
+    "id": 188,
+    "question": "List products with standard price greater than 500.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products with standard price greater than 500.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 500;",
+    "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 500"
+  },
+  {
+    "id": 189,
+    "question": "Show products from vendor '碧雲冰城' sorted by price descending.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show products from vendor '碧雲冰城' sorted by price descending.\nSQL:",
+    "pred_sql": "SELECT pNo, pName, price FROM WP_M09.dbo.WP_vProduct WHERE pvName = N'碧雲冰城' ORDER BY price DESC;",
+    "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'碧雲冰城' ORDER BY priceStd DESC"
+  },
+  {
+    "id": 190,
+    "question": "Show products where costAvg is greater than priceStd.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show products where costAvg is greater than priceStd.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE costAvg > priceStd;",
+    "gold_sql": "SELECT pNo, pName, costAvg, priceStd FROM WP_M09.dbo.WP_vProduct WHERE costAvg > priceStd AND priceStd > 0"
+  },
+  {
+    "id": 191,
+    "question": "List products with pvDiscount greater than 0.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products with pvDiscount greater than 0.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvDiscount > 0;",
+    "gold_sql": "SELECT pNo, pName, pvDiscount FROM WP_M09.dbo.WP_vProduct WHERE pvDiscount > 0"
+  },
+  {
+    "id": 192,
+    "question": "Count the number of products with isSale='1'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Count the number of products with isSale='1'.\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProduct WHERE isSale = '1';",
+    "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProduct WHERE isSale='1'"
+  },
+  {
+    "id": 193,
+    "question": "Show distinct vendor IDs and names in products.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show distinct vendor IDs and names in products.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pvId, pvName FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT DISTINCT pvId, pvName FROM WP_M09.dbo.WP_vProduct WHERE pvId IS NOT NULL"
+  },
+  {
+    "id": 194,
+    "question": "List products where qtyNow is less than qtySafe.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products where qtyNow is less than qtySafe.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < qtySafe;",
+    "gold_sql": "SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtySafe > qtyNow"
+  },
+  {
+    "id": 195,
+    "question": "Show products where isPvDiscount is '1'.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show products where isPvDiscount is '1'.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE isPvDiscount = '1';",
+    "gold_sql": "SELECT pNo, pName, pvDiscount FROM WP_M09.dbo.WP_vProduct WHERE isPvDiscount='1'"
+  },
+  {
+    "id": 196,
+    "question": "Which vendor supplies the most products?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Which vendor supplies the most products?\nSQL:",
+    "pred_sql": "SELECT TOP 1 pvName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY cnt DESC;",
+    "gold_sql": "SELECT TOP 1 pvName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL GROUP BY pvName ORDER BY cnt DESC"
+  },
+  {
+    "id": 197,
+    "question": "List vendors who supply more than 50 products.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List vendors who supply more than 50 products.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProduct GROUP BY pvName HAVING COUNT(*) > 50;",
+    "gold_sql": "SELECT pvName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL GROUP BY pvName HAVING COUNT(*) > 50"
+  },
+  {
+    "id": 198,
+    "question": "Show products with priceStd above the average.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show products with priceStd above the average.\nSQL:",
+    "pred_sql": "SELECT pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > (SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vProduct);",
+    "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > (SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 0)"
+  },
+  {
+    "id": 199,
+    "question": "What is the total standard price value of all products (sum of priceStd)?",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: What is the total standard price value of all products (sum of priceStd)?\nSQL:",
+    "pred_sql": "SELECT SUM(priceStd) FROM WP_M09.dbo.WP_vProduct;",
+    "gold_sql": "SELECT SUM(priceStd) FROM WP_M09.dbo.WP_vProduct"
+  },
+  {
+    "id": 200,
+    "question": "Show the vendor with the highest average product price.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show the vendor with the highest average product price.\nSQL:",
+    "pred_sql": "SELECT TOP 1 pvName, AVG(price) AS avgPrice FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY avgPrice DESC;",
+    "gold_sql": "SELECT TOP 1 pvName, AVG(priceStd) AS avgPrice FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL AND priceStd > 0 GROUP BY pvName ORDER BY avgPrice DESC"
+  },
+  {
+    "id": 201,
+    "question": "List products that have costAvg exceeding double their costStd.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List products that have costAvg exceeding double their costStd.\nSQL:",
+    "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE costAvg > (costStd * 2);",
+    "gold_sql": "SELECT pNo, pName, costAvg, costStd FROM WP_M09.dbo.WP_vProduct WHERE costAvg > costStd * 2 AND costStd > 0"
+  },
+  {
+    "id": 202,
+    "question": "Show the top 5 vendors by total number of products, descending.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: Show the top 5 vendors by total number of products, descending.\nSQL:",
+    "pred_sql": "SELECT TOP 5 pvName, COUNT(*) AS productCount FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY productCount DESC;",
+    "gold_sql": "SELECT TOP 5 pvName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProduct WHERE pvName IS NOT NULL GROUP BY pvName ORDER BY cnt DESC"
+  },
+  {
+    "id": 203,
+    "question": "List unit types that have more than 10 products.",
+    "inferred_table": "WP_vProduct",
+    "gold_table": "WP_vProduct",
+    "prompt": "Table: WP_vProduct\nNote: pNo is a sequential product number (1, 2, 3...), NOT a date. This view has no date filtering capability.\nQuestion: List unit types that have more than 10 products.\nSQL:",
+    "pred_sql": "SELECT unitType FROM WP_M09.dbo.WP_vProduct GROUP BY unitType HAVING COUNT(*) > 10;",
+    "gold_sql": "SELECT pUName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProduct WHERE pUName IS NOT NULL GROUP BY pUName HAVING COUNT(*) > 10"
+  },
+  {
+    "id": 204,
+    "question": "How many providers are there?",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: How many providers are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider;",
+    "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider"
+  },
+  {
+    "id": 205,
+    "question": "List all active providers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List all active providers.\nSQL:",
+    "pred_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N';",
+    "gold_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE isStop='N'"
+  },
+  {
+    "id": 206,
+    "question": "How many active providers are there?",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: How many active providers are there?\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N';",
+    "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE isStop='N'"
+  },
+  {
+    "id": 207,
+    "question": "Show the details of provider '二水鄉農會'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show the details of provider '二水鄉農會'.\nSQL:",
+    "pred_sql": "SELECT pvId, pvName, pvTel, pvFax, pvEmail FROM WP_M09.dbo.WP_vProvider WHERE pvName = N'二水鄉農會';",
+    "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'二水鄉農會'"
+  },
+  {
+    "id": 208,
+    "question": "List all distinct provider cities.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List all distinct provider cities.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pvCity FROM WP_M09.dbo.WP_vProvider;",
+    "gold_sql": "SELECT DISTINCT pvCity FROM WP_M09.dbo.WP_vProvider WHERE pvCity IS NOT NULL AND pvCity <> ''"
+  },
+  {
+    "id": 209,
+    "question": "List providers in city '雲林縣'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List providers in city '雲林縣'.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE pvCity = N'雲林縣';",
+    "gold_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvCity=N'雲林縣'"
+  },
+  {
+    "id": 210,
+    "question": "List all distinct provider category names.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List all distinct provider category names.\nSQL:",
+    "pred_sql": "SELECT DISTINCT pvKName FROM WP_M09.dbo.WP_vProvider;",
+    "gold_sql": "SELECT DISTINCT pvKName FROM WP_M09.dbo.WP_vProvider WHERE pvKName IS NOT NULL AND pvKName <> ''"
+  },
+  {
+    "id": 211,
+    "question": "Show the provider with ID '0'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show the provider with ID '0'.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE pvId = '0';",
+    "gold_sql": "SELECT pvId, pvName, pvCity, pvZone FROM WP_M09.dbo.WP_vProvider WHERE pvId='0'"
+  },
+  {
+    "id": 212,
+    "question": "List all providers with their phone numbers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List all providers with their phone numbers.\nSQL:",
+    "pred_sql": "SELECT pvName, pvTel FROM WP_M09.dbo.WP_vProvider;",
+    "gold_sql": "SELECT pvId, pvName, pvTel FROM WP_M09.dbo.WP_vProvider WHERE isStop='N'"
+  },
+  {
+    "id": 213,
+    "question": "Show all providers who have an email address.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show all providers who have an email address.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE email IS NOT NULL AND email <> '';",
+    "gold_sql": "SELECT pvId, pvName, email FROM WP_M09.dbo.WP_vProvider WHERE email IS NOT NULL AND email <> ''"
+  },
+  {
+    "id": 214,
+    "question": "List all stopped providers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List all stopped providers.\nSQL:",
+    "pred_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'Y';",
+    "gold_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE isStop='Y'"
+  },
+  {
+    "id": 215,
+    "question": "Show the contact name for provider '二林農會'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show the contact name for provider '二林農會'.\nSQL:",
+    "pred_sql": "SELECT ctactName FROM WP_M09.dbo.WP_vProvider WHERE pvName = N'二林農會';",
+    "gold_sql": "SELECT ctactName, ctactTel FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'二林農會'"
+  },
+  {
+    "id": 216,
+    "question": "List all distinct bank names used by providers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List all distinct bank names used by providers.\nSQL:",
+    "pred_sql": "SELECT DISTINCT bankName FROM WP_M09.dbo.WP_vProvider WHERE bankName IS NOT NULL AND bankName <> '';",
+    "gold_sql": "SELECT DISTINCT bankName FROM WP_M09.dbo.WP_vProvider WHERE bankName IS NOT NULL AND bankName <> ''"
+  },
+  {
+    "id": 217,
+    "question": "List providers in zone '(市區鄉鎮)'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List providers in zone '(市區鄉鎮)'.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE pvZone = N'(市區鄉鎮)';",
+    "gold_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvZone=N'(市區鄉鎮)'"
+  },
+  {
+    "id": 218,
+    "question": "Show the count of providers per city.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show the count of providers per city.\nSQL:",
+    "pred_sql": "SELECT pvCity, COUNT(*) FROM WP_M09.dbo.WP_vProvider GROUP BY pvCity;",
+    "gold_sql": "SELECT pvCity, COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE pvCity IS NOT NULL AND pvCity <> '' GROUP BY pvCity"
+  },
+  {
+    "id": 219,
+    "question": "Count providers per category.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Count providers per category.\nSQL:",
+    "pred_sql": "SELECT pvKName, COUNT(*) FROM WP_M09.dbo.WP_vProvider GROUP BY pvKName;",
+    "gold_sql": "SELECT pvKName, COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE pvKName IS NOT NULL AND pvKName <> '' GROUP BY pvKName"
+  },
+  {
+    "id": 220,
+    "question": "List providers with pvDiscount greater than 0.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List providers with pvDiscount greater than 0.\nSQL:",
+    "pred_sql": "SELECT pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvDiscount > 0;",
+    "gold_sql": "SELECT pvId, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvDiscount > 0"
+  },
+  {
+    "id": 221,
+    "question": "Show the average pvDiscount per category.",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_M09\nQuestion: Show the average pvDiscount per category.\nSQL:",
+    "pred_sql": "SELECT AVG(pvDiscount), fCategory FROM WP_M09 GROUP BY fCategory;",
+    "gold_sql": "SELECT pvKName, AVG(pvDiscount) FROM WP_M09.dbo.WP_vProvider WHERE pvKName IS NOT NULL AND pvKName <> '' GROUP BY pvKName"
+  },
+  {
+    "id": 222,
+    "question": "List active providers sorted by pvName.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List active providers sorted by pvName.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N' ORDER BY pvName;",
+    "gold_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE isStop='N' ORDER BY pvName"
+  },
+  {
+    "id": 223,
+    "question": "Show the top 5 providers by pvDiscount.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show the top 5 providers by pvDiscount.\nSQL:",
+    "pred_sql": "SELECT TOP 5 pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider ORDER BY pvDiscount DESC;",
+    "gold_sql": "SELECT TOP 5 pvId, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider ORDER BY pvDiscount DESC"
+  },
+  {
+    "id": 224,
+    "question": "Count active providers in city '雲林縣'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Count active providers in city '雲林縣'.\nSQL:",
+    "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE pvCity = N'雲林縣' AND isStop = 'N';",
+    "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE pvCity=N'雲林縣' AND isStop='N'"
+  },
+  {
+    "id": 225,
+    "question": "List providers with both fax and email.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List providers with both fax and email.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE pvFax IS NOT NULL AND pvFax <> '' AND email IS NOT NULL AND email <> '';",
+    "gold_sql": "SELECT pvId, pvName, fax, email FROM WP_M09.dbo.WP_vProvider WHERE fax IS NOT NULL AND fax <> '' AND email IS NOT NULL AND email <> ''"
+  },
+  {
+    "id": 226,
+    "question": "List providers in category '無'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List providers in category '無'.\nSQL:",
+    "pred_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvKName = N'無';",
+    "gold_sql": "SELECT pvId, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvKName=N'無'"
+  },
+  {
+    "id": 227,
+    "question": "Show distinct zones per city for providers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show distinct zones per city for providers.\nSQL:",
+    "pred_sql": "SELECT pvCity, COUNT(DISTINCT zoneId) FROM WP_M09.dbo.WP_vProvider GROUP BY pvCity;",
+    "gold_sql": "SELECT DISTINCT pvCity, pvZone FROM WP_M09.dbo.WP_vProvider WHERE pvCity IS NOT NULL AND pvCity <> '' AND pvZone IS NOT NULL AND pvZone <> ''"
+  },
+  {
+    "id": 228,
+    "question": "Count providers per bank name.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Count providers per bank name.\nSQL:",
+    "pred_sql": "SELECT bankName, COUNT(pvId) FROM WP_M09.dbo.WP_vProvider GROUP BY bankName;",
+    "gold_sql": "SELECT bankName, COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE bankName IS NOT NULL AND bankName <> '' GROUP BY bankName"
+  },
+  {
+    "id": 229,
+    "question": "List providers using bank ' 郵局'.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List providers using bank ' 郵局'.\nSQL:",
+    "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE bankName = N'郵局';",
+    "gold_sql": "SELECT pvId, pvName, bankAccount FROM WP_M09.dbo.WP_vProvider WHERE bankName=N' 郵局'"
+  },
+  {
+    "id": 230,
+    "question": "Which city has the most providers?",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Which city has the most providers?\nSQL:",
+    "pred_sql": "SELECT TOP 1 pvCity, COUNT(*) AS pvCount FROM WP_M09.dbo.WP_vProvider GROUP BY pvCity ORDER BY pvCount DESC;",
+    "gold_sql": "SELECT TOP 1 pvCity, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProvider WHERE pvCity IS NOT NULL AND pvCity <> '' GROUP BY pvCity ORDER BY cnt DESC"
+  },
+  {
+    "id": 231,
+    "question": "List cities with more than 5 providers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List cities with more than 5 providers.\nSQL:",
+    "pred_sql": "SELECT pvCity FROM WP_M09.dbo.WP_vProvider GROUP BY pvCity HAVING COUNT(*) > 5;",
+    "gold_sql": "SELECT pvCity, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProvider WHERE pvCity IS NOT NULL AND pvCity <> '' GROUP BY pvCity HAVING COUNT(*) > 5"
+  },
+  {
+    "id": 232,
+    "question": "Show providers with pvDiscount above the average.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show providers with pvDiscount above the average.\nSQL:",
+    "pred_sql": "SELECT pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvDiscount > (SELECT AVG(pvDiscount) FROM WP_M09.dbo.WP_vProvider);",
+    "gold_sql": "SELECT pvId, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvDiscount > (SELECT AVG(pvDiscount) FROM WP_M09.dbo.WP_vProvider WHERE pvDiscount > 0)"
+  },
+  {
+    "id": 233,
+    "question": "Which category has the highest average pvDiscount?",
+    "inferred_table": "WP_M09",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_M09\nQuestion: Which category has the highest average pvDiscount?\nSQL:",
+    "pred_sql": "SELECT TOP 1 pvDiscount AVG(pvDiscount) FROM WP_M09 WHERE dtlIsDel = 'N' GROUP BY pvDiscount;",
+    "gold_sql": "SELECT TOP 1 pvKName, AVG(pvDiscount) AS avgDisc FROM WP_M09.dbo.WP_vProvider WHERE pvKName IS NOT NULL AND pvKName <> '' GROUP BY pvKName ORDER BY avgDisc DESC"
+  },
+  {
+    "id": 234,
+    "question": "List categories with more than 10 providers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List categories with more than 10 providers.\nSQL:",
+    "pred_sql": "SELECT pvKName FROM WP_M09.dbo.WP_vProvider GROUP BY pvKName HAVING COUNT(*) > 10;",
+    "gold_sql": "SELECT pvKName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProvider WHERE pvKName IS NOT NULL AND pvKName <> '' GROUP BY pvKName HAVING COUNT(*) > 10"
+  },
+  {
+    "id": 235,
+    "question": "Show the top 3 cities by number of active providers.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Show the top 3 cities by number of active providers.\nSQL:",
+    "pred_sql": "SELECT TOP 3 pvCity, COUNT(*) AS pvCnt FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N' GROUP BY pvCity ORDER BY pvCnt DESC;",
+    "gold_sql": "SELECT TOP 3 pvCity, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProvider WHERE isStop='N' AND pvCity IS NOT NULL AND pvCity <> '' GROUP BY pvCity ORDER BY cnt DESC"
+  },
+  {
+    "id": 236,
+    "question": "List providers whose taxId is not empty, grouped by city.",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: List providers whose taxId is not empty, grouped by city.\nSQL:",
+    "pred_sql": "SELECT pvCity, COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE taxId IS NOT NULL AND taxId <> '' GROUP BY pvCity;",
+    "gold_sql": "SELECT pvCity, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProvider WHERE taxId IS NOT NULL AND taxId <> '' AND pvCity IS NOT NULL AND pvCity <> '' GROUP BY pvCity"
+  },
+  {
+    "id": 237,
+    "question": "Which bank is used by the most providers?",
+    "inferred_table": "WP_vProvider",
+    "gold_table": "WP_vProvider",
+    "prompt": "Table: WP_vProvider\nNote: isSale='Y' means active provider. Boolean fields use 'Y'/'N' encoding.\nQuestion: Which bank is used by the most providers?\nSQL:",
+    "pred_sql": "SELECT TOP 1 bankName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProvider GROUP BY bankName ORDER BY cnt DESC;",
+    "gold_sql": "SELECT TOP 1 bankName, COUNT(*) AS cnt FROM WP_M09.dbo.WP_vProvider WHERE bankName IS NOT NULL AND bankName <> '' GROUP BY bankName ORDER BY cnt DESC"
+  }
+]

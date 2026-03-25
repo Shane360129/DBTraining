@@ -1,0 +1,742 @@
+Total: 242 samples
+
+=== By View ===
+  WP_vAcctIn: 39
+  WP_vAcctOut: 28
+  WP_vInventory: 50
+  WP_vOutStock: 26
+  WP_vProduct: 44
+  WP_vProvider: 26
+  WP_vTransfer: 29
+
+=== By Difficulty ===
+  easy: 179
+  medium: 63
+
+=== All Questions ===
+  1. [easy] [WP_vAcctOut] Show details for accounts payable 202508200001
+     SQL: SELECT * FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202508200001' AND isDel='N' AND dtlIsDel='N';
+
+  2. [easy] [WP_vOutStock] What is the total quantity sold for 竹炭冬筍餅?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'竹炭冬筍餅' AND isDel='N' AND dtlIsDel='N';
+
+  3. [easy] [WP_vInventory] List 永豐農產 products with stock above 50
+     SQL: SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'永豐農產' AND qty > 50;
+
+  4. [easy] [WP_vAcctOut] List accounts payable created on 20251225
+     SQL: SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,8)='20251225' AND isDel='N' AND dtlIsDel='N';
+
+  5. [medium] [WP_vInventory] How many distinct products are in warehouse 南區倉庫?
+     SQL: SELECT COUNT(DISTINCT pNo) AS count FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫';
+
+  6. [easy] [WP_vInventory] Show inventory in 北區倉庫 from supplier 實垣有限公司
+     SQL: SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'北區倉庫' AND pvName=N'實垣有限公司';
+
+  7. [easy] [WP_vProduct] Show products with more than 15 units in stock
+     SQL: SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow > 15 ORDER BY qtyNow DESC;
+
+  8. [easy] [WP_vInventory] List products in warehouse 東區倉庫 with standard price above 30
+     SQL: SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'東區倉庫' AND priceStd > 30;
+
+  9. [easy] [WP_vProduct] Show products with more than 10 units in stock
+     SQL: SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow > 10 ORDER BY qtyNow DESC;
+
+ 10. [easy] [WP_vProduct] Find products with safe stock set but current stock is zero
+     SQL: SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtyNow = 0 AND qtySafe > 0;
+
+ 11. [easy] [WP_vOutStock] What is the total sales for 202511?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';
+
+ 12. [easy] [WP_vAcctIn] Retrieve every active accounts receivable ID
+     SQL: SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';
+
+ 13. [easy] [WP_vInventory] Show inventory in 特產中心 from supplier 台灣好茶
+     SQL: SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心' AND pvName=N'台灣好茶';
+
+ 14. [easy] [WP_vOutStock] What is the total revenue from selling 東方美人茶?
+     SQL: SELECT SUM(amtTotal) AS total_revenue FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';
+
+ 15. [medium] [WP_vTransfer] Show average transferred quantity per product
+     SQL: SELECT pName, AVG(qty) AS avg_qty FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName ORDER BY avg_qty DESC;
+
+ 16. [easy] [WP_vAcctOut] Find accounts payable for products related to 高山
+     SQL: SELECT DISTINCT acctOutId, pName FROM WP_M09.dbo.WP_vAcctOut WHERE pName LIKE N'%高山%' AND isDel='N' AND dtlIsDel='N';
+
+ 17. [easy] [WP_vAcctIn] What is the total receivable from member 觀光農場?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'觀光農場' AND isDel='N' AND dtlIsDel='N';
+
+ 18. [easy] [WP_vProvider] Show all supplier information
+     SQL: SELECT * FROM WP_M09.dbo.WP_vProvider ORDER BY pvSn;
+
+ 19. [easy] [WP_vProduct] What is the current stock for 台灣高山茶?
+     SQL: SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'台灣高山茶';
+
+ 20. [medium] [WP_vAcctIn] Show total accounts receivable per member
+     SQL: SELECT memId, memName, SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY memId, memName ORDER BY total DESC;
+
+ 21. [easy] [WP_vProvider] Is supplier 健康食品 active?
+     SQL: SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'健康食品';
+
+ 22. [medium] [WP_vTransfer] How many times was 普洱茶 transferred?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'普洱茶' AND isDel='N' AND dtlIsDel='N';
+
+ 23. [medium] [WP_vAcctOut] How many accounts payable records were created in 202511?
+     SQL: SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202511' AND isDel='N' AND dtlIsDel='N';
+
+ 24. [easy] [WP_vProduct] List all products supplied by 健康食品
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';
+
+ 25. [medium] [WP_vInventory] Show all products from supplier 永豐農產 in inventory
+     SQL: SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'永豐農產' GROUP BY pName;
+
+ 26. [medium] [WP_vProduct] How many products contain 竹 in their name?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%竹%';
+
+ 27. [medium] [WP_vInventory] Show all products from supplier 山林食品 in inventory
+     SQL: SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'山林食品' GROUP BY pName;
+
+ 28. [easy] [WP_vAcctIn] Find accounts receivable exceeding 20000
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 20000 AND isDel='N' AND dtlIsDel='N';
+
+ 29. [easy] [WP_vInventory] List products with standard price above 30
+     SQL: SELECT DISTINCT pName, priceStd FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 30 ORDER BY priceStd DESC;
+
+ 30. [easy] [WP_vInventory] In which warehouses is 有機烏龍茶 stored?
+     SQL: SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'有機烏龍茶';
+
+ 31. [easy] [WP_vProduct] Show products priced below 30
+     SQL: SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd < 30 ORDER BY priceStd;
+
+ 32. [easy] [WP_vInventory] Show products with less than 5 units in stock
+     SQL: SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 5;
+
+ 33. [easy] [WP_vAcctOut] Show details for accounts payable 202512100002
+     SQL: SELECT * FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202512100002' AND isDel='N' AND dtlIsDel='N';
+
+ 34. [easy] [WP_vAcctIn] Show accounts receivable for member 觀光農場
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'觀光農場' AND isDel='N' AND dtlIsDel='N';
+
+ 35. [medium] [WP_vProduct] How many products does 品茶苑 supply?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';
+
+ 36. [medium] [WP_vAcctIn] List accounts receivable for member 食品公司 that include 烏龍茶葉
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'食品公司' AND pName=N'烏龍茶葉' AND isDel='N' AND dtlIsDel='N';
+
+ 37. [easy] [WP_vAcctOut] What is the maximum accounts payable amount?
+     SQL: SELECT MAX(DISTINCT amount) AS max_amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';
+
+ 38. [easy] [WP_vProvider] Show details for supplier pvSn 21
+     SQL: SELECT pvSn, pvName, pvTel, pvAddr, email FROM WP_M09.dbo.WP_vProvider WHERE pvSn='21';
+
+ 39. [easy] [WP_vInventory] In which warehouses is 阿里山茶 stored?
+     SQL: SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'阿里山茶';
+
+ 40. [medium] [WP_vAcctOut] What is the total payable to 綠野農業 in 202504?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'綠野農業' AND LEFT(acctOutId,6)='202504' AND isDel='N' AND dtlIsDel='N';
+
+ 41. [easy] [WP_vProvider] Find suppliers containing '茶' in their name
+     SQL: SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%茶%';
+
+ 42. [medium] [WP_vAcctIn] How many accounts receivable records does member A008 have?
+     SQL: SELECT COUNT(DISTINCT acctInId) AS count FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND isDel='N' AND dtlIsDel='N';
+
+ 43. [easy] [WP_vAcctOut] List accounts payable from 202403
+     SQL: SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202403' AND isDel='N' AND dtlIsDel='N';
+
+ 44. [medium] [WP_vTransfer] How much 有機烏龍茶 was transferred in 202512?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'有機烏龍茶' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';
+
+ 45. [medium] [WP_vOutStock] Sales orders for member A006 in 202511
+     SQL: SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A006' AND LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';
+
+ 46. [medium] [WP_vAcctOut] Total accounts payable for 台灣好茶 in 202509
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'台灣好茶' AND LEFT(acctOutId,6)='202509' AND isDel='N' AND dtlIsDel='N';
+
+ 47. [easy] [WP_vOutStock] Find sales orders with product containing keyword 花
+     SQL: SELECT DISTINCT OutStkId, pName FROM WP_M09.dbo.WP_vOutStock WHERE pName LIKE N'%花%' AND isDel='N' AND dtlIsDel='N';
+
+ 48. [medium] [WP_vInventory] Show inventory for products priced over 500
+     SQL: SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 500 GROUP BY pName, priceStd;
+
+ 49. [easy] [WP_vInventory] Show inventory for products with name containing 茶
+     SQL: SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%';
+
+ 50. [easy] [WP_vInventory] What is the total stock of products containing 龍井?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%龍井%';
+
+ 51. [medium] [WP_vProduct] Show products where average cost exceeds 80% of standard price
+     SQL: SELECT pNo, pName, costAvg, priceStd FROM WP_M09.dbo.WP_vProduct WHERE costAvg > priceStd * 0.8 ORDER BY pName;
+
+ 52. [easy] [WP_vAcctIn] List accounts receivable for month 202501
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202501' AND isDel='N' AND dtlIsDel='N';
+
+ 53. [easy] [WP_vAcctIn] List accounts receivable created on 20251225
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,8)='20251225' AND isDel='N' AND dtlIsDel='N';
+
+ 54. [easy] [WP_vProduct] What is the total inventory value for supplier 永豐農產?
+     SQL: SELECT SUM(qtyNow * costAvg) AS total_value FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產';
+
+ 55. [easy] [WP_vProvider] Show all suppliers with registered boss name
+     SQL: SELECT pvSn, pvName, pvBoss FROM WP_M09.dbo.WP_vProvider WHERE pvBoss IS NOT NULL AND pvBoss<>'';
+
+ 56. [easy] [WP_vProvider] Is supplier 天然農場 active?
+     SQL: SELECT pvSn, pvName, isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'天然農場';
+
+ 57. [easy] [WP_vProduct] What is the current stock for 龍井茶?
+     SQL: SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'龍井茶';
+
+ 58. [easy] [WP_vProduct] List products added in 202504
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202504%';
+
+ 59. [easy] [WP_vAcctOut] What is the total purchase amount for 阿里山茶?
+     SQL: SELECT SUM(amtTotal) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';
+
+ 60. [easy] [WP_vTransfer] Show transfers for product with barcode 4712070722015
+     SQL: SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE pBarcode='4712070722015' AND isDel='N' AND dtlIsDel='N';
+
+ 61. [easy] [WP_vProduct] Show product details for barcode 4719865002441
+     SQL: SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pBarcode='4719865002441';
+
+ 62. [medium] [WP_vAcctIn] Total accounts receivable for member A006 in 202512
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A006' AND LEFT(acctInId,6)='202512' AND isDel='N' AND dtlIsDel='N';
+
+ 63. [easy] [WP_vProvider] What is the contact information for supplier 有機世界?
+     SQL: SELECT pvSn, pvName, pvTel FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';
+
+ 64. [easy] [WP_vInventory] What is the total stock of products containing 高山?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%高山%';
+
+ 65. [medium] [WP_vInventory] Find inventory items with product name containing 冬
+     SQL: SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%冬%' GROUP BY pName;
+
+ 66. [easy] [WP_vAcctIn] Show all records containing product 有機烏龍茶 in accounts receivable
+     SQL: SELECT DISTINCT acctInId, oStkDtlQty, oStkDtlAmt FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'有機烏龍茶' AND isDel='N' AND dtlIsDel='N';
+
+ 67. [medium] [WP_vInventory] How many distinct products are in warehouse 冷藏倉?
+     SQL: SELECT COUNT(DISTINCT pNo) AS count FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'冷藏倉';
+
+ 68. [easy] [WP_vAcctOut] Find accounts payable that include 東方美人茶
+     SQL: SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';
+
+ 69. [medium] [WP_vProvider] Find suppliers offering more than 8% discount
+     SQL: SELECT pvSn, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvDiscount > 8 ORDER BY pvDiscount DESC;
+
+ 70. [easy] [WP_vProvider] Show all supplier contact details
+     SQL: SELECT pvSn, pvName, pvTel, pvAddr FROM WP_M09.dbo.WP_vProvider ORDER BY pvName;
+
+ 71. [easy] [WP_vProduct] List products added in 202412
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202412%';
+
+ 72. [easy] [WP_vInventory] Show inventory for supplier pvSn 3
+     SQL: SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvSn='3';
+
+ 73. [easy] [WP_vAcctOut] Find accounts payable with product name containing 香
+     SQL: SELECT DISTINCT acctOutId, pName FROM WP_M09.dbo.WP_vAcctOut WHERE pName LIKE N'%香%' AND isDel='N' AND dtlIsDel='N';
+
+ 74. [easy] [WP_vInventory] Show inventory for products with name containing 米
+     SQL: SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%米%';
+
+ 75. [easy] [WP_vInventory] What is the total inventory quantity for supplier 山林食品?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'山林食品';
+
+ 76. [medium] [WP_vAcctOut] Total accounts payable for 永豐農產 in 202508
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'永豐農產' AND LEFT(acctOutId,6)='202508' AND isDel='N' AND dtlIsDel='N';
+
+ 77. [easy] [WP_vProvider] Show suppliers sorted by name
+     SQL: SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider ORDER BY pvName;
+
+ 78. [easy] [WP_vOutStock] What is the total sales for 202502?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202502' AND isDel='N' AND dtlIsDel='N';
+
+ 79. [easy] [WP_vAcctOut] What products are in accounts payable 202512100002?
+     SQL: SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202512100002' AND isDel='N' AND dtlIsDel='N';
+
+ 80. [medium] [WP_vAcctIn] Total accounts receivable for member A008 in 202509
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND LEFT(acctInId,6)='202509' AND isDel='N' AND dtlIsDel='N';
+
+ 81. [easy] [WP_vTransfer] How many units of 阿里山茶 were transferred in total?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';
+
+ 82. [easy] [WP_vTransfer] Show all transfers involving product 花蓮米
+     SQL: SELECT TransferId, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'花蓮米' AND isDel='N' AND dtlIsDel='N';
+
+ 83. [easy] [WP_vAcctIn] Find accounts receivable that include product 烏龍茶葉
+     SQL: SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'烏龍茶葉' AND isDel='N' AND dtlIsDel='N';
+
+ 84. [easy] [WP_vAcctIn] What is the total amount of accounts receivable 202511200001?
+     SQL: SELECT DISTINCT amount FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202511200001' AND isDel='N' AND dtlIsDel='N';
+
+ 85. [easy] [WP_vProduct] List all products supplied by 健康食品
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';
+
+ 86. [easy] [WP_vAcctIn] List accounts receivable with amount greater than 10000
+     SQL: SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 10000 AND isDel='N' AND dtlIsDel='N';
+
+ 87. [easy] [WP_vAcctOut] What is the total quantity of 龍井茶 in accounts payable?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';
+
+ 88. [easy] [WP_vTransfer] What is the total quantity transferred from 北區倉庫?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'北區倉庫' AND isDel='N' AND dtlIsDel='N';
+
+ 89. [medium] [WP_vTransfer] How much 竹炭冬筍餅 was received by warehouse 北區倉庫?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'竹炭冬筍餅' AND tfWhName=N'北區倉庫' AND isDel='N' AND dtlIsDel='N';
+
+ 90. [medium] [WP_vTransfer] Show average transfer quantity per warehouse route
+     SQL: SELECT fWhName, tfWhName, AVG(qty) AS avg_qty FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY fWhName, tfWhName ORDER BY avg_qty DESC;
+
+ 91. [easy] [WP_vAcctIn] What is the total accounts receivable for member A008?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND isDel='N' AND dtlIsDel='N';
+
+ 92. [easy] [WP_vAcctIn] Total revenue from 玫瑰花茶 in accounts receivable
+     SQL: SELECT SUM(oStkDtlAmt) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'玫瑰花茶' AND isDel='N' AND dtlIsDel='N';
+
+ 93. [medium] [WP_vAcctOut] What is the total payable to 綠野農業 in 202501?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'綠野農業' AND LEFT(acctOutId,6)='202501' AND isDel='N' AND dtlIsDel='N';
+
+ 94. [easy] [WP_vOutStock] Show sales orders where product quantity exceeds 15
+     SQL: SELECT DISTINCT OutStkId, pName, qty FROM WP_M09.dbo.WP_vOutStock WHERE qty > 15 AND isDel='N' AND dtlIsDel='N';
+
+ 95. [medium] [WP_vTransfer] Show count of distinct products transferred per month in 2025
+     SQL: SELECT LEFT(TransferId,6) AS month, COUNT(DISTINCT pNo) AS products FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,4)='2025' AND isDel='N' AND dtlIsDel='N' GROUP BY LEFT(TransferId,6) ORDER BY month;
+
+ 96. [easy] [WP_vProvider] Show suppliers with no discount
+     SQL: SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE discount = 0 OR discount IS NULL;
+
+ 97. [easy] [WP_vTransfer] Show transfers from warehouse 中央倉庫
+     SQL: SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'中央倉庫' AND isDel='N' AND dtlIsDel='N';
+
+ 98. [medium] [WP_vTransfer] How many transfers happened in 202512?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';
+
+ 99. [easy] [WP_vProduct] Find products with name containing 春
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%春%';
+
+100. [easy] [WP_vOutStock] What is the total revenue from selling 龍井茶?
+     SQL: SELECT SUM(amtTotal) AS total_revenue FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';
+
+101. [easy] [WP_vAcctIn] Find accounts receivable exceeding 10000
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 10000 AND isDel='N' AND dtlIsDel='N';
+
+102. [medium] [WP_vInventory] Show inventory for products priced over 300
+     SQL: SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 300 GROUP BY pName, priceStd;
+
+103. [medium] [WP_vTransfer] How much 益全香米 was transferred in 202512?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'益全香米' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';
+
+104. [medium] [WP_vAcctIn] Summarize accounts receivable by member with total amounts
+     SQL: SELECT memId, memName, SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY memId, memName ORDER BY total DESC;
+
+105. [easy] [WP_vOutStock] Show sales orders for product 東方美人茶
+     SQL: SELECT DISTINCT OutStkId, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';
+
+106. [easy] [WP_vOutStock] List all active sales order IDs
+     SQL: SELECT DISTINCT OutStkId FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N';
+
+107. [easy] [WP_vAcctOut] What is the total accounts payable for 202503?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202503' AND isDel='N' AND dtlIsDel='N';
+
+108. [easy] [WP_vInventory] Show inventory in 中央倉庫 from supplier 實垣有限公司
+     SQL: SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'中央倉庫' AND pvName=N'實垣有限公司';
+
+109. [easy] [WP_vProduct] Show products with name containing 米
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%米%';
+
+110. [easy] [WP_vAcctIn] What is the total accounts receivable for member A009?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A009' AND isDel='N' AND dtlIsDel='N';
+
+111. [easy] [WP_vProduct] Products from 永豐農產 with current stock above 10
+     SQL: SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產' AND qtyNow > 10;
+
+112. [easy] [WP_vProduct] Show details for product 普洱茶
+     SQL: SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'普洱茶';
+
+113. [easy] [WP_vProduct] What is the standard price for 有機烏龍茶?
+     SQL: SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'有機烏龍茶';
+
+114. [medium] [WP_vProvider] Count how many suppliers have phone numbers on file
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProvider WHERE pvTel IS NOT NULL AND pvTel <> '';
+
+115. [easy] [WP_vAcctIn] List accounts receivable with amount greater than 500
+     SQL: SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 500 AND isDel='N' AND dtlIsDel='N';
+
+116. [easy] [WP_vProduct] What is the standard price for 龍井茶?
+     SQL: SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'龍井茶';
+
+117. [easy] [WP_vProvider] Show suppliers with bank information
+     SQL: SELECT pvSn, pvName, bankId, bankName FROM WP_M09.dbo.WP_vProvider WHERE bankId IS NOT NULL AND bankId<>'';
+
+118. [easy] [WP_vTransfer] Total quantity transferred in 202401
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202401' AND isDel='N' AND dtlIsDel='N';
+
+119. [medium] [WP_vTransfer] Show transfers from 特產中心 to 南區倉庫
+     SQL: SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'特產中心' AND tfWhName=N'南區倉庫' AND isDel='N' AND dtlIsDel='N';
+
+120. [easy] [WP_vProvider] Find suppliers with name containing 龍井
+     SQL: SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%龍井%';
+
+121. [medium] [WP_vOutStock] Sales orders for member A008 in 202511
+     SQL: SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A008' AND LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';
+
+122. [easy] [WP_vAcctOut] Find accounts payable that include product 益全香米
+     SQL: SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'益全香米' AND isDel='N' AND dtlIsDel='N';
+
+123. [medium] [WP_vInventory] Show inventory summary: total products, quantity and value
+     SQL: SELECT COUNT(DISTINCT pNo) AS products, SUM(qty) AS total_qty, SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory;
+
+124. [easy] [WP_vProvider] Show details for supplier pvSn 2
+     SQL: SELECT pvSn, pvName, pvTel, pvAddr, email FROM WP_M09.dbo.WP_vProvider WHERE pvSn='2';
+
+125. [easy] [WP_vOutStock] List sales orders from 202506
+     SQL: SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202506' AND isDel='N' AND dtlIsDel='N';
+
+126. [easy] [WP_vProduct] List products with standard price above 150
+     SQL: SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 150 ORDER BY priceStd DESC;
+
+127. [easy] [WP_vAcctIn] What is the total accounts receivable amount in 202503?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202503' AND isDel='N' AND dtlIsDel='N';
+
+128. [easy] [WP_vTransfer] List all transfers on 20251020
+     SQL: SELECT TransferId, pName, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,8)='20251020' AND isDel='N' AND dtlIsDel='N';
+
+129. [medium] [WP_vTransfer] List employees with most transfer activity
+     SQL: SELECT empId, COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY empId ORDER BY count DESC;
+
+130. [medium] [WP_vOutStock] How many sales orders were created in 202508?
+     SQL: SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202508' AND isDel='N' AND dtlIsDel='N';
+
+131. [easy] [WP_vProduct] What is the average standard price for supplier 品茶苑 products?
+     SQL: SELECT AVG(priceStd) AS avg_price FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';
+
+132. [easy] [WP_vProvider] Is supplier pvSn 33 active?
+     SQL: SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvSn='33';
+
+133. [easy] [WP_vAcctIn] Show accounts receivable containing products with keyword 高山
+     SQL: SELECT DISTINCT acctInId, pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%高山%' AND isDel='N' AND dtlIsDel='N';
+
+134. [easy] [WP_vInventory] List products with inventory quantity below 0
+     SQL: SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 0;
+
+135. [easy] [WP_vProduct] List all products supplied by 永豐農產
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產';
+
+136. [easy] [WP_vInventory] List products in warehouse 北區倉庫 with standard price above 80
+     SQL: SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'北區倉庫' AND priceStd > 80;
+
+137. [easy] [WP_vInventory] Find products where member price exceeds standard price
+     SQL: SELECT DISTINCT pName, priceStd, priceMem FROM WP_M09.dbo.WP_vInventory WHERE priceMem > priceStd;
+
+138. [medium] [WP_vInventory] Find inventory items with product name containing 龍井
+     SQL: SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%龍井%' GROUP BY pName;
+
+139. [easy] [WP_vAcctIn] Find accounts receivable that include product 龍井茶
+     SQL: SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';
+
+140. [easy] [WP_vOutStock] What is the total sales amount for member A007?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE memId='A007' AND isDel='N' AND dtlIsDel='N';
+
+141. [easy] [WP_vOutStock] Show sales orders from 202412
+     SQL: SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202412' AND isDel='N' AND dtlIsDel='N';
+
+142. [easy] [WP_vInventory] Show all warehouses that have inventory
+     SQL: SELECT DISTINCT WarehouseName FROM WP_M09.dbo.WP_vInventory;
+
+143. [easy] [WP_vTransfer] Total quantity transferred in 202405
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202405' AND isDel='N' AND dtlIsDel='N';
+
+144. [easy] [WP_vProvider] How many total suppliers are registered?
+     SQL: SELECT COUNT(*) AS total FROM WP_M09.dbo.WP_vProvider;
+
+145. [easy] [WP_vInventory] Show products with less than 15 units in stock
+     SQL: SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 15;
+
+146. [easy] [WP_vAcctOut] How much was paid in 202409?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202409' AND isDel='N' AND dtlIsDel='N';
+
+147. [medium] [WP_vInventory] Find inventory items with product name containing 茶
+     SQL: SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%' GROUP BY pName;
+
+148. [medium] [WP_vTransfer] Show transfers from 南區倉庫 to 中央倉庫
+     SQL: SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'南區倉庫' AND tfWhName=N'中央倉庫' AND isDel='N' AND dtlIsDel='N';
+
+149. [medium] [WP_vProduct] Which supplier has the highest average product price?
+     SQL: SELECT TOP 1 pvName, AVG(priceStd) AS avg_price FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY avg_price DESC;
+
+150. [easy] [WP_vProduct] What is the total inventory for products from 台灣農業?
+     SQL: SELECT SUM(qtyNow) AS total_qty FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣農業';
+
+151. [easy] [WP_vAcctIn] List accounts receivable created on 20251215
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,8)='20251215' AND isDel='N' AND dtlIsDel='N';
+
+152. [easy] [WP_vAcctIn] Find accounts receivable exceeding 1000
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 1000 AND isDel='N' AND dtlIsDel='N';
+
+153. [easy] [WP_vInventory] What is the total stock of products containing 豆?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%豆%';
+
+154. [easy] [WP_vInventory] Show inventory for product 台灣高山茶
+     SQL: SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'台灣高山茶';
+
+155. [easy] [WP_vInventory] Show inventory in 南區倉庫 from supplier 綠野農業
+     SQL: SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫' AND pvName=N'綠野農業';
+
+156. [easy] [WP_vProvider] Show suppliers with email addresses
+     SQL: SELECT pvSn, pvName, email FROM WP_M09.dbo.WP_vProvider WHERE email IS NOT NULL AND email<>'';
+
+157. [easy] [WP_vAcctOut] List accounts payable created in 202511
+     SQL: SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202511' AND isDel='N' AND dtlIsDel='N';
+
+158. [easy] [WP_vTransfer] What is the total quantity of 有機烏龍茶 transferred?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'有機烏龍茶' AND isDel='N' AND dtlIsDel='N';
+
+159. [medium] [WP_vTransfer] How much 金萱茶包 was transferred in 202512?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'金萱茶包' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';
+
+160. [easy] [WP_vInventory] List products in warehouse 南區倉庫 with standard price above 80
+     SQL: SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫' AND priceStd > 80;
+
+161. [easy] [WP_vAcctOut] How many active accounts payable records are there?
+     SQL: SELECT COUNT(DISTINCT acctOutId) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';
+
+162. [easy] [WP_vTransfer] Show transfers from warehouse 北區倉庫
+     SQL: SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'北區倉庫' AND isDel='N' AND dtlIsDel='N';
+
+163. [medium] [WP_vAcctOut] How many accounts payable records were created in 202510?
+     SQL: SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202510' AND isDel='N' AND dtlIsDel='N';
+
+164. [easy] [WP_vOutStock] What is the total revenue from selling 玫瑰花茶?
+     SQL: SELECT SUM(amtTotal) AS total_revenue FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'玫瑰花茶' AND isDel='N' AND dtlIsDel='N';
+
+165. [easy] [WP_vProvider] Is supplier 綠野農業 active?
+     SQL: SELECT pvSn, pvName, isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'綠野農業';
+
+166. [easy] [WP_vOutStock] Find sales orders exceeding 3000 in amount
+     SQL: SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE amount > 3000 AND isDel='N' AND dtlIsDel='N';
+
+167. [medium] [WP_vTransfer] How many transfers happened in 202509?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202509' AND isDel='N' AND dtlIsDel='N';
+
+168. [medium] [WP_vTransfer] How much 竹炭冬筍餅 was transferred in 202512?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'竹炭冬筍餅' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';
+
+169. [medium] [WP_vProduct] How many products does supplier 健康食品 supply?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';
+
+170. [easy] [WP_vTransfer] Show top 10 largest single transfers by quantity
+     SQL: SELECT TOP 10 TransferId, pName, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' ORDER BY qty DESC;
+
+171. [easy] [WP_vProvider] Is supplier 綠野農業 active?
+     SQL: SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'綠野農業';
+
+172. [medium] [WP_vProduct] How many products does 綠野農業 supply?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'綠野農業';
+
+173. [medium] [WP_vProduct] How many products does supplier 品茶苑 supply?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';
+
+174. [easy] [WP_vProduct] What is the standard price for 台灣高山茶?
+     SQL: SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'台灣高山茶';
+
+175. [easy] [WP_vInventory] What is the total inventory quantity of 玫瑰花茶?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'玫瑰花茶';
+
+176. [medium] [WP_vInventory] Show inventory for products priced over 80
+     SQL: SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 80 GROUP BY pName, priceStd;
+
+177. [easy] [WP_vOutStock] Show sales orders for member A011
+     SQL: SELECT DISTINCT OutStkId, amount, OutStkDate FROM WP_M09.dbo.WP_vOutStock WHERE memId='A011' AND isDel='N' AND dtlIsDel='N';
+
+178. [easy] [WP_vInventory] Show inventory for products with name containing 烏龍
+     SQL: SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%烏龍%';
+
+179. [medium] [WP_vInventory] Show all products from supplier 實垣有限公司 in inventory
+     SQL: SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'實垣有限公司' GROUP BY pName;
+
+180. [easy] [WP_vProduct] What is the standard price for 阿里山茶?
+     SQL: SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'阿里山茶';
+
+181. [easy] [WP_vAcctIn] Total revenue from 黑糖茶磚 in accounts receivable
+     SQL: SELECT SUM(oStkDtlAmt) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'黑糖茶磚' AND isDel='N' AND dtlIsDel='N';
+
+182. [easy] [WP_vProduct] What is the total inventory value for supplier 台灣農業?
+     SQL: SELECT SUM(qtyNow * costAvg) AS total_value FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣農業';
+
+183. [medium] [WP_vAcctIn] What is the accounts receivable total for member A009 in 202506?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A009' AND LEFT(acctInId,6)='202506' AND isDel='N' AND dtlIsDel='N';
+
+184. [medium] [WP_vProvider] Show suppliers offering less than 10% discount
+     SQL: SELECT pvSn, pvName, discount FROM WP_M09.dbo.WP_vProvider WHERE discount < 10 ORDER BY discount;
+
+185. [easy] [WP_vAcctIn] How many line items does accounts receivable 202512050001 have?
+     SQL: SELECT COUNT(*) AS lines FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202512050001' AND isDel='N' AND dtlIsDel='N';
+
+186. [easy] [WP_vProduct] List all product names
+     SQL: SELECT DISTINCT pName FROM WP_M09.dbo.WP_vProduct ORDER BY pName;
+
+187. [easy] [WP_vProvider] Is supplier 有機世界 active?
+     SQL: SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';
+
+188. [easy] [WP_vAcctOut] Show accounts payable created by employee B02
+     SQL: SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE empId='B02' AND isDel='N' AND dtlIsDel='N';
+
+189. [medium] [WP_vOutStock] Sales orders for member A006 in 202509
+     SQL: SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A006' AND LEFT(OutStkId,6)='202509' AND isDel='N' AND dtlIsDel='N';
+
+190. [easy] [WP_vOutStock] Show all products in sales order 202511210055
+     SQL: SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202511210055' AND isDel='N' AND dtlIsDel='N';
+
+191. [medium] [WP_vProduct] How many products does supplier 台灣好茶 supply?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣好茶';
+
+192. [easy] [WP_vAcctIn] Show all active accounts receivable record IDs
+     SQL: SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';
+
+193. [easy] [WP_vProvider] What is the discount rate for supplier 有機世界?
+     SQL: SELECT pvSn, pvName, discount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';
+
+194. [easy] [WP_vProduct] Show details for product 金萱茶包
+     SQL: SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'金萱茶包';
+
+195. [easy] [WP_vInventory] What is the total stock for 竹炭冬筍餅?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'竹炭冬筍餅';
+
+196. [easy] [WP_vProvider] What is the discount rate for supplier 品茶苑?
+     SQL: SELECT pvSn, pvName, discount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'品茶苑';
+
+197. [easy] [WP_vInventory] Show inventory for products with name containing 金萱
+     SQL: SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%金萱%';
+
+198. [medium] [WP_vAcctOut] How many accounts payable records exist for supplier 健康食品?
+     SQL: SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'健康食品' AND isDel='N' AND dtlIsDel='N';
+
+199. [easy] [WP_vAcctIn] Total accounts receivable for 202406
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202406' AND isDel='N' AND dtlIsDel='N';
+
+200. [easy] [WP_vAcctIn] What is the total number of active accounts receivable?
+     SQL: SELECT COUNT(DISTINCT acctInId) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';
+
+201. [easy] [WP_vProduct] List all products supplied by 綠野農業
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'綠野農業';
+
+202. [easy] [WP_vInventory] Show products with less than 20 units in stock
+     SQL: SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 20;
+
+203. [medium] [WP_vOutStock] How many sales orders does member A011 have?
+     SQL: SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE memId='A011' AND isDel='N' AND dtlIsDel='N';
+
+204. [easy] [WP_vAcctIn] What accounts receivable contain 黑糖茶磚?
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'黑糖茶磚' AND isDel='N' AND dtlIsDel='N';
+
+205. [easy] [WP_vInventory] List all products in warehouse 冷藏倉
+     SQL: SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'冷藏倉' ORDER BY qty DESC;
+
+206. [medium] [WP_vOutStock] How many sales orders were created in 202505?
+     SQL: SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202505' AND isDel='N' AND dtlIsDel='N';
+
+207. [easy] [WP_vInventory] Show non-sale products in inventory
+     SQL: SELECT DISTINCT pName, isSale FROM WP_M09.dbo.WP_vInventory WHERE isSale<>'0';
+
+208. [medium] [WP_vInventory] Show total inventory per warehouse
+     SQL: SELECT WarehouseName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY total_qty DESC;
+
+209. [easy] [WP_vAcctIn] List accounts receivable from 202405
+     SQL: SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202405' AND isDel='N' AND dtlIsDel='N';
+
+210. [easy] [WP_vProduct] Show top 5 most expensive products
+     SQL: SELECT TOP 5 pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct ORDER BY priceStd DESC;
+
+211. [easy] [WP_vProduct] Show products below safe stock level
+     SQL: SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < qtySafe;
+
+212. [easy] [WP_vProvider] What is the discount for supplier 台灣農業?
+     SQL: SELECT pvSn, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'台灣農業';
+
+213. [easy] [WP_vAcctIn] What is the total amount of all active accounts receivable?
+     SQL: SELECT SUM(DISTINCT amount) AS total_amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';
+
+214. [easy] [WP_vOutStock] Show all products in sales order 202510080025
+     SQL: SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202510080025' AND isDel='N' AND dtlIsDel='N';
+
+215. [easy] [WP_vOutStock] What is the total amount of sales order 202507100018?
+     SQL: SELECT DISTINCT amount FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202507100018' AND isDel='N' AND dtlIsDel='N';
+
+216. [easy] [WP_vAcctOut] List accounts payable from 202411
+     SQL: SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202411' AND isDel='N' AND dtlIsDel='N';
+
+217. [easy] [WP_vProduct] Products containing 茶 with price above 100
+     SQL: SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%茶%' AND priceStd > 100;
+
+218. [easy] [WP_vAcctIn] What is the total quantity of 龍井茶 across all accounts receivable?
+     SQL: SELECT SUM(oStkDtlQty) AS total_qty FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';
+
+219. [easy] [WP_vProduct] What is the current stock for 竹炭冬筍餅?
+     SQL: SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'竹炭冬筍餅';
+
+220. [medium] [WP_vInventory] Show product count and quantity per supplier
+     SQL: SELECT pvName, COUNT(DISTINCT pName) AS products, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY pvName ORDER BY total_qty DESC;
+
+221. [easy] [WP_vAcctIn] What is the total accounts receivable amount in 202510?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202510' AND isDel='N' AND dtlIsDel='N';
+
+222. [easy] [WP_vTransfer] What is the total quantity transferred in 202504?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202504' AND isDel='N' AND dtlIsDel='N';
+
+223. [easy] [WP_vProvider] Show address details for supplier 實垣有限公司
+     SQL: SELECT pvSn, pvName, pvAddr FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'實垣有限公司';
+
+224. [easy] [WP_vAcctIn] Show accounts receivable containing products with keyword 豆
+     SQL: SELECT DISTINCT acctInId, pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%豆%' AND isDel='N' AND dtlIsDel='N';
+
+225. [medium] [WP_vAcctOut] What is the total payable to 實垣有限公司 in 202505?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'實垣有限公司' AND LEFT(acctOutId,6)='202505' AND isDel='N' AND dtlIsDel='N';
+
+226. [medium] [WP_vTransfer] How many times was 龍井茶 transferred?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';
+
+227. [easy] [WP_vOutStock] What is the total spent by 農產品行?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE memName=N'農產品行' AND isDel='N' AND dtlIsDel='N';
+
+228. [easy] [WP_vAcctOut] List all active accounts payable IDs
+     SQL: SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';
+
+229. [medium] [WP_vProduct] How many products does 實垣有限公司 supply?
+     SQL: SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'實垣有限公司';
+
+230. [medium] [WP_vInventory] Show count of product types per warehouse
+     SQL: SELECT WarehouseName, COUNT(DISTINCT pNo) AS product_types FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY product_types DESC;
+
+231. [easy] [WP_vProduct] Products from 台灣好茶 with current stock above 50
+     SQL: SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣好茶' AND qtyNow > 50;
+
+232. [easy] [WP_vProduct] Show product details for barcode 4710632001318
+     SQL: SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pBarcode='4710632001318';
+
+233. [easy] [WP_vProduct] Show products added in 202502
+     SQL: SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202502%';
+
+234. [easy] [WP_vOutStock] Show sales orders for product 阿里山茶
+     SQL: SELECT DISTINCT OutStkId, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';
+
+235. [easy] [WP_vInventory] List 實垣有限公司 products with stock above 50
+     SQL: SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'實垣有限公司' AND qty > 50;
+
+236. [easy] [WP_vAcctIn] What is the total accounts receivable amount in 202511?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202511' AND isDel='N' AND dtlIsDel='N';
+
+237. [easy] [WP_vTransfer] How many units of 東方美人茶 were transferred in total?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';
+
+238. [easy] [WP_vAcctOut] How much was paid in 202407?
+     SQL: SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202407' AND isDel='N' AND dtlIsDel='N';
+
+239. [easy] [WP_vInventory] What is the total stock for 台灣高山茶?
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'台灣高山茶';
+
+240. [easy] [WP_vTransfer] Total quantity transferred in 202411
+     SQL: SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202411' AND isDel='N' AND dtlIsDel='N';
+
+241. [easy] [WP_vInventory] List all products in warehouse 東區倉庫
+     SQL: SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'東區倉庫' ORDER BY qty DESC;
+
+242. [easy] [WP_vInventory] What is the inventory value in warehouse 特產中心?
+     SQL: SELECT SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心';
+

@@ -1,0 +1,9 @@
+Gold validation set : data/wp_m09/val_claude_en_spider.json
+  Total samples     : 242
+  Difficulty        : easy=179  medium=63
+  Views             : AcctIn=39  AcctOut=28  Inventory=50  OutStock=26  Product=44  Provider=26  Transfer=29
+
+���J�ҫ�: outputs/models/wp_m09_dora_0320_spider/final_model
+  Base model : meta-llama/Llama-3.1-8B-Instruct
+  Trained on : data\wp_m09\train_claude_en_2000.json  (1748 samples)
+  Method     : DoRA  r=16

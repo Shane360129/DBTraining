@@ -1,0 +1,242 @@
+[
+  {
+    "db_id": "WP_M09",
+    "question": "How many products are there?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many products in my store?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all products",
+    "query": "SELECT * FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all product names",
+    "query": "SELECT pName FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average price?",
+    "query": "SELECT AVG(priceStd) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total stock?",
+    "query": "SELECT SUM(qtyNow) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the highest price?",
+    "query": "SELECT MAX(priceStd) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the lowest price?",
+    "query": "SELECT MIN(priceStd) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show items that are out of stock",
+    "query": "SELECT * FROM WP_vProduct WHERE qtyNow = 0",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which items are on sale?",
+    "query": "SELECT * FROM WP_vProduct WHERE isSale = 1",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show products with price greater than 1000",
+    "query": "SELECT * FROM WP_vProduct WHERE priceStd > 1000",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many items are out of stock?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE qtyNow = 0",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the most expensive items",
+    "query": "SELECT TOP 10 * FROM WP_vProduct ORDER BY priceStd DESC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show top 5 products by price",
+    "query": "SELECT TOP 5 * FROM WP_vProduct ORDER BY priceStd DESC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the cheapest items",
+    "query": "SELECT TOP 10 * FROM WP_vProduct ORDER BY priceStd ASC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many receipts are there?",
+    "query": "SELECT COUNT(*) FROM WP_vReceipt",
+    "table": "WP_vReceipt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total receipt amount?",
+    "query": "SELECT SUM(amount) FROM WP_vReceipt",
+    "table": "WP_vReceipt",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent receipts",
+    "query": "SELECT TOP 10 * FROM WP_vReceipt ORDER BY ReceiptDate DESC",
+    "table": "WP_vReceipt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average receipt amount?",
+    "query": "SELECT AVG(amount) FROM WP_vReceipt",
+    "table": "WP_vReceipt",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many payments are there?",
+    "query": "SELECT COUNT(*) FROM WP_vPayment",
+    "table": "WP_vPayment",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total payment amount?",
+    "query": "SELECT SUM(amount) FROM WP_vPayment",
+    "table": "WP_vPayment",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show cash payments",
+    "query": "SELECT * FROM WP_vPayment WHERE isCash = 1",
+    "table": "WP_vPayment",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent payments",
+    "query": "SELECT TOP 10 * FROM WP_vPayment ORDER BY PaymentDate DESC",
+    "table": "WP_vPayment",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many products in the system?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all product details",
+    "query": "SELECT * FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show products with stock below safety level",
+    "query": "SELECT * FROM WP_vProduct WHERE qtyNow < qtySafe",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count products by unit",
+    "query": "SELECT pUnit, COUNT(*) FROM WP_vProduct GROUP BY pUnit",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average price by unit?",
+    "query": "SELECT pUnit, AVG(priceStd) FROM WP_vProduct GROUP BY pUnit",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct product units",
+    "query": "SELECT DISTINCT pUnit FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count taxable products",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE isTax = 1",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  }
+]

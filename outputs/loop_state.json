@@ -1,0 +1,12 @@
+{
+  "current_round": 1,
+  "rounds": [
+    {
+      "round": 1,
+      "em_pct": 91.76,
+      "model": "outputs/models/wp_m09_dora_0317_spider_r1\\final_model",
+      "eval": "outputs/evaluation_loop_r1.json",
+      "train": "data/wp_m09/train_spider_WP_M09_r1.json"
+    }
+  ]
+}

@@ -1,0 +1,1282 @@
+[
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount recorded on 2026-02-14?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn WHERE acctInId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List empId and their total amount during February 2026.",
+    "query": "SELECT empId, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '202602%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY empId",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total amount for each memName in the year 2026.",
+    "query": "SELECT memName, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify memo categories that had more than 4 transactions in 2024.",
+    "query": "SELECT memo FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo HAVING COUNT(*) > 4",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total amount contributed by memName 'Shane' in March 2026?",
+    "query": "SELECT (SUM(CASE WHEN memName = 'Shane' THEN amount ELSE 0 END) / SUM(amount)) * 100 FROM WP_vAcctIn WHERE acctInId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 empId sorted by amount in descending order for 2025-10-01.",
+    "query": "SELECT TOP 5 empId FROM WP_vAcctIn WHERE acctInId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the acctInId where amount is less than 10000.",
+    "query": "SELECT acctInId FROM WP_vAcctIn WHERE amount < 10000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pName in WP_vAcctIn.",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount recorded on 2026-01-01?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn WHERE acctInId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vAcctIn from the year 2024.",
+    "query": "SELECT * FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total amount for each memName in the year 2024.",
+    "query": "SELECT memName, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vAcctIn records exist for the date 2025-10-01?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn WHERE acctInId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vAcctIn items that have a memo equal to 'Main Office'.",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn WHERE memo = 'Main Office' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total amount for memo 'EMP001'?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctIn WHERE memo = 'EMP001' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total amount for each memName in the year 2026.",
+    "query": "SELECT memName, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total amount for each memo in the year 2024.",
+    "query": "SELECT memo, SUM(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show memName and amount for the entry with the highest amount in the first half of 2025.",
+    "query": "SELECT memName, amount FROM WP_vAcctIn WHERE acctInId >= 202501010000 AND acctInId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the pName where amount is less than 50000.",
+    "query": "SELECT pName FROM WP_vAcctIn WHERE amount < 50000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vAcctIn from the year 2025.",
+    "query": "SELECT * FROM WP_vAcctIn WHERE acctInId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 empId sorted by amount in descending order for 2026-03-05.",
+    "query": "SELECT TOP 5 empId FROM WP_vAcctIn WHERE acctInId LIKE '20260305%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount recorded on 2025-12-31?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn WHERE acctInId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the memo where the average amount in 2025 is higher than the average in the previous year 2024.",
+    "query": "SELECT memo FROM WP_vAcctIn WHERE acctInId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo HAVING AVG(amount) > (SELECT AVG(amount) FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N')",
+    "table": "WP_vAcctIn",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total amount contributed by memName 'Warehouse A' in February 2026?",
+    "query": "SELECT (SUM(CASE WHEN memName = 'Warehouse A' THEN amount ELSE 0 END) / SUM(amount)) * 100 FROM WP_vAcctIn WHERE acctInId LIKE '202602%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vAcctIn records exist for the date 2025-10-01?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn WHERE acctInId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vAcctIn from the year 2025.",
+    "query": "SELECT * FROM WP_vAcctIn WHERE acctInId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify memo categories that had more than 17 transactions in 2024.",
+    "query": "SELECT memo FROM WP_vAcctIn WHERE acctInId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memo HAVING COUNT(*) > 17",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard"
+  },
+
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum transAmt recorded on 2025-12-31?",
+    "query": "SELECT MAX(transAmt) FROM WP_vAcctOut WHERE acctOutId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pvName in WP_vAcctOut.",
+    "query": "SELECT DISTINCT pvName FROM WP_vAcctOut WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total transAmt contributed by pvName 'Alice' in March 2026?",
+    "query": "SELECT (SUM(CASE WHEN pvName = 'Alice' THEN transAmt ELSE 0 END) / SUM(transAmt)) * 100 FROM WP_vAcctOut WHERE acctOutId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify pvName categories that had more than 13 transactions in 2025.",
+    "query": "SELECT pvName FROM WP_vAcctOut WHERE acctOutId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 13",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vAcctOut from the year 2024.",
+    "query": "SELECT * FROM WP_vAcctOut WHERE acctOutId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum transAmt recorded on 2026-01-01?",
+    "query": "SELECT MAX(transAmt) FROM WP_vAcctOut WHERE acctOutId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average amount for Shane transactions in January 2026.",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOut WHERE pvName = 'Shane' AND acctOutId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total amount for each pvName in the year 2026.",
+    "query": "SELECT pvName, SUM(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 acctOutId sorted by transAmt in descending order for 2026-02-14.",
+    "query": "SELECT TOP 5 acctOutId FROM WP_vAcctOut WHERE acctOutId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY transAmt DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the pvName where transAmt is less than 50000.",
+    "query": "SELECT pvName FROM WP_vAcctOut WHERE transAmt < 50000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average transAmt for Alice transactions in December 2025.",
+    "query": "SELECT AVG(transAmt) FROM WP_vAcctOut WHERE pvName = 'Alice' AND acctOutId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vAcctOut records exist for the date 2025-12-31?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut WHERE acctOutId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Compare the sum of amount between Main Office and EMP001 for the year 2024.",
+    "query": "SELECT pvName, SUM(amount) FROM WP_vAcctOut WHERE pvName IN ('Main Office', 'EMP001') AND acctOutId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+    "table": "WP_vAcctOut",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vAcctOut records exist for the date 2026-02-14?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut WHERE acctOutId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify pvName categories that had more than 3 transactions in 2026.",
+    "query": "SELECT pvName FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 3",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total transAmt contributed by pvName 'Main Office' in October 2025?",
+    "query": "SELECT (SUM(CASE WHEN pvName = 'Main Office' THEN transAmt ELSE 0 END) / SUM(transAmt)) * 100 FROM WP_vAcctOut WHERE acctOutId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average transAmt for Warehouse A transactions in December 2025.",
+    "query": "SELECT AVG(transAmt) FROM WP_vAcctOut WHERE pvName = 'Warehouse A' AND acctOutId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pvName whose amount is above the overall average for 2026.",
+    "query": "SELECT pvName FROM WP_vAcctOut WHERE amount > (SELECT AVG(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify pvName categories that had more than 12 transactions in 2026.",
+    "query": "SELECT pvName FROM WP_vAcctOut WHERE acctOutId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 12",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pvName and their total amount during October 2025.",
+    "query": "SELECT pvName, SUM(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vAcctOut records exist for the date 2026-02-14?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut WHERE acctOutId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pName and amount for the entry with the highest amount in the first half of 2025.",
+    "query": "SELECT pName, amount FROM WP_vAcctOut WHERE acctOutId >= 202501010000 AND acctOutId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vAcctOut items that have a pvName equal to 'EMP001'.",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut WHERE pvName = 'EMP001' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List acctOutId and their total amount during October 2025.",
+    "query": "SELECT acctOutId, SUM(amount) FROM WP_vAcctOut WHERE acctOutId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY acctOutId",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pvName and transAmt for the entry with the highest transAmt in the first half of 2025.",
+    "query": "SELECT pvName, transAmt FROM WP_vAcctOut WHERE acctOutId >= 202501010000 AND acctOutId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY transAmt DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the acctOutId where transAmt is less than 50000.",
+    "query": "SELECT acctOutId FROM WP_vAcctOut WHERE transAmt < 50000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy"
+  },
+
+  {
+    "db_id": "WP_M09",
+    "question": "List pvName whose amtNoneTax is above the overall average for 2026.",
+    "query": "SELECT pvName FROM WP_vInStock WHERE amtNoneTax > (SELECT AVG(amtNoneTax) FROM WP_vInStock WHERE InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total amount for pvName 'Alice'?",
+    "query": "SELECT SUM(amount) FROM WP_vInStock WHERE pvName = 'Alice' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total amtNoneTax contributed by pvName 'Alice' in March 2026?",
+    "query": "SELECT (SUM(CASE WHEN pvName = 'Alice' THEN amtNoneTax ELSE 0 END) / SUM(amtNoneTax)) * 100 FROM WP_vInStock WHERE InStkId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total amtNoneTax for each pvName in the year 2026.",
+    "query": "SELECT pvName, SUM(amtNoneTax) FROM WP_vInStock WHERE InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the InStkId where amtNoneTax is less than 5000.",
+    "query": "SELECT InStkId FROM WP_vInStock WHERE amtNoneTax < 5000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount recorded on 2025-12-31?",
+    "query": "SELECT MAX(amount) FROM WP_vInStock WHERE InStkId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 pvName sorted by amount in descending order for 2026-01-01.",
+    "query": "SELECT TOP 5 pvName FROM WP_vInStock WHERE InStkId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pName and their total amount during October 2025.",
+    "query": "SELECT pName, SUM(amount) FROM WP_vInStock WHERE InStkId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the pName where amount is less than 1000.",
+    "query": "SELECT pName FROM WP_vInStock WHERE amount < 1000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vInStock records exist for the date 2025-10-01?",
+    "query": "SELECT COUNT(*) FROM WP_vInStock WHERE InStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vInStock from the year 2025.",
+    "query": "SELECT * FROM WP_vInStock WHERE InStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique InStkId in WP_vInStock.",
+    "query": "SELECT DISTINCT InStkId FROM WP_vInStock WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pName and their total amtNoneTax during December 2025.",
+    "query": "SELECT pName, SUM(amtNoneTax) FROM WP_vInStock WHERE InStkId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pName",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total amtNoneTax contributed by pvName 'Main Office' in October 2025?",
+    "query": "SELECT (SUM(CASE WHEN pvName = 'Main Office' THEN amtNoneTax ELSE 0 END) / SUM(amtNoneTax)) * 100 FROM WP_vInStock WHERE InStkId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vInStock from the year 2024.",
+    "query": "SELECT * FROM WP_vInStock WHERE InStkId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 pvName sorted by amount in descending order for 2026-03-05.",
+    "query": "SELECT TOP 5 pvName FROM WP_vInStock WHERE InStkId LIKE '20260305%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average amtNoneTax for Alice transactions in January 2026.",
+    "query": "SELECT AVG(amtNoneTax) FROM WP_vInStock WHERE pvName = 'Alice' AND InStkId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify pvName categories that had more than 8 transactions in 2024.",
+    "query": "SELECT pvName FROM WP_vInStock WHERE InStkId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 8",
+    "table": "WP_vInStock",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pName and amtNoneTax for the entry with the highest amtNoneTax in the first half of 2024.",
+    "query": "SELECT pName, amtNoneTax FROM WP_vInStock WHERE InStkId >= 202401010000 AND InStkId <= 202406309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amtNoneTax DESC",
+    "table": "WP_vInStock",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 pName sorted by amount in descending order for 2026-02-14.",
+    "query": "SELECT TOP 5 pName FROM WP_vInStock WHERE InStkId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vInStock records exist for the date 2026-02-14?",
+    "query": "SELECT COUNT(*) FROM WP_vInStock WHERE InStkId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total amtNoneTax contributed by pvName 'Alice' in December 2025?",
+    "query": "SELECT (SUM(CASE WHEN pvName = 'Alice' THEN amtNoneTax ELSE 0 END) / SUM(amtNoneTax)) * 100 FROM WP_vInStock WHERE InStkId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List InStkId and their total amount during January 2026.",
+    "query": "SELECT InStkId, SUM(amount) FROM WP_vInStock WHERE InStkId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY InStkId",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 pName sorted by amount in descending order for 2026-02-14.",
+    "query": "SELECT TOP 5 pName FROM WP_vInStock WHERE InStkId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amount DESC",
+    "table": "WP_vInStock",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pName in WP_vInStock.",
+    "query": "SELECT DISTINCT pName FROM WP_vInStock WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vInStock",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify pvName categories that had more than 14 transactions in 2026.",
+    "query": "SELECT pvName FROM WP_vInStock WHERE InStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pvName HAVING COUNT(*) > 14",
+    "table": "WP_vInStock",
+    "difficulty": "hard"
+  },
+
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vProduct items that have a priceMem equal to 'Global'.",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE priceMem = 'Global'",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vProduct items that have a priceMem equal to 'VIP'.",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE priceMem = 'VIP'",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total priceMem for priceMem 'Shane'?",
+    "query": "SELECT SUM(priceMem) FROM WP_vProduct WHERE priceMem = 'Shane'",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total priceStd for priceMem 'Shane'?",
+    "query": "SELECT SUM(priceStd) FROM WP_vProduct WHERE priceMem = 'Shane'",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vProduct records exist for the date 2025-10-01?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE pNo LIKE '20251001%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pNo and their total qtySafe during October 2025.",
+    "query": "SELECT pNo, SUM(qtySafe) FROM WP_vProduct WHERE pNo LIKE '202510%' GROUP BY pNo",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pName in WP_vProduct.",
+    "query": "SELECT DISTINCT pName FROM WP_vProduct WHERE 1=1",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pName in WP_vProduct.",
+    "query": "SELECT DISTINCT pName FROM WP_vProduct WHERE 1=1",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average qtyNow for Warehouse A transactions in January 2026.",
+    "query": "SELECT AVG(qtyNow) FROM WP_vProduct WHERE priceMem = 'Warehouse A' AND pNo LIKE '202601%'",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pName whose priceMem is above the overall average for 2024.",
+    "query": "SELECT pName FROM WP_vProduct WHERE priceMem > (SELECT AVG(priceMem) FROM WP_vProduct WHERE pNo LIKE '2024%') AND pNo LIKE '2024%'",
+    "table": "WP_vProduct",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pName and their total qtySafe during February 2026.",
+    "query": "SELECT pName, SUM(qtySafe) FROM WP_vProduct WHERE pNo LIKE '202602%' GROUP BY pName",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pName in WP_vProduct.",
+    "query": "SELECT DISTINCT pName FROM WP_vProduct WHERE 1=1",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Compare the sum of qtySafe between MemberX and Shane for the year 2024.",
+    "query": "SELECT priceMem, SUM(qtySafe) FROM WP_vProduct WHERE priceMem IN ('MemberX', 'Shane') AND pNo LIKE '2024%' GROUP BY priceMem",
+    "table": "WP_vProduct",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total priceStd for each priceMem in the year 2026.",
+    "query": "SELECT priceMem, SUM(priceStd) FROM WP_vProduct WHERE pNo LIKE '2026%' GROUP BY priceMem",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vProduct from the year 2024.",
+    "query": "SELECT * FROM WP_vProduct WHERE pNo LIKE '2024%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vProduct items that have a priceMem equal to 'MemberX'.",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE priceMem = 'MemberX'",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pNo whose costAvg is above the overall average for 2025.",
+    "query": "SELECT pNo FROM WP_vProduct WHERE costAvg > (SELECT AVG(costAvg) FROM WP_vProduct WHERE pNo LIKE '2025%') AND pNo LIKE '2025%'",
+    "table": "WP_vProduct",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum qtySafe recorded on 2025-12-31?",
+    "query": "SELECT MAX(qtySafe) FROM WP_vProduct WHERE pNo LIKE '20251231%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the pName where costAvg is less than 5000.",
+    "query": "SELECT pName FROM WP_vProduct WHERE costAvg < 5000",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pName and their total costAvg during December 2025.",
+    "query": "SELECT pName, SUM(costAvg) FROM WP_vProduct WHERE pNo LIKE '202512%' GROUP BY pName",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vProduct from the year 2026.",
+    "query": "SELECT * FROM WP_vProduct WHERE pNo LIKE '2026%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total qtySafe for each priceMem in the year 2026.",
+    "query": "SELECT priceMem, SUM(qtySafe) FROM WP_vProduct WHERE pNo LIKE '2026%' GROUP BY priceMem",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pName and qtySafe for the entry with the highest qtySafe in the first half of 2025.",
+    "query": "SELECT pName, qtySafe FROM WP_vProduct WHERE pNo >= 202501010000 AND pNo <= 202506309999 ORDER BY qtySafe DESC",
+    "table": "WP_vProduct",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify priceMem categories that had more than 3 transactions in 2024.",
+    "query": "SELECT priceMem FROM WP_vProduct WHERE pNo LIKE '2024%' GROUP BY priceMem HAVING COUNT(*) > 3",
+    "table": "WP_vProduct",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify priceMem categories that had more than 18 transactions in 2025.",
+    "query": "SELECT priceMem FROM WP_vProduct WHERE pNo LIKE '2025%' GROUP BY priceMem HAVING COUNT(*) > 18",
+    "table": "WP_vProduct",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total costAvg for priceMem 'Shane'?",
+    "query": "SELECT SUM(costAvg) FROM WP_vProduct WHERE priceMem = 'Shane'",
+    "table": "WP_vProduct",
+    "difficulty": "medium"
+  },
+
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total dtlCostAvg for memName 'Shane'?",
+    "query": "SELECT SUM(dtlCostAvg) FROM WP_vOutStockUnion WHERE memName = 'Shane' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify memName categories that had more than 17 transactions in 2026.",
+    "query": "SELECT memName FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName HAVING COUNT(*) > 17",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total qty for each memName in the year 2025.",
+    "query": "SELECT memName, SUM(qty) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Compare the sum of qty between Main Office and Warehouse A for the year 2025.",
+    "query": "SELECT memName, SUM(qty) FROM WP_vOutStockUnion WHERE memName IN ('Main Office', 'Warehouse A') AND OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vOutStockUnion from the year 2025.",
+    "query": "SELECT * FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amtTotal recorded on 2025-10-01?",
+    "query": "SELECT MAX(amtTotal) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique memName in WP_vOutStockUnion.",
+    "query": "SELECT DISTINCT memName FROM WP_vOutStockUnion WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total qty for each memName in the year 2025.",
+    "query": "SELECT memName, SUM(qty) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show OutStkId and dtlCostAvg for the entry with the highest dtlCostAvg in the first half of 2025.",
+    "query": "SELECT OutStkId, dtlCostAvg FROM WP_vOutStockUnion WHERE OutStkId >= 202501010000 AND OutStkId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY dtlCostAvg DESC",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average qty for VIP transactions in February 2026.",
+    "query": "SELECT AVG(qty) FROM WP_vOutStockUnion WHERE memName = 'VIP' AND OutStkId LIKE '202602%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total dtlCostAvg for each memName in the year 2026.",
+    "query": "SELECT memName, SUM(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List OutStkId whose dtlCostAvg is above the overall average for 2026.",
+    "query": "SELECT OutStkId FROM WP_vOutStockUnion WHERE dtlCostAvg > (SELECT AVG(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total amtTotal contributed by memName 'Global' in March 2026?",
+    "query": "SELECT (SUM(CASE WHEN memName = 'Global' THEN amtTotal ELSE 0 END) / SUM(amtTotal)) * 100 FROM WP_vOutStockUnion WHERE OutStkId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List OutStkId and their total amtTotal during October 2025.",
+    "query": "SELECT OutStkId, SUM(amtTotal) FROM WP_vOutStockUnion WHERE OutStkId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY OutStkId",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vOutStockUnion records exist for the date 2025-10-01?",
+    "query": "SELECT COUNT(*) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List OutStkId whose dtlCostAvg is above the overall average for 2025.",
+    "query": "SELECT OutStkId FROM WP_vOutStockUnion WHERE dtlCostAvg > (SELECT AVG(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N') AND OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vOutStockUnion items that have a memName equal to 'Global'.",
+    "query": "SELECT COUNT(*) FROM WP_vOutStockUnion WHERE memName = 'Global' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 pNameS sorted by qty in descending order for 2025-12-31.",
+    "query": "SELECT TOP 5 pNameS FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY qty DESC",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average qty for Alice transactions in January 2026.",
+    "query": "SELECT AVG(qty) FROM WP_vOutStockUnion WHERE memName = 'Alice' AND OutStkId LIKE '202601%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify memName categories that had more than 17 transactions in 2026.",
+    "query": "SELECT memName FROM WP_vOutStockUnion WHERE OutStkId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName HAVING COUNT(*) > 17",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify memName categories that had more than 19 transactions in 2025.",
+    "query": "SELECT memName FROM WP_vOutStockUnion WHERE OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName HAVING COUNT(*) > 19",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pNameS and amtTotal for the entry with the highest amtTotal in the first half of 2025.",
+    "query": "SELECT pNameS, amtTotal FROM WP_vOutStockUnion WHERE OutStkId >= 202501010000 AND OutStkId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY amtTotal DESC",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum qty recorded on 2026-01-01?",
+    "query": "SELECT MAX(qty) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vOutStockUnion records exist for the date 2025-10-01?",
+    "query": "SELECT COUNT(*) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Compare the sum of dtlCostAvg between Global and Alice for the year 2025.",
+    "query": "SELECT memName, SUM(dtlCostAvg) FROM WP_vOutStockUnion WHERE memName IN ('Global', 'Alice') AND OutStkId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum dtlCostAvg recorded on 2026-03-05?",
+    "query": "SELECT MAX(dtlCostAvg) FROM WP_vOutStockUnion WHERE OutStkId LIKE '20260305%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vOutStockUnion",
+    "difficulty": "easy"
+  },
+
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vTransfer from the year 2025.",
+    "query": "SELECT * FROM WP_vTransfer WHERE TransferId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Compare the sum of costAvg between Global and Alice for the year 2024.",
+    "query": "SELECT TransferId, SUM(costAvg) FROM WP_vTransfer WHERE TransferId IN ('Global', 'Alice') AND TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId",
+    "table": "WP_vTransfer",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total qty for TransferId 'Shane'?",
+    "query": "SELECT SUM(qty) FROM WP_vTransfer WHERE TransferId = 'Shane' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pNo whose costAvg is above the overall average for 2024.",
+    "query": "SELECT pNo FROM WP_vTransfer WHERE costAvg > (SELECT AVG(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N') AND TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average qty for Shane transactions in March 2026.",
+    "query": "SELECT AVG(qty) FROM WP_vTransfer WHERE TransferId = 'Shane' AND TransferId LIKE '202603%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the pNo where qty is less than 1000.",
+    "query": "SELECT pNo FROM WP_vTransfer WHERE qty < 1000 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total qty for TransferId 'Alice'?",
+    "query": "SELECT SUM(qty) FROM WP_vTransfer WHERE TransferId = 'Alice' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show TransferId and qty for the entry with the highest qty in the first half of 2025.",
+    "query": "SELECT TransferId, qty FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY qty DESC",
+    "table": "WP_vTransfer",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pNo and their total costAvg during October 2025.",
+    "query": "SELECT pNo, SUM(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY pNo",
+    "table": "WP_vTransfer",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the TransferId where the average costAvg in 2024 is higher than the average in the previous year 2023.",
+    "query": "SELECT TransferId FROM WP_vTransfer WHERE TransferId LIKE '2024%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId HAVING AVG(costAvg) > (SELECT AVG(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '2023%' AND isDel = 'N' AND dtlIsDel = 'N')",
+    "table": "WP_vTransfer",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vTransfer items that have a TransferId equal to 'Main Office'.",
+    "query": "SELECT COUNT(*) FROM WP_vTransfer WHERE TransferId = 'Main Office' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 fWhName sorted by costAvg in descending order for 2025-12-31.",
+    "query": "SELECT TOP 5 fWhName FROM WP_vTransfer WHERE TransferId LIKE '20251231%' AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg DESC",
+    "table": "WP_vTransfer",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the TransferId that appeared in October 2025 but did not appear in December 2025.",
+    "query": "SELECT DISTINCT TransferId FROM WP_vTransfer WHERE TransferId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' EXCEPT SELECT DISTINCT TransferId FROM WP_vTransfer WHERE TransferId LIKE '202512%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List TransferId and their total qty during October 2025.",
+    "query": "SELECT TransferId, SUM(qty) FROM WP_vTransfer WHERE TransferId LIKE '202510%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId",
+    "table": "WP_vTransfer",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vTransfer records exist for the date 2026-02-14?",
+    "query": "SELECT COUNT(*) FROM WP_vTransfer WHERE TransferId LIKE '20260214%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List TransferId whose qty is above the overall average for 2026.",
+    "query": "SELECT TransferId FROM WP_vTransfer WHERE qty > (SELECT AVG(qty) FROM WP_vTransfer WHERE TransferId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N') AND TransferId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vTransfer from the year 2026.",
+    "query": "SELECT * FROM WP_vTransfer WHERE TransferId LIKE '2026%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pNo in WP_vTransfer.",
+    "query": "SELECT DISTINCT pNo FROM WP_vTransfer WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pNo and qty for the entry with the highest qty in the first half of 2025.",
+    "query": "SELECT pNo, qty FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY qty DESC",
+    "table": "WP_vTransfer",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pNo and costAvg for the entry with the highest costAvg in the first half of 2025.",
+    "query": "SELECT pNo, costAvg FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg DESC",
+    "table": "WP_vTransfer",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify TransferId categories that had more than 7 transactions in 2025.",
+    "query": "SELECT TransferId FROM WP_vTransfer WHERE TransferId LIKE '2025%' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId HAVING COUNT(*) > 7",
+    "table": "WP_vTransfer",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum costAvg recorded on 2025-10-01?",
+    "query": "SELECT MAX(costAvg) FROM WP_vTransfer WHERE TransferId LIKE '20251001%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show fWhName and costAvg for the entry with the highest costAvg in the first half of 2025.",
+    "query": "SELECT fWhName, costAvg FROM WP_vTransfer WHERE TransferId >= 202501010000 AND TransferId <= 202506309999 AND isDel = 'N' AND dtlIsDel = 'N' ORDER BY costAvg DESC",
+    "table": "WP_vTransfer",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vTransfer records exist for the date 2026-01-01?",
+    "query": "SELECT COUNT(*) FROM WP_vTransfer WHERE TransferId LIKE '20260101%' AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique tfWhName in WP_vTransfer.",
+    "query": "SELECT DISTINCT tfWhName FROM WP_vTransfer WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pNo in WP_vTransfer.",
+    "query": "SELECT DISTINCT pNo FROM WP_vTransfer WHERE 1=1 AND isDel = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vTransfer",
+    "difficulty": "easy"
+  },
+
+  {
+    "db_id": "WP_M09",
+    "question": "List pName whose qtyNow is above the overall average for 2024.",
+    "query": "SELECT pName FROM WP_vInventory WHERE qtyNow > (SELECT AVG(qtyNow) FROM WP_vInventory WHERE pNo LIKE '2024%') AND pNo LIKE '2024%'",
+    "table": "WP_vInventory",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pNo in WP_vInventory.",
+    "query": "SELECT DISTINCT pNo FROM WP_vInventory WHERE 1=1",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vInventory items that have a WarehouseName equal to 'MemberX'.",
+    "query": "SELECT COUNT(*) FROM WP_vInventory WHERE WarehouseName = 'MemberX'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vInventory records exist for the date 2026-01-01?",
+    "query": "SELECT COUNT(*) FROM WP_vInventory WHERE pNo LIKE '20260101%'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 WarehouseName sorted by qtySafe in descending order for 2025-12-31.",
+    "query": "SELECT TOP 5 WarehouseName FROM WP_vInventory WHERE pNo LIKE '20251231%' ORDER BY qtySafe DESC",
+    "table": "WP_vInventory",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the pNo where priceStd is less than 10000.",
+    "query": "SELECT pNo FROM WP_vInventory WHERE priceStd < 10000",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show pName and qtySafe for the entry with the highest qtySafe in the first half of 2025.",
+    "query": "SELECT pName, qtySafe FROM WP_vInventory WHERE pNo >= 202501010000 AND pNo <= 202506309999 ORDER BY qtySafe DESC",
+    "table": "WP_vInventory",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vInventory records exist for the date 2026-03-05?",
+    "query": "SELECT COUNT(*) FROM WP_vInventory WHERE pNo LIKE '20260305%'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total qtyNow contributed by WarehouseName 'Global' in October 2025?",
+    "query": "SELECT (SUM(CASE WHEN WarehouseName = 'Global' THEN qtyNow ELSE 0 END) / SUM(qtyNow)) * 100 FROM WP_vInventory WHERE pNo LIKE '202510%'",
+    "table": "WP_vInventory",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pName in WP_vInventory.",
+    "query": "SELECT DISTINCT pName FROM WP_vInventory WHERE 1=1",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique WarehouseName in WP_vInventory.",
+    "query": "SELECT DISTINCT WarehouseName FROM WP_vInventory WHERE 1=1",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total priceStd for each WarehouseName in the year 2026.",
+    "query": "SELECT WarehouseName, SUM(priceStd) FROM WP_vInventory WHERE pNo LIKE '2026%' GROUP BY WarehouseName",
+    "table": "WP_vInventory",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify WarehouseName categories that had more than 15 transactions in 2024.",
+    "query": "SELECT WarehouseName FROM WP_vInventory WHERE pNo LIKE '2024%' GROUP BY WarehouseName HAVING COUNT(*) > 15",
+    "table": "WP_vInventory",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many WP_vInventory records exist for the date 2025-10-01?",
+    "query": "SELECT COUNT(*) FROM WP_vInventory WHERE pNo LIKE '20251001%'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique WarehouseName in WP_vInventory.",
+    "query": "SELECT DISTINCT WarehouseName FROM WP_vInventory WHERE 1=1",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the percentage of total qtyNow contributed by WarehouseName 'Main Office' in December 2025?",
+    "query": "SELECT (SUM(CASE WHEN WarehouseName = 'Main Office' THEN qtyNow ELSE 0 END) / SUM(qtyNow)) * 100 FROM WP_vInventory WHERE pNo LIKE '202512%'",
+    "table": "WP_vInventory",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List pNo whose costAvg is above the overall average for 2024.",
+    "query": "SELECT pNo FROM WP_vInventory WHERE costAvg > (SELECT AVG(costAvg) FROM WP_vInventory WHERE pNo LIKE '2024%') AND pNo LIKE '2024%'",
+    "table": "WP_vInventory",
+    "difficulty": "hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vInventory from the year 2025.",
+    "query": "SELECT * FROM WP_vInventory WHERE pNo LIKE '2025%'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the pNo where qtySafe is less than 10000.",
+    "query": "SELECT pNo FROM WP_vInventory WHERE qtySafe < 10000",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vInventory items that have a priceMem equal to 'EMP001'.",
+    "query": "SELECT COUNT(*) FROM WP_vInventory WHERE priceMem = 'EMP001'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List WarehouseName and their total priceStd during December 2025.",
+    "query": "SELECT WarehouseName, SUM(priceStd) FROM WP_vInventory WHERE pNo LIKE '202512%' GROUP BY WarehouseName",
+    "table": "WP_vInventory",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the unique pName in WP_vInventory.",
+    "query": "SELECT DISTINCT pName FROM WP_vInventory WHERE 1=1",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the pName that appeared in January 2026 but did not appear in December 2025.",
+    "query": "SELECT DISTINCT pName FROM WP_vInventory WHERE pNo LIKE '202601%' EXCEPT SELECT DISTINCT pName FROM WP_vInventory WHERE pNo LIKE '202512%'",
+    "table": "WP_vInventory",
+    "difficulty": "extra hard"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total qtyNow for each priceMem in the year 2026.",
+    "query": "SELECT priceMem, SUM(qtyNow) FROM WP_vInventory WHERE pNo LIKE '2026%' GROUP BY priceMem",
+    "table": "WP_vInventory",
+    "difficulty": "medium"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the WP_vInventory items that have a priceMem equal to 'MemberX'.",
+    "query": "SELECT COUNT(*) FROM WP_vInventory WHERE priceMem = 'MemberX'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for WP_vInventory from the year 2026.",
+    "query": "SELECT * FROM WP_vInventory WHERE pNo LIKE '2026%'",
+    "table": "WP_vInventory",
+    "difficulty": "easy"
+  }
+]

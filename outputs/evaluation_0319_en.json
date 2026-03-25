@@ -1,0 +1,2473 @@
+{
+  "total": 242,
+  "em_correct": 151,
+  "em_pct": 62.4,
+  "ex_correct": null,
+  "ex_pct": null,
+  "table_stats": {
+    "WP_vAcctOut": {
+      "total": 28,
+      "em": 26,
+      "ex": 0
+    },
+    "WP_vOutStock": {
+      "total": 26,
+      "em": 22,
+      "ex": 0
+    },
+    "WP_vInventory": {
+      "total": 50,
+      "em": 33,
+      "ex": 0
+    },
+    "WP_vProduct": {
+      "total": 44,
+      "em": 30,
+      "ex": 0
+    },
+    "WP_vAcctIn": {
+      "total": 39,
+      "em": 39,
+      "ex": 0
+    },
+    "WP_vTransfer": {
+      "total": 29,
+      "em": 0,
+      "ex": 0
+    },
+    "WP_vProvider": {
+      "total": 26,
+      "em": 1,
+      "ex": 0
+    }
+  },
+  "diff_stats": {
+    "unknown": {
+      "total": 242,
+      "em": 151,
+      "ex": 0
+    }
+  },
+  "details": [
+    {
+      "id": 0,
+      "question": "Show details for accounts payable 202508200001",
+      "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202508200001' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT * FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202508200001' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 1,
+      "question": "What is the total quantity sold for 竹炭冬筍餅?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'竹炭冬筍餅' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'竹炭冬筍餅' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 2,
+      "question": "List 永豐農產 products with stock above 50",
+      "gold_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'永豐農產' AND qty > 50;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產' AND qtyNow > 50;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 3,
+      "question": "List accounts payable created on 20251225",
+      "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,8)='20251225' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,8)='20251225' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 4,
+      "question": "How many distinct products are in warehouse 南區倉庫?",
+      "gold_sql": "SELECT COUNT(DISTINCT pNo) AS count FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫';",
+      "pred_sql": "SELECT COUNT(DISTINCT pNo) AS count FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 5,
+      "question": "Show inventory in 北區倉庫 from supplier 實垣有限公司",
+      "gold_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'北區倉庫' AND pvName=N'實垣有限公司';",
+      "pred_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'北區倉庫' AND pvName=N'實垣有限公司';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 6,
+      "question": "Show products with more than 15 units in stock",
+      "gold_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow > 15 ORDER BY qtyNow DESC;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow > 15 ORDER BY qtyNow DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 7,
+      "question": "List products in warehouse 東區倉庫 with standard price above 30",
+      "gold_sql": "SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'東區倉庫' AND priceStd > 30;",
+      "pred_sql": "SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'東區倉庫' AND priceStd > 30;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 8,
+      "question": "Show products with more than 10 units in stock",
+      "gold_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow > 10 ORDER BY qtyNow DESC;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow > 10 ORDER BY qtyNow DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 9,
+      "question": "Find products with safe stock set but current stock is zero",
+      "gold_sql": "SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtyNow = 0 AND qtySafe > 0;",
+      "pred_sql": "SELECT pNo, pName, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtySafe > 0 AND qtyNow = 0;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 10,
+      "question": "What is the total sales for 202511?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 11,
+      "question": "Retrieve every active accounts receivable ID",
+      "gold_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 12,
+      "question": "Show inventory in 特產中心 from supplier 台灣好茶",
+      "gold_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心' AND pvName=N'台灣好茶';",
+      "pred_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心' AND pvName=N'台灣好茶';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 13,
+      "question": "What is the total revenue from selling 東方美人茶?",
+      "gold_sql": "SELECT SUM(amtTotal) AS total_revenue FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(price) AS total_revenue FROM WP_M09 WHERE pName=N'東方美人茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 14,
+      "question": "Show average transferred quantity per product",
+      "gold_sql": "SELECT pName, AVG(qty) AS avg_qty FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY pName ORDER BY avg_qty DESC;",
+      "pred_sql": "SELECT pName, AVG(qty) AS avg_qty FROM WP_M09.dbo.WP_vTransfer GROUP BY pName ORDER BY avg_qty DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 15,
+      "question": "Find accounts payable for products related to 高山",
+      "gold_sql": "SELECT DISTINCT acctOutId, pName FROM WP_M09.dbo.WP_vAcctOut WHERE pName LIKE N'%高山%' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, pName FROM WP_M09.dbo.WP_vAcctOut WHERE pName LIKE N'%高山%' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 16,
+      "question": "What is the total receivable from member 觀光農場?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'觀光農場' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'觀光農場' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 17,
+      "question": "Show all supplier information",
+      "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vProvider ORDER BY pvSn;",
+      "pred_sql": "SELECT pvSn, pvName, pvTel, pvAddr FROM WP_M09.dbo.WP_vProvider WHERE isSale='Y' ORDER BY pvName;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 18,
+      "question": "What is the current stock for 台灣高山茶?",
+      "gold_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'台灣高山茶';",
+      "pred_sql": "SELECT qty FROM WP_M09 WHERE pName=N'台灣高山茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 19,
+      "question": "Show total accounts receivable per member",
+      "gold_sql": "SELECT memId, memName, SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY memId, memName ORDER BY total DESC;",
+      "pred_sql": "SELECT memId, memName, SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY memId, memName ORDER BY total DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 20,
+      "question": "Is supplier 健康食品 active?",
+      "gold_sql": "SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'健康食品';",
+      "pred_sql": "SELECT isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'健康食品';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 21,
+      "question": "How many times was 普洱茶 transferred?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'普洱茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'普洱茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 22,
+      "question": "How many accounts payable records were created in 202511?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 23,
+      "question": "List all products supplied by 健康食品",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 24,
+      "question": "Show all products from supplier 永豐農產 in inventory",
+      "gold_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'永豐農產' GROUP BY pName;",
+      "pred_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'永豐農產' GROUP BY pName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 25,
+      "question": "How many products contain 竹 in their name?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%竹%';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%竹%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 26,
+      "question": "Show all products from supplier 山林食品 in inventory",
+      "gold_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'山林食品' GROUP BY pName;",
+      "pred_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'山林食品' GROUP BY pName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 27,
+      "question": "Find accounts receivable exceeding 20000",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 20000 AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 20000 AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 28,
+      "question": "List products with standard price above 30",
+      "gold_sql": "SELECT DISTINCT pName, priceStd FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 30 ORDER BY priceStd DESC;",
+      "pred_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 30 ORDER BY priceStd DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 29,
+      "question": "In which warehouses is 有機烏龍茶 stored?",
+      "gold_sql": "SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'有機烏龍茶';",
+      "pred_sql": "SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'有機烏龍茶';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 30,
+      "question": "Show products priced below 30",
+      "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd < 30 ORDER BY priceStd;",
+      "pred_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd < 30 ORDER BY priceStd;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 31,
+      "question": "Show products with less than 5 units in stock",
+      "gold_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 5;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < 5;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 32,
+      "question": "Show details for accounts payable 202512100002",
+      "gold_sql": "SELECT * FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202512100002' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT * FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202512100002' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 33,
+      "question": "Show accounts receivable for member 觀光農場",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'觀光農場' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'觀光農場' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 34,
+      "question": "How many products does 品茶苑 supply?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 35,
+      "question": "List accounts receivable for member 食品公司 that include 烏龍茶葉",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'食品公司' AND pName=N'烏龍茶葉' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE memName=N'食品公司' AND pName=N'烏龍茶葉' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 36,
+      "question": "What is the maximum accounts payable amount?",
+      "gold_sql": "SELECT MAX(DISTINCT amount) AS max_amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT MAX(DISTINCT amount) AS max_amount FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 37,
+      "question": "Show details for supplier pvSn 21",
+      "gold_sql": "SELECT pvSn, pvName, pvTel, pvAddr, email FROM WP_M09.dbo.WP_vProvider WHERE pvSn='21';",
+      "pred_sql": "SELECT pvSn, pvName, pvTel, pvAddr, isSale FROM WP_M09.dbo.WP_vProvider WHERE pvSn='21';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 38,
+      "question": "In which warehouses is 阿里山茶 stored?",
+      "gold_sql": "SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'阿里山茶';",
+      "pred_sql": "SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'阿里山茶';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 39,
+      "question": "What is the total payable to 綠野農業 in 202504?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'綠野農業' AND LEFT(acctOutId,6)='202504' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'綠野農業' AND LEFT(acctOutId,6)='202504' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 40,
+      "question": "Find suppliers containing '茶' in their name",
+      "gold_sql": "SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%茶%';",
+      "pred_sql": "SELECT pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%茶%' AND isSale='Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 41,
+      "question": "How many accounts receivable records does member A008 have?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctInId) AS count FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctInId) AS count FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 42,
+      "question": "List accounts payable from 202403",
+      "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202403' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202403' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 43,
+      "question": "How much 有機烏龍茶 was transferred in 202512?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'有機烏龍茶' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'有機烏龍茶' AND LEFT(TransferId,6)='202512';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 44,
+      "question": "Sales orders for member A006 in 202511",
+      "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A006' AND LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A006' AND LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 45,
+      "question": "Total accounts payable for 台灣好茶 in 202509",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'台灣好茶' AND LEFT(acctOutId,6)='202509' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'台灣好茶' AND LEFT(acctOutId,6)='202509' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 46,
+      "question": "Find sales orders with product containing keyword 花",
+      "gold_sql": "SELECT DISTINCT OutStkId, pName FROM WP_M09.dbo.WP_vOutStock WHERE pName LIKE N'%花%' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, pName FROM WP_M09.dbo.WP_vOutStock WHERE pName LIKE N'%花%' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 47,
+      "question": "Show inventory for products priced over 500",
+      "gold_sql": "SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 500 GROUP BY pName, priceStd;",
+      "pred_sql": "SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 500 GROUP BY pName, priceStd;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 48,
+      "question": "Show inventory for products with name containing 茶",
+      "gold_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%';",
+      "pred_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 49,
+      "question": "What is the total stock of products containing 龍井?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%龍井%';",
+      "pred_sql": "SELECT SUM(qtyNow) AS total_qty FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%龍井%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 50,
+      "question": "Show products where average cost exceeds 80% of standard price",
+      "gold_sql": "SELECT pNo, pName, costAvg, priceStd FROM WP_M09.dbo.WP_vProduct WHERE costAvg > priceStd * 0.8 ORDER BY pName;",
+      "pred_sql": "SELECT pNo, pName, costAvg / priceStd AS ratio FROM WP_M09.dbo.WP_vProduct WHERE costAvg > priceStd * 0.8;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 51,
+      "question": "List accounts receivable for month 202501",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202501' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202501' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 52,
+      "question": "List accounts receivable created on 20251225",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,8)='20251225' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,8)='20251225' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 53,
+      "question": "What is the total inventory value for supplier 永豐農產?",
+      "gold_sql": "SELECT SUM(qtyNow * costAvg) AS total_value FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產';",
+      "pred_sql": "SELECT SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'永豐農產';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 54,
+      "question": "Show all suppliers with registered boss name",
+      "gold_sql": "SELECT pvSn, pvName, pvBoss FROM WP_M09.dbo.WP_vProvider WHERE pvBoss IS NOT NULL AND pvBoss<>'';",
+      "pred_sql": "SELECT DISTINCT pvSn, pvName, bossName FROM WP_M09.dbo.WP_vProvider WHERE bossName IS NOT NULL AND bossName<>'';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 55,
+      "question": "Is supplier 天然農場 active?",
+      "gold_sql": "SELECT pvSn, pvName, isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'天然農場';",
+      "pred_sql": "SELECT isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'天然農場';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 56,
+      "question": "What is the current stock for 龍井茶?",
+      "gold_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'龍井茶';",
+      "pred_sql": "SELECT CURRENT_STOCK FROM WP_M09 WHERE pName=N'龍井茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 57,
+      "question": "List products added in 202504",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202504%';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202504%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 58,
+      "question": "What is the total purchase amount for 阿里山茶?",
+      "gold_sql": "SELECT SUM(amtTotal) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(amtTotal) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 59,
+      "question": "Show transfers for product with barcode 4712070722015",
+      "gold_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE pBarcode='4712070722015' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE pBarcode='4712070722015';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 60,
+      "question": "Show product details for barcode 4719865002441",
+      "gold_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pBarcode='4719865002441';",
+      "pred_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pBarcode='4719865002441';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 61,
+      "question": "Total accounts receivable for member A006 in 202512",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A006' AND LEFT(acctInId,6)='202512' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A006' AND LEFT(acctInId,6)='202512' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 62,
+      "question": "What is the contact information for supplier 有機世界?",
+      "gold_sql": "SELECT pvSn, pvName, pvTel FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';",
+      "pred_sql": "SELECT pvName, pvTel, pvAddr FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界' AND isSale='Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 63,
+      "question": "What is the total stock of products containing 高山?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%高山%';",
+      "pred_sql": "SELECT SUM(qtyNow) AS total_qty FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%高山%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 64,
+      "question": "Find inventory items with product name containing 冬",
+      "gold_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%冬%' GROUP BY pName;",
+      "pred_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%冬%' GROUP BY pName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 65,
+      "question": "Show all records containing product 有機烏龍茶 in accounts receivable",
+      "gold_sql": "SELECT DISTINCT acctInId, oStkDtlQty, oStkDtlAmt FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'有機烏龍茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, oStkDtlQty, oStkDtlAmt FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'有機烏龍茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 66,
+      "question": "How many distinct products are in warehouse 冷藏倉?",
+      "gold_sql": "SELECT COUNT(DISTINCT pNo) AS count FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'冷藏倉';",
+      "pred_sql": "SELECT COUNT(DISTINCT pNo) AS count FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'冷藏倉';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 67,
+      "question": "Find accounts payable that include 東方美人茶",
+      "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 68,
+      "question": "Find suppliers offering more than 8% discount",
+      "gold_sql": "SELECT pvSn, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvDiscount > 8 ORDER BY pvDiscount DESC;",
+      "pred_sql": "SELECT pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE isSale='Y' AND pvDiscount > 8 ORDER BY pvDiscount DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 69,
+      "question": "Show all supplier contact details",
+      "gold_sql": "SELECT pvSn, pvName, pvTel, pvAddr FROM WP_M09.dbo.WP_vProvider ORDER BY pvName;",
+      "pred_sql": "SELECT pvName, pvTel, pvAddr FROM WP_M09.dbo.WP_vProvider WHERE isSale='Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 70,
+      "question": "List products added in 202412",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202412%';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202412%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 71,
+      "question": "Show inventory for supplier pvSn 3",
+      "gold_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvSn='3';",
+      "pred_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvSn='3';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 72,
+      "question": "Find accounts payable with product name containing 香",
+      "gold_sql": "SELECT DISTINCT acctOutId, pName FROM WP_M09.dbo.WP_vAcctOut WHERE pName LIKE N'%香%' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, pName FROM WP_M09.dbo.WP_vAcctOut WHERE pName LIKE N'%香%' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 73,
+      "question": "Show inventory for products with name containing 米",
+      "gold_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%米%';",
+      "pred_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%米%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 74,
+      "question": "What is the total inventory quantity for supplier 山林食品?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'山林食品';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'山林食品';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 75,
+      "question": "Total accounts payable for 永豐農產 in 202508",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'永豐農產' AND LEFT(acctOutId,6)='202508' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'永豐農產' AND LEFT(acctOutId,6)='202508' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 76,
+      "question": "Show suppliers sorted by name",
+      "gold_sql": "SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider ORDER BY pvName;",
+      "pred_sql": "SELECT pvName, pvTel FROM WP_M09.dbo.WP_vProvider WHERE isSale='Y' ORDER BY pvName;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 77,
+      "question": "What is the total sales for 202502?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202502' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202502' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 78,
+      "question": "What products are in accounts payable 202512100002?",
+      "gold_sql": "SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202512100002' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId='202512100002' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 79,
+      "question": "Total accounts receivable for member A008 in 202509",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND LEFT(acctInId,6)='202509' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND LEFT(acctInId,6)='202509' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 80,
+      "question": "How many units of 阿里山茶 were transferred in total?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'阿里山茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 81,
+      "question": "Show all transfers involving product 花蓮米",
+      "gold_sql": "SELECT TransferId, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'花蓮米' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT TransferId, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'花蓮米';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 82,
+      "question": "Find accounts receivable that include product 烏龍茶葉",
+      "gold_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'烏龍茶葉' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'烏龍茶葉' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 83,
+      "question": "What is the total amount of accounts receivable 202511200001?",
+      "gold_sql": "SELECT DISTINCT amount FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202511200001' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT amount FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202511200001' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 84,
+      "question": "List all products supplied by 健康食品",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 85,
+      "question": "List accounts receivable with amount greater than 10000",
+      "gold_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 10000 AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 10000 AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 86,
+      "question": "What is the total quantity of 龍井茶 in accounts payable?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 87,
+      "question": "What is the total quantity transferred from 北區倉庫?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'北區倉庫' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'北區倉庫';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 88,
+      "question": "How much 竹炭冬筍餅 was received by warehouse 北區倉庫?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'竹炭冬筍餅' AND tfWhName=N'北區倉庫' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'竹炭冬筍餅' AND WarehouseName=N'北區倉庫';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 89,
+      "question": "Show average transfer quantity per warehouse route",
+      "gold_sql": "SELECT fWhName, tfWhName, AVG(qty) AS avg_qty FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY fWhName, tfWhName ORDER BY avg_qty DESC;",
+      "pred_sql": "SELECT LEFT(TransferId,3) AS whl, LEFT(TransferId,6) AS route, AVG(qty) AS avg_qty FROM WP_M09.dbo.WP_vTransfer GROUP BY LEFT(TransferId,3), LEFT(TransferId,6) ORDER BY avg_qty DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 90,
+      "question": "What is the total accounts receivable for member A008?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A008' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 91,
+      "question": "Total revenue from 玫瑰花茶 in accounts receivable",
+      "gold_sql": "SELECT SUM(oStkDtlAmt) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'玫瑰花茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(oStkDtlAmt) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'玫瑰花茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 92,
+      "question": "What is the total payable to 綠野農業 in 202501?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'綠野農業' AND LEFT(acctOutId,6)='202501' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'綠野農業' AND LEFT(acctOutId,6)='202501' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 93,
+      "question": "Show sales orders where product quantity exceeds 15",
+      "gold_sql": "SELECT DISTINCT OutStkId, pName, qty FROM WP_M09.dbo.WP_vOutStock WHERE qty > 15 AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, pName, qty FROM WP_M09.dbo.WP_vOutStock WHERE qty > 15 AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 94,
+      "question": "Show count of distinct products transferred per month in 2025",
+      "gold_sql": "SELECT LEFT(TransferId,6) AS month, COUNT(DISTINCT pNo) AS products FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,4)='2025' AND isDel='N' AND dtlIsDel='N' GROUP BY LEFT(TransferId,6) ORDER BY month;",
+      "pred_sql": "SELECT LEFT(TransferId,6) AS month, COUNT(DISTINCT pName) AS count FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,4)='2025' GROUP BY LEFT(TransferId,6) ORDER BY month;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 95,
+      "question": "Show suppliers with no discount",
+      "gold_sql": "SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE discount = 0 OR discount IS NULL;",
+      "pred_sql": "SELECT pvName, isSale FROM WP_M09.dbo.WP_vProvider WHERE isDiscount='N' OR isDiscount IS NULL;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 96,
+      "question": "Show transfers from warehouse 中央倉庫",
+      "gold_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'中央倉庫' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'中央倉庫';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 97,
+      "question": "How many transfers happened in 202512?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202512';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 98,
+      "question": "Find products with name containing 春",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%春%';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%春%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 99,
+      "question": "What is the total revenue from selling 龍井茶?",
+      "gold_sql": "SELECT SUM(amtTotal) AS total_revenue FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(price) AS total_revenue FROM WP_M09 WHERE pName=N'龍井茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 100,
+      "question": "Find accounts receivable exceeding 10000",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 10000 AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 10000 AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 101,
+      "question": "Show inventory for products priced over 300",
+      "gold_sql": "SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 300 GROUP BY pName, priceStd;",
+      "pred_sql": "SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 300 GROUP BY pName, priceStd;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 102,
+      "question": "How much 益全香米 was transferred in 202512?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'益全香米' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'益全香米' AND LEFT(TransferId,6)='202512';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 103,
+      "question": "Summarize accounts receivable by member with total amounts",
+      "gold_sql": "SELECT memId, memName, SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY memId, memName ORDER BY total DESC;",
+      "pred_sql": "SELECT memId, memName, SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N' GROUP BY memId, memName ORDER BY total DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 104,
+      "question": "Show sales orders for product 東方美人茶",
+      "gold_sql": "SELECT DISTINCT OutStkId, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 105,
+      "question": "List all active sales order IDs",
+      "gold_sql": "SELECT DISTINCT OutStkId FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId FROM WP_M09.dbo.WP_vOutStock WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 106,
+      "question": "What is the total accounts payable for 202503?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202503' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202503' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 107,
+      "question": "Show inventory in 中央倉庫 from supplier 實垣有限公司",
+      "gold_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'中央倉庫' AND pvName=N'實垣有限公司';",
+      "pred_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'中央倉庫' AND pvName=N'實垣有限公司';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 108,
+      "question": "Show products with name containing 米",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%米%';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%米%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 109,
+      "question": "What is the total accounts receivable for member A009?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A009' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A009' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 110,
+      "question": "Products from 永豐農產 with current stock above 10",
+      "gold_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產' AND qtyNow > 10;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產' AND qtyNow > 10;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 111,
+      "question": "Show details for product 普洱茶",
+      "gold_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'普洱茶';",
+      "pred_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'普洱茶';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 112,
+      "question": "What is the standard price for 有機烏龍茶?",
+      "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'有機烏龍茶';",
+      "pred_sql": "SELECT standard_price FROM WP_M09 WHERE pName=N'有機烏龍茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 113,
+      "question": "Count how many suppliers have phone numbers on file",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProvider WHERE pvTel IS NOT NULL AND pvTel <> '';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProvider WHERE phone IS NOT NULL AND phone<>'' AND isSale='Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 114,
+      "question": "List accounts receivable with amount greater than 500",
+      "gold_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 500 AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 500 AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 115,
+      "question": "What is the standard price for 龍井茶?",
+      "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'龍井茶';",
+      "pred_sql": "SELECT standard_price FROM WP_M09 WHERE pName=N'龍井茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 116,
+      "question": "Show suppliers with bank information",
+      "gold_sql": "SELECT pvSn, pvName, bankId, bankName FROM WP_M09.dbo.WP_vProvider WHERE bankId IS NOT NULL AND bankId<>'';",
+      "pred_sql": "SELECT pvName, bankName, bankAccount FROM WP_M09.dbo.WP_vProvider WHERE bankName IS NOT NULL AND bankName<>'' AND isSale='Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 117,
+      "question": "Total quantity transferred in 202401",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202401' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202401';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 118,
+      "question": "Show transfers from 特產中心 to 南區倉庫",
+      "gold_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'特產中心' AND tfWhName=N'南區倉庫' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'特產中心' AND tfWhName=N'南區倉庫';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 119,
+      "question": "Find suppliers with name containing 龍井",
+      "gold_sql": "SELECT pvSn, pvName FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%龍井%';",
+      "pred_sql": "SELECT pvName, isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%龍井%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 120,
+      "question": "Sales orders for member A008 in 202511",
+      "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A008' AND LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A008' AND LEFT(OutStkId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 121,
+      "question": "Find accounts payable that include product 益全香米",
+      "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'益全香米' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE pName=N'益全香米' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 122,
+      "question": "Show inventory summary: total products, quantity and value",
+      "gold_sql": "SELECT COUNT(DISTINCT pNo) AS products, SUM(qty) AS total_qty, SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory;",
+      "pred_sql": "SELECT COUNT(DISTINCT pNo) AS product_count, SUM(qty) AS total_qty, SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 123,
+      "question": "Show details for supplier pvSn 2",
+      "gold_sql": "SELECT pvSn, pvName, pvTel, pvAddr, email FROM WP_M09.dbo.WP_vProvider WHERE pvSn='2';",
+      "pred_sql": "SELECT pvSn, pvName, pvTel, pvAddr, isSale FROM WP_M09.dbo.WP_vProvider WHERE pvSn='2';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 124,
+      "question": "List sales orders from 202506",
+      "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202506' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202506' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 125,
+      "question": "List products with standard price above 150",
+      "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 150 ORDER BY priceStd DESC;",
+      "pred_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE priceStd > 150 ORDER BY priceStd DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 126,
+      "question": "What is the total accounts receivable amount in 202503?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202503' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202503' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 127,
+      "question": "List all transfers on 20251020",
+      "gold_sql": "SELECT TransferId, pName, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,8)='20251020' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT TransferId, pName, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,8)='20251020';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 128,
+      "question": "List employees with most transfer activity",
+      "gold_sql": "SELECT empId, COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' GROUP BY empId ORDER BY count DESC;",
+      "pred_sql": "SELECT TOP 5 pName, COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer GROUP BY pName ORDER BY count DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 129,
+      "question": "How many sales orders were created in 202508?",
+      "gold_sql": "SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202508' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202508' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 130,
+      "question": "What is the average standard price for supplier 品茶苑 products?",
+      "gold_sql": "SELECT AVG(priceStd) AS avg_price FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';",
+      "pred_sql": "SELECT AVG(priceStd) AS avg_price FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 131,
+      "question": "Is supplier pvSn 33 active?",
+      "gold_sql": "SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvSn='33';",
+      "pred_sql": "SELECT isSale FROM WP_M09.dbo.WP_vProvider WHERE pvSn='33';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 132,
+      "question": "Show accounts receivable containing products with keyword 高山",
+      "gold_sql": "SELECT DISTINCT acctInId, pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%高山%' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%高山%' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 133,
+      "question": "List products with inventory quantity below 0",
+      "gold_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 0;",
+      "pred_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 0;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 134,
+      "question": "List all products supplied by 永豐農產",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'永豐農產';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 135,
+      "question": "List products in warehouse 北區倉庫 with standard price above 80",
+      "gold_sql": "SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'北區倉庫' AND priceStd > 80;",
+      "pred_sql": "SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'北區倉庫' AND priceStd > 80;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 136,
+      "question": "Find products where member price exceeds standard price",
+      "gold_sql": "SELECT DISTINCT pName, priceStd, priceMem FROM WP_M09.dbo.WP_vInventory WHERE priceMem > priceStd;",
+      "pred_sql": "SELECT pNo, pName, priceStd, priceMem FROM WP_M09.dbo.WP_vProduct WHERE priceMem > priceStd;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 137,
+      "question": "Find inventory items with product name containing 龍井",
+      "gold_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%龍井%' GROUP BY pName;",
+      "pred_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%龍井%' GROUP BY pName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 138,
+      "question": "Find accounts receivable that include product 龍井茶",
+      "gold_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount, memName FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 139,
+      "question": "What is the total sales amount for member A007?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE memId='A007' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE memId='A007' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 140,
+      "question": "Show sales orders from 202412",
+      "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202412' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202412' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 141,
+      "question": "Show all warehouses that have inventory",
+      "gold_sql": "SELECT DISTINCT WarehouseName FROM WP_M09.dbo.WP_vInventory;",
+      "pred_sql": "SELECT DISTINCT WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName IS NOT NULL AND WarehouseName <> '';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 142,
+      "question": "Total quantity transferred in 202405",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202405' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202405';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 143,
+      "question": "How many total suppliers are registered?",
+      "gold_sql": "SELECT COUNT(*) AS total FROM WP_M09.dbo.WP_vProvider;",
+      "pred_sql": "SELECT COUNT(*) AS total FROM WP_M09.dbo.WP_vProvider;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 144,
+      "question": "Show products with less than 15 units in stock",
+      "gold_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 15;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < 15;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 145,
+      "question": "How much was paid in 202409?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202409' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09 WHERE pDate LIKE '202409%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 146,
+      "question": "Find inventory items with product name containing 茶",
+      "gold_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%' GROUP BY pName;",
+      "pred_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%茶%' GROUP BY pName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 147,
+      "question": "Show transfers from 南區倉庫 to 中央倉庫",
+      "gold_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'南區倉庫' AND tfWhName=N'中央倉庫' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'南區倉庫' AND tfWhName=N'中央倉庫';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 148,
+      "question": "Which supplier has the highest average product price?",
+      "gold_sql": "SELECT TOP 1 pvName, AVG(priceStd) AS avg_price FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY avg_price DESC;",
+      "pred_sql": "SELECT TOP 1 pvName, AVG(priceStd) AS avg_price FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY avg_price DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 149,
+      "question": "What is the total inventory for products from 台灣農業?",
+      "gold_sql": "SELECT SUM(qtyNow) AS total_qty FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣農業';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'台灣農業';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 150,
+      "question": "List accounts receivable created on 20251215",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,8)='20251215' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,8)='20251215' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 151,
+      "question": "Find accounts receivable exceeding 1000",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 1000 AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE amount > 1000 AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 152,
+      "question": "What is the total stock of products containing 豆?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%豆%';",
+      "pred_sql": "SELECT SUM(qtyNow) AS total_qty FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%豆%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 153,
+      "question": "Show inventory for product 台灣高山茶",
+      "gold_sql": "SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'台灣高山茶';",
+      "pred_sql": "SELECT WarehouseName, qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'台灣高山茶';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 154,
+      "question": "Show inventory in 南區倉庫 from supplier 綠野農業",
+      "gold_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫' AND pvName=N'綠野農業';",
+      "pred_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫' AND pvName=N'綠野農業';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 155,
+      "question": "Show suppliers with email addresses",
+      "gold_sql": "SELECT pvSn, pvName, email FROM WP_M09.dbo.WP_vProvider WHERE email IS NOT NULL AND email<>'';",
+      "pred_sql": "SELECT pvName, email FROM WP_M09.dbo.WP_vProvider WHERE email IS NOT NULL AND email<>'' AND isSale='Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 156,
+      "question": "List accounts payable created in 202511",
+      "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 157,
+      "question": "What is the total quantity of 有機烏龍茶 transferred?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'有機烏龍茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'有機烏龍茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 158,
+      "question": "How much 金萱茶包 was transferred in 202512?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'金萱茶包' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'金萱茶包' AND LEFT(TransferId,6)='202512';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 159,
+      "question": "List products in warehouse 南區倉庫 with standard price above 80",
+      "gold_sql": "SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫' AND priceStd > 80;",
+      "pred_sql": "SELECT pName, qty, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'南區倉庫' AND priceStd > 80;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 160,
+      "question": "How many active accounts payable records are there?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctOutId) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctOutId) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 161,
+      "question": "Show transfers from warehouse 北區倉庫",
+      "gold_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'北區倉庫' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE fWhName=N'北區倉庫';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 162,
+      "question": "How many accounts payable records were created in 202510?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202510' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202510' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 163,
+      "question": "What is the total revenue from selling 玫瑰花茶?",
+      "gold_sql": "SELECT SUM(amtTotal) AS total_revenue FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'玫瑰花茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(price) AS total_revenue FROM WP_M09 WHERE pName=N'玫瑰花茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 164,
+      "question": "Is supplier 綠野農業 active?",
+      "gold_sql": "SELECT pvSn, pvName, isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'綠野農業';",
+      "pred_sql": "SELECT isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'綠野農業';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 165,
+      "question": "Find sales orders exceeding 3000 in amount",
+      "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE amount > 3000 AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE amount > 3000 AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 166,
+      "question": "How many transfers happened in 202509?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202509' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202509';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 167,
+      "question": "How much 竹炭冬筍餅 was transferred in 202512?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'竹炭冬筍餅' AND LEFT(TransferId,6)='202512' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'竹炭冬筍餅' AND LEFT(TransferId,6)='202512';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 168,
+      "question": "How many products does supplier 健康食品 supply?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'健康食品';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 169,
+      "question": "Show top 10 largest single transfers by quantity",
+      "gold_sql": "SELECT TOP 10 TransferId, pName, qty, fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE isDel='N' AND dtlIsDel='N' ORDER BY qty DESC;",
+      "pred_sql": "SELECT TOP 10 TransferId, pName, qty FROM WP_M09.dbo.WP_vTransfer WHERE transferType='單位內' ORDER BY qty DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 170,
+      "question": "Is supplier 綠野農業 active?",
+      "gold_sql": "SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'綠野農業';",
+      "pred_sql": "SELECT isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'綠野農業';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 171,
+      "question": "How many products does 綠野農業 supply?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'綠野農業';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'綠野農業';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 172,
+      "question": "How many products does supplier 品茶苑 supply?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'品茶苑';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 173,
+      "question": "What is the standard price for 台灣高山茶?",
+      "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'台灣高山茶';",
+      "pred_sql": "SELECT standard_price FROM WP_M09 WHERE pName=N'台灣高山茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 174,
+      "question": "What is the total inventory quantity of 玫瑰花茶?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'玫瑰花茶';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'玫瑰花茶';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 175,
+      "question": "Show inventory for products priced over 80",
+      "gold_sql": "SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 80 GROUP BY pName, priceStd;",
+      "pred_sql": "SELECT DISTINCT pName, priceStd, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE priceStd > 80 GROUP BY pName, priceStd;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 176,
+      "question": "Show sales orders for member A011",
+      "gold_sql": "SELECT DISTINCT OutStkId, amount, OutStkDate FROM WP_M09.dbo.WP_vOutStock WHERE memId='A011' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, amount, OutStkDate FROM WP_M09.dbo.WP_vOutStock WHERE memId='A011' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 177,
+      "question": "Show inventory for products with name containing 烏龍",
+      "gold_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%烏龍%';",
+      "pred_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%烏龍%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 178,
+      "question": "Show all products from supplier 實垣有限公司 in inventory",
+      "gold_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'實垣有限公司' GROUP BY pName;",
+      "pred_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'實垣有限公司' GROUP BY pName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 179,
+      "question": "What is the standard price for 阿里山茶?",
+      "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName=N'阿里山茶';",
+      "pred_sql": "SELECT standard_price FROM WP_M09 WHERE pName=N'阿里山茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 180,
+      "question": "Total revenue from 黑糖茶磚 in accounts receivable",
+      "gold_sql": "SELECT SUM(oStkDtlAmt) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'黑糖茶磚' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(oStkDtlAmt) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'黑糖茶磚' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 181,
+      "question": "What is the total inventory value for supplier 台灣農業?",
+      "gold_sql": "SELECT SUM(qtyNow * costAvg) AS total_value FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣農業';",
+      "pred_sql": "SELECT SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'台灣農業';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 182,
+      "question": "What is the accounts receivable total for member A009 in 202506?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A009' AND LEFT(acctInId,6)='202506' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE memId='A009' AND LEFT(acctInId,6)='202506' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 183,
+      "question": "Show suppliers offering less than 10% discount",
+      "gold_sql": "SELECT pvSn, pvName, discount FROM WP_M09.dbo.WP_vProvider WHERE discount < 10 ORDER BY discount;",
+      "pred_sql": "SELECT pvName, discount FROM WP_M09.dbo.WP_vProvider WHERE isSale='Y' AND discount < 10;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 184,
+      "question": "How many line items does accounts receivable 202512050001 have?",
+      "gold_sql": "SELECT COUNT(*) AS lines FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202512050001' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(*) AS lines FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId='202512050001' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 185,
+      "question": "List all product names",
+      "gold_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vProduct ORDER BY pName;",
+      "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vProduct ORDER BY pName;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 186,
+      "question": "Is supplier 有機世界 active?",
+      "gold_sql": "SELECT pvSn, pvName, isStop FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';",
+      "pred_sql": "SELECT isSale FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 187,
+      "question": "Show accounts payable created by employee B02",
+      "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE empId='B02' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE empId='B02' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 188,
+      "question": "Sales orders for member A006 in 202509",
+      "gold_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A006' AND LEFT(OutStkId,6)='202509' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, amount FROM WP_M09.dbo.WP_vOutStock WHERE memId='A006' AND LEFT(OutStkId,6)='202509' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 189,
+      "question": "Show all products in sales order 202511210055",
+      "gold_sql": "SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202511210055' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202511210055' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 190,
+      "question": "How many products does supplier 台灣好茶 supply?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣好茶';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣好茶';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 191,
+      "question": "Show all active accounts receivable record IDs",
+      "gold_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 192,
+      "question": "What is the discount rate for supplier 有機世界?",
+      "gold_sql": "SELECT pvSn, pvName, discount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';",
+      "pred_sql": "SELECT isSale, discount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'有機世界';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 193,
+      "question": "Show details for product 金萱茶包",
+      "gold_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'金萱茶包';",
+      "pred_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'金萱茶包';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 194,
+      "question": "What is the total stock for 竹炭冬筍餅?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'竹炭冬筍餅';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09 WHERE pName=N'竹炭冬筍餅';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 195,
+      "question": "What is the discount rate for supplier 品茶苑?",
+      "gold_sql": "SELECT pvSn, pvName, discount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'品茶苑';",
+      "pred_sql": "SELECT isSale, discount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'品茶苑';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 196,
+      "question": "Show inventory for products with name containing 金萱",
+      "gold_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%金萱%';",
+      "pred_sql": "SELECT pName, qty, WarehouseName FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%金萱%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 197,
+      "question": "How many accounts payable records exist for supplier 健康食品?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'健康食品' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctOutId) AS count FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'健康食品' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 198,
+      "question": "Total accounts receivable for 202406",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202406' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202406' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 199,
+      "question": "What is the total number of active accounts receivable?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctInId) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctInId) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 200,
+      "question": "List all products supplied by 綠野農業",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'綠野農業';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'綠野農業';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 201,
+      "question": "Show products with less than 20 units in stock",
+      "gold_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE qty < 20;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < 20;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 202,
+      "question": "How many sales orders does member A011 have?",
+      "gold_sql": "SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE memId='A011' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE memId='A011' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 203,
+      "question": "What accounts receivable contain 黑糖茶磚?",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'黑糖茶磚' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'黑糖茶磚' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 204,
+      "question": "List all products in warehouse 冷藏倉",
+      "gold_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'冷藏倉' ORDER BY qty DESC;",
+      "pred_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'冷藏倉' ORDER BY qty DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 205,
+      "question": "How many sales orders were created in 202505?",
+      "gold_sql": "SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202505' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(DISTINCT OutStkId) AS count FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId,6)='202505' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 206,
+      "question": "Show non-sale products in inventory",
+      "gold_sql": "SELECT DISTINCT pName, isSale FROM WP_M09.dbo.WP_vInventory WHERE isSale<>'0';",
+      "pred_sql": "SELECT DISTINCT pName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName LIKE N'%sale%' AND qty > 0 GROUP BY pName;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 207,
+      "question": "Show total inventory per warehouse",
+      "gold_sql": "SELECT WarehouseName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY total_qty DESC;",
+      "pred_sql": "SELECT WarehouseName, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY total_qty DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 208,
+      "question": "List accounts receivable from 202405",
+      "gold_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202405' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, amount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202405' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 209,
+      "question": "Show top 5 most expensive products",
+      "gold_sql": "SELECT TOP 5 pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct ORDER BY priceStd DESC;",
+      "pred_sql": "SELECT TOP 5 pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct ORDER BY priceStd DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 210,
+      "question": "Show products below safe stock level",
+      "gold_sql": "SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < qtySafe;",
+      "pred_sql": "SELECT pName, qty, qtySafe FROM WP_M09.dbo.WP_vInventory WHERE qty < qtySafe;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 211,
+      "question": "What is the discount for supplier 台灣農業?",
+      "gold_sql": "SELECT pvSn, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'台灣農業';",
+      "pred_sql": "SELECT isSale, pvName, pvDiscount FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'台灣農業';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 212,
+      "question": "What is the total amount of all active accounts receivable?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total_amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total_amount FROM WP_M09.dbo.WP_vAcctIn WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 213,
+      "question": "Show all products in sales order 202510080025",
+      "gold_sql": "SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202510080025' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT pName, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202510080025' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 214,
+      "question": "What is the total amount of sales order 202507100018?",
+      "gold_sql": "SELECT DISTINCT amount FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202507100018' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT amount FROM WP_M09.dbo.WP_vOutStock WHERE OutStkId='202507100018' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 215,
+      "question": "List accounts payable from 202411",
+      "gold_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202411' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId, amount FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202411' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 216,
+      "question": "Products containing 茶 with price above 100",
+      "gold_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%茶%' AND priceStd > 100;",
+      "pred_sql": "SELECT pNo, pName, priceStd FROM WP_M09.dbo.WP_vProduct WHERE pName LIKE N'%茶%' AND priceStd > 100;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 217,
+      "question": "What is the total quantity of 龍井茶 across all accounts receivable?",
+      "gold_sql": "SELECT SUM(oStkDtlQty) AS total_qty FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(oStkDtlQty) AS total_qty FROM WP_M09.dbo.WP_vAcctIn WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 218,
+      "question": "What is the current stock for 竹炭冬筍餅?",
+      "gold_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pName=N'竹炭冬筍餅';",
+      "pred_sql": "SELECT current_stock FROM WP_M09 WHERE pName=N'竹炭冬筍餅';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 219,
+      "question": "Show product count and quantity per supplier",
+      "gold_sql": "SELECT pvName, COUNT(DISTINCT pName) AS products, SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory GROUP BY pvName ORDER BY total_qty DESC;",
+      "pred_sql": "SELECT pvName, COUNT(*) AS products, SUM(qtyNow) AS total_qty FROM WP_M09.dbo.WP_vProduct WHERE qtyNow > 0 GROUP BY pvName ORDER BY total_qty DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 220,
+      "question": "What is the total accounts receivable amount in 202510?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202510' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202510' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 221,
+      "question": "What is the total quantity transferred in 202504?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202504' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202504';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 222,
+      "question": "Show address details for supplier 實垣有限公司",
+      "gold_sql": "SELECT pvSn, pvName, pvAddr FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'實垣有限公司';",
+      "pred_sql": "SELECT pvName, pvAddr FROM WP_M09.dbo.WP_vProvider WHERE pvName=N'實垣有限公司' AND isSale='Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 223,
+      "question": "Show accounts receivable containing products with keyword 豆",
+      "gold_sql": "SELECT DISTINCT acctInId, pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%豆%' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctInId, pName FROM WP_M09.dbo.WP_vAcctIn WHERE pName LIKE N'%豆%' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 224,
+      "question": "What is the total payable to 實垣有限公司 in 202505?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'實垣有限公司' AND LEFT(acctOutId,6)='202505' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE pvName=N'實垣有限公司' AND LEFT(acctOutId,6)='202505' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 225,
+      "question": "How many times was 龍井茶 transferred?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'龍井茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'龍井茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 226,
+      "question": "What is the total spent by 農產品行?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vOutStock WHERE memName=N'農產品行' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09 WHERE mem_name=N'農產品行';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 227,
+      "question": "List all active accounts payable IDs",
+      "gold_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT acctOutId FROM WP_M09.dbo.WP_vAcctOut WHERE isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 228,
+      "question": "How many products does 實垣有限公司 supply?",
+      "gold_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'實垣有限公司';",
+      "pred_sql": "SELECT COUNT(*) AS count FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'實垣有限公司';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 229,
+      "question": "Show count of product types per warehouse",
+      "gold_sql": "SELECT WarehouseName, COUNT(DISTINCT pNo) AS product_types FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY product_types DESC;",
+      "pred_sql": "SELECT WarehouseName, COUNT(DISTINCT pName) AS count FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName ORDER BY count DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 230,
+      "question": "Products from 台灣好茶 with current stock above 50",
+      "gold_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣好茶' AND qtyNow > 50;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'台灣好茶' AND qtyNow > 50;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 231,
+      "question": "Show product details for barcode 4710632001318",
+      "gold_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pBarcode='4710632001318';",
+      "pred_sql": "SELECT pNo, pName, priceStd, costAvg, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pBarcode='4710632001318';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 232,
+      "question": "Show products added in 202502",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202502%';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pNo LIKE '202502%';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 233,
+      "question": "Show sales orders for product 阿里山茶",
+      "gold_sql": "SELECT DISTINCT OutStkId, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT DISTINCT OutStkId, qty, amtTotal FROM WP_M09.dbo.WP_vOutStock WHERE pName=N'阿里山茶' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 234,
+      "question": "List 實垣有限公司 products with stock above 50",
+      "gold_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE pvName=N'實垣有限公司' AND qty > 50;",
+      "pred_sql": "SELECT pNo, pName, qtyNow FROM WP_M09.dbo.WP_vProduct WHERE pvName=N'實垣有限公司' AND qtyNow > 50;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 235,
+      "question": "What is the total accounts receivable amount in 202511?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId,6)='202511' AND isDel='N' AND dtlIsDel='N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 236,
+      "question": "How many units of 東方美人茶 were transferred in total?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'東方美人茶' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE pName=N'東方美人茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 237,
+      "question": "How much was paid in 202407?",
+      "gold_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId,6)='202407' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(DISTINCT amount) AS total FROM WP_M09 WHERE pDate LIKE '202407%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 238,
+      "question": "What is the total stock for 台灣高山茶?",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vInventory WHERE pName=N'台灣高山茶';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09 WHERE pName=N'台灣高山茶';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 239,
+      "question": "Total quantity transferred in 202411",
+      "gold_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202411' AND isDel='N' AND dtlIsDel='N';",
+      "pred_sql": "SELECT SUM(qty) AS total_qty FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId,6)='202411';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 240,
+      "question": "List all products in warehouse 東區倉庫",
+      "gold_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'東區倉庫' ORDER BY qty DESC;",
+      "pred_sql": "SELECT DISTINCT pName, qty FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'東區倉庫' ORDER BY qty DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    },
+    {
+      "id": 241,
+      "question": "What is the inventory value in warehouse 特產中心?",
+      "gold_sql": "SELECT SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心';",
+      "pred_sql": "SELECT SUM(qty * costAvg) AS total_value FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName=N'特產中心';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "unknown"
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+WP_M09 全模型評估報告  0308
+測試集: data\wp_m09\test.json  (182 筆)
+
+────────────────────────────────────────────────────────────
+  模型: spider1-llama31-dora
+  總體 EM: 21/182  (11.54%)
+  按難度:
+    easy          10/75   (13.3%)
+    extra hard     0/9    (0.0%)
+    hard           2/46   (4.3%)
+    medium         9/52   (17.3%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                     12/26   (46.2%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                    9/26   (34.6%)
+
+────────────────────────────────────────────────────────────
+  模型: spider1-llama31-dora-v3
+  總體 EM: 12/182  (6.59%)
+  按難度:
+    easy           7/75   (9.3%)
+    extra hard     0/9    (0.0%)
+    hard           2/46   (4.3%)
+    medium         3/52   (5.8%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                      8/26   (30.8%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                    4/26   (15.4%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_0228_failed
+  總體 EM: 0/182  (0.0%)
+  按難度:
+    easy           0/75   (0.0%)
+    extra hard     0/9    (0.0%)
+    hard           0/46   (0.0%)
+    medium         0/52   (0.0%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                      0/26   (0.0%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                    0/26   (0.0%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_0301
+  總體 EM: 11/182  (6.04%)
+  按難度:
+    easy           3/75   (4.0%)
+    extra hard     0/9    (0.0%)
+    hard           1/46   (2.2%)
+    medium         7/52   (13.5%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                      5/26   (19.2%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                    6/26   (23.1%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_0303
+  總體 EM: 28/182  (15.38%)
+  按難度:
+    easy          18/75   (24.0%)
+    extra hard     0/9    (0.0%)
+    hard           2/46   (4.3%)
+    medium         8/52   (15.4%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                     16/26   (61.5%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                   12/26   (46.2%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_0304
+  總體 EM: 27/182  (14.84%)
+  按難度:
+    easy          17/75   (22.7%)
+    extra hard     0/9    (0.0%)
+    hard           1/46   (2.2%)
+    medium         9/52   (17.3%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                     14/26   (53.8%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                   13/26   (50.0%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_dora_0306
+  總體 EM: 36/182  (19.78%)
+  按難度:
+    easy          23/75   (30.7%)
+    extra hard     0/9    (0.0%)
+    hard           1/46   (2.2%)
+    medium        12/52   (23.1%)
+  按資料表:
+    WP_vAcctIn                       3/26   (11.5%)
+    WP_vAcctOut                      2/26   (7.7%)
+    WP_vInStock                      2/26   (7.7%)
+    WP_vProduct                     15/26   (57.7%)
+    WP_vOutStockUnion                2/26   (7.7%)
+    WP_vTransfer                     3/26   (11.5%)
+    WP_vInventory                    9/26   (34.6%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_dora_0307
+  總體 EM: 81/182  (44.51%)
+  按難度:
+    easy          46/75   (61.3%)
+    extra hard     0/9    (0.0%)
+    hard           8/46   (17.4%)
+    medium        27/52   (51.9%)
+  按資料表:
+    WP_vAcctIn                      14/26   (53.8%)
+    WP_vAcctOut                     13/26   (50.0%)
+    WP_vInStock                      9/26   (34.6%)
+    WP_vProduct                     13/26   (50.0%)
+    WP_vOutStockUnion               13/26   (50.0%)
+    WP_vTransfer                     9/26   (34.6%)
+    WP_vInventory                   10/26   (38.5%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_dora_0307_v2
+  總體 EM: 68/182  (37.36%)
+  按難度:
+    easy          39/75   (52.0%)
+    extra hard     0/9    (0.0%)
+    hard           8/46   (17.4%)
+    medium        21/52   (40.4%)
+  按資料表:
+    WP_vAcctIn                      14/26   (53.8%)
+    WP_vAcctOut                     12/26   (46.2%)
+    WP_vInStock                     13/26   (50.0%)
+    WP_vProduct                      6/26   (23.1%)
+    WP_vOutStockUnion               14/26   (53.8%)
+    WP_vTransfer                     4/26   (15.4%)
+    WP_vInventory                    5/26   (19.2%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_from_scratch
+  總體 EM: 0/182  (0.0%)
+  按難度:
+    easy           0/75   (0.0%)
+    extra hard     0/9    (0.0%)
+    hard           0/46   (0.0%)
+    medium         0/52   (0.0%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                      0/26   (0.0%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                    0/26   (0.0%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_model
+  總體 EM: 8/182  (4.4%)
+  按難度:
+    easy           6/75   (8.0%)
+    extra hard     0/9    (0.0%)
+    hard           0/46   (0.0%)
+    medium         2/52   (3.8%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                      4/26   (15.4%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                    4/26   (15.4%)
+
+────────────────────────────────────────────────────────────
+  模型: wp_m09_uploaded_0305
+  總體 EM: 0/182  (0.0%)
+  按難度:
+    easy           0/75   (0.0%)
+    extra hard     0/9    (0.0%)
+    hard           0/46   (0.0%)
+    medium         0/52   (0.0%)
+  按資料表:
+    WP_vAcctIn                       0/26   (0.0%)
+    WP_vAcctOut                      0/26   (0.0%)
+    WP_vInStock                      0/26   (0.0%)
+    WP_vProduct                      0/26   (0.0%)
+    WP_vOutStockUnion                0/26   (0.0%)
+    WP_vTransfer                     0/26   (0.0%)
+    WP_vInventory                    0/26   (0.0%)
+
+============================================================
+【排行榜】
+============================================================
+  排名   模型                                          EM
+  ───────────────────────────────────────────────────────
+  1    wp_m09_dora_0307                     81/182  ( 44.51%)
+  2    wp_m09_dora_0307_v2                  68/182  ( 37.36%)
+  3    wp_m09_dora_0306                     36/182  ( 19.78%)
+  4    wp_m09_0303                          28/182  ( 15.38%)
+  5    wp_m09_0304                          27/182  ( 14.84%)
+  6    spider1-llama31-dora                 21/182  ( 11.54%)
+  7    spider1-llama31-dora-v3              12/182  (  6.59%)
+  8    wp_m09_0301                          11/182  (  6.04%)
+  9    wp_m09_model                          8/182  (   4.4%)
+  10   wp_m09_0228_failed                    0/182  (   0.0%)
+  11   wp_m09_from_scratch                   0/182  (   0.0%)
+  12   wp_m09_uploaded_0305                  0/182  (   0.0%)

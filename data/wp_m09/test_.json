@@ -1,0 +1,5681 @@
+[
+  {
+    "db_id": "WP_M09",
+    "question": "How many active account-in records are stored in the database?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn WHERE isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all account-in IDs and their amounts for records created after January 1st, 2024.",
+    "query": "SELECT acctInId, amount FROM WP_vAcctIn WHERE timeCreate >= '2024-01-01' AND isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total amount collected from all transactions that are not deleted?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctIn WHERE isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the distinct names of all products that have been sold.",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn WHERE dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the memo and employee ID for the transaction with account-in ID 'AI2024001'.",
+    "query": "SELECT memo, empId FROM WP_vAcctIn WHERE acctInId = 'AI2024001' AND isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many unique members have performed an account-in transaction?",
+    "query": "SELECT COUNT(DISTINCT memId) FROM WP_vAcctIn WHERE isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all transactions processed by employee 'EMP05' during March 2024.",
+    "query": "SELECT * FROM WP_vAcctIn WHERE empId = 'EMP05' AND acctInDate BETWEEN '2024-03-01' AND '2024-03-31' AND isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total amount received per member, and list the member names.",
+    "query": "SELECT memName, SUM(amount) FROM WP_vAcctIn WHERE isDel = 'N' GROUP BY memName",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which employee has processed the highest number of transactions?",
+    "query": "SELECT TOP 1 empId, COUNT(*) AS TxnCount FROM WP_vAcctIn WHERE isDel = 'N' GROUP BY empId ORDER BY TxnCount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the top 5 products based on the total quantity sold.",
+    "query": "SELECT TOP 5 pName, SUM(oStkDtlQty) AS TotalQty FROM WP_vAcctIn WHERE dtlIsDel = 'N' GROUP BY pName ORDER BY TotalQty DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all products with the pCode 'CAT01' that have had a discount share greater than 0.",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn WHERE pCode = 'CAT01' AND dtlDiscntShare > 0 AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average transaction amount for each month in 2024?",
+    "query": "SELECT MONTH(acctInDate) AS Month, AVG(amount) FROM WP_vAcctIn WHERE YEAR(acctInDate) = 2024 AND isDel = 'N' GROUP BY MONTH(acctInDate)",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify any detail records where the quantity is positive but the total detail amount is zero.",
+    "query": "SELECT * FROM WP_vAcctIn WHERE oStkDtlQty > 0 AND oStkDtlAmtTotal = 0 AND dtlIsDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "logic_validation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find all account-in records where the total amount is different from the total stock out amount.",
+    "query": "SELECT acctInId, amount, outStkAmtTotal FROM WP_vAcctIn WHERE amount <> outStkAmtTotal AND isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the total discount given for each product category (pCode), ordered by the discount amount descending.",
+    "query": "SELECT pCode, SUM(dtlDiscnt) AS TotalDiscount FROM WP_vAcctIn WHERE dtlIsDel = 'N' GROUP BY pCode ORDER BY TotalDiscount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the last 10 transactions that were updated, including the update time and member name.",
+    "query": "SELECT TOP 10 timeUpdate, memName, amount FROM WP_vAcctIn WHERE isDel = 'N' ORDER BY timeUpdate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "top_n_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount processed in a single transaction for member 'Shane'?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn WHERE memName = 'Shane' AND isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count how many transactions were deleted (marked with 'Y').",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn WHERE isDel = 'Y'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the total quantity of product 'P0001' sold, grouped by each account-in date.",
+    "query": "SELECT acctInDate, SUM(oStkDtlQty) FROM WP_vAcctIn WHERE pNo = 'P0001' AND dtlIsDel = 'N' GROUP BY acctInDate",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which members have made more than 3 transactions in total?",
+    "query": "SELECT memId, memName FROM WP_vAcctIn WHERE isDel = 'N' GROUP BY memId, memName HAVING COUNT(acctInId) > 3",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "aggregation_with_having"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the sum of 'dtlDiscntShare' for each product to see which items are being discounted the most.",
+    "query": "SELECT pName, SUM(dtlDiscntShare) AS TotalShare FROM WP_vAcctIn WHERE dtlIsDel = 'N' GROUP BY pName ORDER BY TotalShare DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Search for transactions where the memo contains the word 'Urgent'.",
+    "query": "SELECT * FROM WP_vAcctIn WHERE memo LIKE '%Urgent%' AND isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "text_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the revenue (sum of oStkDtlAmtTotal) for each product barcode.",
+    "query": "SELECT pBarcode, SUM(oStkDtlAmtTotal) FROM WP_vAcctIn WHERE dtlIsDel = 'N' GROUP BY pBarcode",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find all records where the transaction was updated on a different day than it was created.",
+    "query": "SELECT acctInId FROM WP_vAcctIn WHERE CAST(timeCreate AS DATE) <> CAST(timeUpdate AS DATE) AND isDel = 'N'",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "date_logic_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the total sales amount (amount) for each year.",
+    "query": "SELECT YEAR(acctInDate) AS Year, SUM(amount) FROM WP_vAcctIn WHERE isDel = 'N' GROUP BY YEAR(acctInDate)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many active account-out (payment) records are currently in the system?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut WHERE isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the account-out dates and total amounts paid to the supplier 'Shane Vendor'.",
+    "query": "SELECT acctOutDate, amount FROM WP_vAcctOut WHERE pvName = 'Shane Vendor' AND isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total sum of tax (inStkTax) for all non-deleted purchase records?",
+    "query": "SELECT SUM(inStkTax) FROM WP_vAcctOut WHERE dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the receipt ID and memo for all payments handled by employee 'EMP001'.",
+    "query": "SELECT recptId, memo FROM WP_vAcctOut WHERE empId = 'EMP001' AND isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which products have been purchased without tax (isTax = 'N')?",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOut WHERE isTax = 'N' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total purchase amount (inStkAmtTotal) grouped by supplier name.",
+    "query": "SELECT pvName, SUM(inStkAmtTotal) FROM WP_vAcctOut WHERE dtlIsDel = 'N' GROUP BY pvName",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average transaction amount (transAmt) for each payment type?",
+    "query": "SELECT payType, AVG(transAmt) FROM WP_vAcctOut WHERE isDel = 'N' GROUP BY payType",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the top 5 suppliers by the total amount paid (amount) in descending order.",
+    "query": "SELECT TOP 5 pvName, SUM(amount) AS TotalPaid FROM WP_vAcctOut WHERE isDel = 'N' GROUP BY pvName ORDER BY TotalPaid DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find all records where the actual payment (amount) is less than the original total amount (amtTotalOrgnl).",
+    "query": "SELECT acctOutId, amount, amtTotalOrgnl FROM WP_vAcctOut WHERE amount < amtTotalOrgnl AND isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all transactions that have a receipt number (reciptNo) starting with 'INV'.",
+    "query": "SELECT * FROM WP_vAcctOut WHERE reciptNo LIKE 'INV%' AND isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "text_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many purchase details were recorded for each product code (pCode)?",
+    "query": "SELECT pCode, COUNT(*) FROM WP_vAcctOut WHERE dtlIsDel = 'N' GROUP BY pCode",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "group_by_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the total quantity of product 'P-BARCODE-001' purchased in the year 2025.",
+    "query": "SELECT SUM(qty) FROM WP_vAcctOut WHERE pBarcode = 'P-BARCODE-001' AND YEAR(acctOutDate) = 2025 AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List suppliers who have provided a total discount (pvDiscount) of more than 1000.",
+    "query": "SELECT pvName, SUM(pvDiscount) FROM WP_vAcctOut WHERE dtlIsDel = 'N' GROUP BY pvName HAVING SUM(pvDiscount) > 1000",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "aggregation_with_having"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify any detail records where the tax-excluded amount (amtNoneTax) plus tax does not equal the total amount (amtTotal).",
+    "query": "SELECT dtlSn, amtNoneTax, amtTotal FROM WP_vAcctOut WHERE amtNoneTax <> (amtTotal - (amtTotal * 0.05)) AND isTax = 'Y' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "logic_validation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the payment details for the account-out ID 'AO-999', including product name and quantity?",
+    "query": "SELECT pName, qty, dtlAmt FROM WP_vAcctOut WHERE acctOutId = 'AO-999' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which employee (empName) has handled the largest total volume of payments?",
+    "query": "SELECT TOP 1 empName, SUM(amount) AS TotalVolume FROM WP_vAcctOut WHERE isDel = 'N' GROUP BY empName ORDER BY TotalVolume DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all records that were updated today.",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(timeUpdate AS DATE) = CAST(GETDATE() AS DATE) AND isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "date_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count the number of transactions for each pay type (payType) in the last 30 days.",
+    "query": "SELECT payType, COUNT(*) FROM WP_vAcctOut WHERE acctOutDate >= DATEADD(day, -30, GETDATE()) AND isDel = 'N' GROUP BY payType",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "date_logic_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all distinct product names purchased from supplier 'Global Tech'.",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOut WHERE pvName = 'Global Tech' AND dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the maximum amount (amtTotal) spent on a single product line item.",
+    "query": "SELECT MAX(amtTotal) FROM WP_vAcctOut WHERE dtlIsDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the total remaining balance (inStkPayLeft) for each supplier.",
+    "query": "SELECT pvName, SUM(inStkPayLeft) FROM WP_vAcctOut WHERE isDel = 'N' GROUP BY pvName",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which product category (pCode) has the highest number of purchase occurrences?",
+    "query": "SELECT TOP 1 pCode, COUNT(*) AS Occurrences FROM WP_vAcctOut WHERE dtlIsDel = 'N' GROUP BY pCode ORDER BY Occurrences DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the account-out records where the memo is empty or null.",
+    "query": "SELECT acctOutId FROM WP_vAcctOut WHERE (memo IS NULL OR memo = '') AND isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "null_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total 'inStkAmtNoneTax' for all 'Cash' payments?",
+    "query": "SELECT SUM(inStkAmtNoneTax) FROM WP_vAcctOut WHERE payType = 'Cash' AND isDel = 'N'",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the trend of total purchase amounts (amtTotal) per month.",
+    "query": "SELECT MONTH(acctOutDate) AS Month, SUM(amtTotal) FROM WP_vAcctOut WHERE isDel = 'N' GROUP BY MONTH(acctOutDate) ORDER BY Month",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "time_series_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts are there?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts do we have?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count all accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total number of accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts in total?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me the count of accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Tell me how many accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the accounts count?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me all accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get all accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show everything from accounts",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List everything",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all data",
+    "query": "SELECT * FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all memname",
+    "query": "SELECT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all memname",
+    "query": "SELECT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the memname?",
+    "query": "SELECT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all memname",
+    "query": "SELECT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the memname",
+    "query": "SELECT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct memname",
+    "query": "SELECT DISTINCT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique memname?",
+    "query": "SELECT DISTINCT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique memname",
+    "query": "SELECT DISTINCT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct memname",
+    "query": "SELECT DISTINCT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique memname",
+    "query": "SELECT DISTINCT memName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pname",
+    "query": "SELECT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pname",
+    "query": "SELECT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pname?",
+    "query": "SELECT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pname",
+    "query": "SELECT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pname",
+    "query": "SELECT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pname?",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate average amount",
+    "query": "SELECT AVG(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the mean amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average amount",
+    "query": "SELECT AVG(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total amount?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sum all amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total amount?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate total amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Add up all amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the highest amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the max amount",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Maximum amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Highest amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the minimum amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the lowest amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the min amount",
+    "query": "SELECT MIN(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Minimum amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Lowest amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctIn",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts with amount greater than 1000",
+    "query": "SELECT * FROM WP_vAcctIn WHERE amount > 1000",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have amount over 1000?",
+    "query": "SELECT * FROM WP_vAcctIn WHERE amount > 1000",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts where amount exceeds 1000",
+    "query": "SELECT * FROM WP_vAcctIn WHERE amount > 1000",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts with amount above 1000",
+    "query": "SELECT * FROM WP_vAcctIn WHERE amount > 1000",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show top 10 accounts by amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Top 10 accounts sorted by amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show highest amount accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sort accounts by amount descending",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts with highest amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY amount DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest accounts?",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY acctInDate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts from today",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(acctInDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's accounts",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(acctInDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What accounts were created today?",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(acctInDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts added today",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(acctInDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY timeCreate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest accounts?",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY timeCreate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY timeCreate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY timeCreate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctIn ORDER BY timeCreate DESC",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts from today",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's accounts",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What accounts were created today?",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts added today",
+    "query": "SELECT * FROM WP_vAcctIn WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts where isDel is true",
+    "query": "SELECT * FROM WP_vAcctIn WHERE isDel = 1",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have isDel?",
+    "query": "SELECT * FROM WP_vAcctIn WHERE isDel = 1",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts with isDel = 1",
+    "query": "SELECT * FROM WP_vAcctIn WHERE isDel = 1",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts that are isdel",
+    "query": "SELECT * FROM WP_vAcctIn WHERE isDel = 1",
+    "table": "WP_vAcctIn",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count accounts by acctinid",
+    "query": "SELECT acctInId, COUNT(*) FROM WP_vAcctIn GROUP BY acctInId",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Group accounts by acctinid",
+    "query": "SELECT acctInId, COUNT(*) FROM WP_vAcctIn GROUP BY acctInId",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts per acctinid?",
+    "query": "SELECT acctInId, COUNT(*) FROM WP_vAcctIn GROUP BY acctInId",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average sn by acctinid",
+    "query": "SELECT acctInId, AVG(sn) FROM WP_vAcctIn GROUP BY acctInId",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average sn per acctinid?",
+    "query": "SELECT acctInId, AVG(sn) FROM WP_vAcctIn GROUP BY acctInId",
+    "table": "WP_vAcctIn",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts are there?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts do we have?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count all accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total number of accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts in total?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me the count of accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Tell me how many accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the accounts count?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me all accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get all accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show everything from accounts",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List everything",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all data",
+    "query": "SELECT * FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all empname",
+    "query": "SELECT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all empname",
+    "query": "SELECT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the empname?",
+    "query": "SELECT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all empname",
+    "query": "SELECT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the empname",
+    "query": "SELECT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique empname?",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pname",
+    "query": "SELECT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pname",
+    "query": "SELECT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pname?",
+    "query": "SELECT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pname",
+    "query": "SELECT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pname",
+    "query": "SELECT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pname?",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate average amount",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the mean amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average amount",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total amount?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sum all amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total amount?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate total amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Add up all amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the highest amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the max amount",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Maximum amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Highest amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the minimum amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the lowest amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the min amount",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Minimum amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Lowest amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOut",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts with amount greater than 1000",
+    "query": "SELECT * FROM WP_vAcctOut WHERE amount > 1000",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have amount over 1000?",
+    "query": "SELECT * FROM WP_vAcctOut WHERE amount > 1000",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts where amount exceeds 1000",
+    "query": "SELECT * FROM WP_vAcctOut WHERE amount > 1000",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts with amount above 1000",
+    "query": "SELECT * FROM WP_vAcctOut WHERE amount > 1000",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show top 10 accounts by amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY amount DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Top 10 accounts sorted by amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY amount DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show highest amount accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY amount DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sort accounts by amount descending",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY amount DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts with highest amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY amount DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest accounts?",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts from today",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's accounts",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What accounts were created today?",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts added today",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest accounts?",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOut ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts from today",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's accounts",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What accounts were created today?",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts added today",
+    "query": "SELECT * FROM WP_vAcctOut WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts where isDel is true",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isDel = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have isDel?",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isDel = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts with isDel = 1",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isDel = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts that are isdel",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isDel = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts where isTax is true",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isTax = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have isTax?",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isTax = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts with isTax = 1",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isTax = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts that are istax",
+    "query": "SELECT * FROM WP_vAcctOut WHERE isTax = 1",
+    "table": "WP_vAcctOut",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count accounts by acctoutid",
+    "query": "SELECT acctOutId, COUNT(*) FROM WP_vAcctOut GROUP BY acctOutId",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Group accounts by acctoutid",
+    "query": "SELECT acctOutId, COUNT(*) FROM WP_vAcctOut GROUP BY acctOutId",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts per acctoutid?",
+    "query": "SELECT acctOutId, COUNT(*) FROM WP_vAcctOut GROUP BY acctOutId",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average sn by acctoutid",
+    "query": "SELECT acctOutId, AVG(sn) FROM WP_vAcctOut GROUP BY acctOutId",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average sn per acctoutid?",
+    "query": "SELECT acctOutId, AVG(sn) FROM WP_vAcctOut GROUP BY acctOutId",
+    "table": "WP_vAcctOut",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts are there?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts do we have?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count all accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total number of accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts in total?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me the count of accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Tell me how many accounts",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the accounts count?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of accounts?",
+    "query": "SELECT COUNT(*) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me all accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get all accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show everything from accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List everything",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all data",
+    "query": "SELECT * FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all empname",
+    "query": "SELECT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all empname",
+    "query": "SELECT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the empname?",
+    "query": "SELECT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all empname",
+    "query": "SELECT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the empname",
+    "query": "SELECT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique empname?",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique empname",
+    "query": "SELECT DISTINCT empName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pname",
+    "query": "SELECT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pname",
+    "query": "SELECT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pname?",
+    "query": "SELECT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pname",
+    "query": "SELECT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pname",
+    "query": "SELECT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pname?",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate average amount",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the mean amount?",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average amount",
+    "query": "SELECT AVG(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total amount?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sum all amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total amount?",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate total amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Add up all amount",
+    "query": "SELECT SUM(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the highest amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the max amount",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Maximum amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Highest amount?",
+    "query": "SELECT MAX(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the minimum amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the lowest amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the min amount",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Minimum amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Lowest amount?",
+    "query": "SELECT MIN(amount) FROM WP_vAcctOutProvider",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts with amount greater than 1000",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE amount > 1000",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have amount over 1000?",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE amount > 1000",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts where amount exceeds 1000",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE amount > 1000",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts with amount above 1000",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE amount > 1000",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show top 10 accounts by amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY amount DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Top 10 accounts sorted by amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY amount DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show highest amount accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY amount DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sort accounts by amount descending",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY amount DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts with highest amount",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY amount DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest accounts?",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY acctOutDate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts from today",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What accounts were created today?",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts added today",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(acctOutDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest accounts?",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest accounts",
+    "query": "SELECT TOP 10 * FROM WP_vAcctOutProvider ORDER BY timeCreate DESC",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts from today",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's accounts",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What accounts were created today?",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts added today",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts where isDel is true",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isDel = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have isDel?",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isDel = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts with isDel = 1",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isDel = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts that are isdel",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isDel = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show accounts where isTax is true",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isTax = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which accounts have isTax?",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isTax = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find accounts with isTax = 1",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isTax = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Accounts that are istax",
+    "query": "SELECT * FROM WP_vAcctOutProvider WHERE isTax = 1",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count accounts by acctoutid",
+    "query": "SELECT acctOutId, COUNT(*) FROM WP_vAcctOutProvider GROUP BY acctOutId",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Group accounts by acctoutid",
+    "query": "SELECT acctOutId, COUNT(*) FROM WP_vAcctOutProvider GROUP BY acctOutId",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many accounts per acctoutid?",
+    "query": "SELECT acctOutId, COUNT(*) FROM WP_vAcctOutProvider GROUP BY acctOutId",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average amount by acctoutid",
+    "query": "SELECT acctOutId, AVG(amount) FROM WP_vAcctOutProvider GROUP BY acctOutId",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average amount per acctoutid?",
+    "query": "SELECT acctOutId, AVG(amount) FROM WP_vAcctOutProvider GROUP BY acctOutId",
+    "table": "WP_vAcctOutProvider",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records are there?",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records do we have?",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count all records",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total number of records?",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records in total?",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me the count of records",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Tell me how many records",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the records count?",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total records?",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of records?",
+    "query": "SELECT COUNT(*) FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me all records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get all records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show everything from records",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List everything",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all data",
+    "query": "SELECT * FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pname",
+    "query": "SELECT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pname",
+    "query": "SELECT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pname?",
+    "query": "SELECT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pname",
+    "query": "SELECT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pname",
+    "query": "SELECT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pname?",
+    "query": "SELECT DISTINCT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pnames",
+    "query": "SELECT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pnames",
+    "query": "SELECT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pnames?",
+    "query": "SELECT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pnames",
+    "query": "SELECT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pnames",
+    "query": "SELECT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pnames?",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChgAmt",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY sDate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest records?",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY sDate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY sDate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY sDate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY sDate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records from today",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's records",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What records were created today?",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records added today",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY timeCreate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest records?",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY timeCreate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY timeCreate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY timeCreate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest records",
+    "query": "SELECT TOP 10 * FROM WP_vChgAmt ORDER BY timeCreate DESC",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records from today",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's records",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What records were created today?",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records added today",
+    "query": "SELECT * FROM WP_vChgAmt WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records where isDel is true",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isDel = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have isDel?",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isDel = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records with isDel = 1",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isDel = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records that are isdel",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isDel = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records where isUpd is true",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isUpd = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have isUpd?",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isUpd = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records with isUpd = 1",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isUpd = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records that are isupd",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isUpd = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records where isTax is true",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isTax = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have isTax?",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isTax = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records with isTax = 1",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isTax = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records that are istax",
+    "query": "SELECT * FROM WP_vChgAmt WHERE isTax = 1",
+    "table": "WP_vChgAmt",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count records by camtid",
+    "query": "SELECT CAmtId, COUNT(*) FROM WP_vChgAmt GROUP BY CAmtId",
+    "table": "WP_vChgAmt",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Group records by camtid",
+    "query": "SELECT CAmtId, COUNT(*) FROM WP_vChgAmt GROUP BY CAmtId",
+    "table": "WP_vChgAmt",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records per camtid?",
+    "query": "SELECT CAmtId, COUNT(*) FROM WP_vChgAmt GROUP BY CAmtId",
+    "table": "WP_vChgAmt",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average sn by camtid",
+    "query": "SELECT CAmtId, AVG(sn) FROM WP_vChgAmt GROUP BY CAmtId",
+    "table": "WP_vChgAmt",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average sn per camtid?",
+    "query": "SELECT CAmtId, AVG(sn) FROM WP_vChgAmt GROUP BY CAmtId",
+    "table": "WP_vChgAmt",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records are there?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records do we have?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count all records",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total number of records?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records in total?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me the count of records",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Tell me how many records",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the records count?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total records?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of records?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me all records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get all records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show everything from records",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List everything",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all data",
+    "query": "SELECT * FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pklname",
+    "query": "SELECT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pklname",
+    "query": "SELECT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pklname?",
+    "query": "SELECT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pklname",
+    "query": "SELECT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pklname",
+    "query": "SELECT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pklname",
+    "query": "SELECT DISTINCT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pklname?",
+    "query": "SELECT DISTINCT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pklname",
+    "query": "SELECT DISTINCT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pklname",
+    "query": "SELECT DISTINCT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pklname",
+    "query": "SELECT DISTINCT pKLName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pkmname",
+    "query": "SELECT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pkmname",
+    "query": "SELECT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pkmname?",
+    "query": "SELECT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pkmname",
+    "query": "SELECT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pkmname",
+    "query": "SELECT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pkmname",
+    "query": "SELECT DISTINCT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pkmname?",
+    "query": "SELECT DISTINCT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pkmname",
+    "query": "SELECT DISTINCT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pkmname",
+    "query": "SELECT DISTINCT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pkmname",
+    "query": "SELECT DISTINCT pKMName FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total qty?",
+    "query": "SELECT SUM(qty) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sum of qty",
+    "query": "SELECT SUM(qty) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total qty?",
+    "query": "SELECT SUM(qty) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How much qty?",
+    "query": "SELECT SUM(qty) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records with zero qty",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE qty = 0",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have no qty?",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE qty = 0",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records where qty is zero",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE qty = 0",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records with qty = 0",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE qty = 0",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records have zero qty?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj WHERE qty = 0",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count records with no qty",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj WHERE qty = 0",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of records where qty is 0",
+    "query": "SELECT COUNT(*) FROM WP_vChkStkAdj WHERE qty = 0",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average pdcost?",
+    "query": "SELECT AVG(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate average pdcost",
+    "query": "SELECT AVG(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average pdcost?",
+    "query": "SELECT AVG(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the mean pdcost?",
+    "query": "SELECT AVG(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average pdcost",
+    "query": "SELECT AVG(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total pdcost?",
+    "query": "SELECT SUM(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sum all pdcost",
+    "query": "SELECT SUM(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total pdcost?",
+    "query": "SELECT SUM(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate total pdcost",
+    "query": "SELECT SUM(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Add up all pdcost",
+    "query": "SELECT SUM(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum pdcost?",
+    "query": "SELECT MAX(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the highest pdcost?",
+    "query": "SELECT MAX(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the max pdcost",
+    "query": "SELECT MAX(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Maximum pdcost?",
+    "query": "SELECT MAX(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Highest pdcost?",
+    "query": "SELECT MAX(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the minimum pdcost?",
+    "query": "SELECT MIN(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the lowest pdcost?",
+    "query": "SELECT MIN(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the min pdcost",
+    "query": "SELECT MIN(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Minimum pdcost?",
+    "query": "SELECT MIN(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Lowest pdcost?",
+    "query": "SELECT MIN(pdCost) FROM WP_vChkStkAdj",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records with pdcost greater than 1000",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE pdCost > 1000",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have pdcost over 1000?",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE pdCost > 1000",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records where pdcost exceeds 1000",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE pdCost > 1000",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records with pdcost above 1000",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE pdCost > 1000",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show top 10 records by pdcost",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY pdCost DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Top 10 records sorted by pdcost",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY pdCost DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show highest pdcost records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY pdCost DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sort records by pdcost descending",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY pdCost DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records with highest pdcost",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY pdCost DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY eDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest records?",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY eDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY eDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY eDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY eDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records from today",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(eDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's records",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(eDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What records were created today?",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(eDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records added today",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(eDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY sDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest records?",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY sDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY sDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY sDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStkAdj ORDER BY sDate DESC",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records from today",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's records",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What records were created today?",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records added today",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE CAST(sDate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records where isDel is true",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE isDel = 1",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have isDel?",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE isDel = 1",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records with isDel = 1",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE isDel = 1",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records that are isdel",
+    "query": "SELECT * FROM WP_vChkStkAdj WHERE isDel = 1",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count records by cstkajid",
+    "query": "SELECT cStkAjId, COUNT(*) FROM WP_vChkStkAdj GROUP BY cStkAjId",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Group records by cstkajid",
+    "query": "SELECT cStkAjId, COUNT(*) FROM WP_vChkStkAdj GROUP BY cStkAjId",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records per cstkajid?",
+    "query": "SELECT cStkAjId, COUNT(*) FROM WP_vChkStkAdj GROUP BY cStkAjId",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average pno by cstkajid",
+    "query": "SELECT cStkAjId, AVG(pNo) FROM WP_vChkStkAdj GROUP BY cStkAjId",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average pno per cstkajid?",
+    "query": "SELECT cStkAjId, AVG(pNo) FROM WP_vChkStkAdj GROUP BY cStkAjId",
+    "table": "WP_vChkStkAdj",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records are there?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records do we have?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count all records",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total number of records?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records in total?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me the count of records",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Tell me how many records",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What's the records count?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total records?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of records?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me all records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get all records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show everything from records",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List everything",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Display all data",
+    "query": "SELECT * FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "simple_list"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pname",
+    "query": "SELECT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pname",
+    "query": "SELECT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pname?",
+    "query": "SELECT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pname",
+    "query": "SELECT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pname",
+    "query": "SELECT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pname?",
+    "query": "SELECT DISTINCT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pname",
+    "query": "SELECT DISTINCT pName FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all pnames",
+    "query": "SELECT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all pnames",
+    "query": "SELECT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the pnames?",
+    "query": "SELECT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Give me all pnames",
+    "query": "SELECT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me the pnames",
+    "query": "SELECT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "easy",
+    "query_type": "select_column"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show distinct pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the unique pnames?",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List unique pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show me distinct pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Get unique pnames",
+    "query": "SELECT DISTINCT pNameS FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "distinct"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total qtyold?",
+    "query": "SELECT SUM(qtyOld) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Sum of qtyold",
+    "query": "SELECT SUM(qtyOld) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Total qtyold?",
+    "query": "SELECT SUM(qtyOld) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How much qtyold?",
+    "query": "SELECT SUM(qtyOld) FROM WP_vChkStock",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records with zero qtyold",
+    "query": "SELECT * FROM WP_vChkStock WHERE qtyOld = 0",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have no qtyold?",
+    "query": "SELECT * FROM WP_vChkStock WHERE qtyOld = 0",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records where qtyold is zero",
+    "query": "SELECT * FROM WP_vChkStock WHERE qtyOld = 0",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records with qtyold = 0",
+    "query": "SELECT * FROM WP_vChkStock WHERE qtyOld = 0",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records have zero qtyold?",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock WHERE qtyOld = 0",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count records with no qtyold",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock WHERE qtyOld = 0",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Number of records where qtyold is 0",
+    "query": "SELECT COUNT(*) FROM WP_vChkStock WHERE qtyOld = 0",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "count_with_condition"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeCreate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest records?",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeCreate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeCreate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeCreate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeCreate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records from today",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's records",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What records were created today?",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records added today",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeCreate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeUpdate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What are the latest records?",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeUpdate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Most recent records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeUpdate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show newest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeUpdate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Latest records",
+    "query": "SELECT TOP 10 * FROM WP_vChkStock ORDER BY timeUpdate DESC",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "order_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records from today",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeUpdate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Today's records",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeUpdate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What records were created today?",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeUpdate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records added today",
+    "query": "SELECT * FROM WP_vChkStock WHERE CAST(timeUpdate AS DATE) = CAST(GETDATE() AS DATE)",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records where isChk is true",
+    "query": "SELECT * FROM WP_vChkStock WHERE isChk = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have isChk?",
+    "query": "SELECT * FROM WP_vChkStock WHERE isChk = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records with isChk = 1",
+    "query": "SELECT * FROM WP_vChkStock WHERE isChk = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records that are ischk",
+    "query": "SELECT * FROM WP_vChkStock WHERE isChk = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show records where isDel is true",
+    "query": "SELECT * FROM WP_vChkStock WHERE isDel = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which records have isDel?",
+    "query": "SELECT * FROM WP_vChkStock WHERE isDel = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find records with isDel = 1",
+    "query": "SELECT * FROM WP_vChkStock WHERE isDel = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Records that are isdel",
+    "query": "SELECT * FROM WP_vChkStock WHERE isDel = 1",
+    "table": "WP_vChkStock",
+    "difficulty": "medium",
+    "query_type": "conditional"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Count records by chkstkid",
+    "query": "SELECT ChkStkId, COUNT(*) FROM WP_vChkStock GROUP BY ChkStkId",
+    "table": "WP_vChkStock",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Group records by chkstkid",
+    "query": "SELECT ChkStkId, COUNT(*) FROM WP_vChkStock GROUP BY ChkStkId",
+    "table": "WP_vChkStock",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many records per chkstkid?",
+    "query": "SELECT ChkStkId, COUNT(*) FROM WP_vChkStock GROUP BY ChkStkId",
+    "table": "WP_vChkStock",
+    "difficulty": "hard",
+    "query_type": "group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Average sn by chkstkid",
+    "query": "SELECT ChkStkId, AVG(sn) FROM WP_vChkStock GROUP BY ChkStkId",
+    "table": "WP_vChkStock",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average sn per chkstkid?",
+    "query": "SELECT ChkStkId, AVG(sn) FROM WP_vChkStock GROUP BY ChkStkId",
+    "table": "WP_vChkStock",
+    "difficulty": "hard",
+    "query_type": "group_by_agg"
+  },{
+    "db_id": "WP_M09",
+    "question": "How many total products are currently listed in the system?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "simple_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all product names and their current stock quantities.",
+    "query": "SELECT pName, qtyNow FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which products have a current quantity lower than their safe stock level?",
+    "query": "SELECT pName, qtyNow, qtySafe FROM WP_vProduct WHERE qtyNow < qtySafe",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average standard price for products in category 'P001'?",
+    "query": "SELECT AVG(priceStd) FROM WP_vProduct WHERE pCode = 'P001'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify products where the membership price is lower than the standard price.",
+    "query": "SELECT pName, priceStd, priceMem FROM WP_vProduct WHERE priceMem < priceStd",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the total inventory value based on current quantity and average cost.",
+    "query": "SELECT SUM(qtyNow * costAvg) AS TotalInventoryValue FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "calculated_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which products are currently taxable?",
+    "query": "SELECT pName FROM WP_vProduct WHERE isTax = 'Y'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products with no barcode assigned.",
+    "query": "SELECT pName FROM WP_vProduct WHERE pBarcode IS NULL OR pBarcode = ''",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "null_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the top 5 most expensive products based on standard price.",
+    "query": "SELECT TOP 5 pName, priceStd FROM WP_vProduct ORDER BY priceStd DESC",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "top_n_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total current quantity of products grouped by supplier name.",
+    "query": "SELECT pvName, SUM(qtyNow) FROM WP_vProduct GROUP BY pvName",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the price difference between standard price and batch price for each product?",
+    "query": "SELECT pName, (priceStd - priceBat) AS PriceDiff FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "calculated_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show products that were updated in the last 7 days.",
+    "query": "SELECT pName, timeUpdate FROM WP_vProduct WHERE timeUpdate >= DATEADD(day, -7, GETDATE())",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "date_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products whose name starts with 'Organic'.",
+    "query": "SELECT * FROM WP_vProduct WHERE pName LIKE 'Organic%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "text_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which supplier (pvId) manages more than 50 products?",
+    "query": "SELECT pvId, COUNT(pNo) FROM WP_vProduct GROUP BY pvId HAVING COUNT(pNo) > 50",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "aggregation_with_having"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the average cost (costAvg) for each product unit name (pUName).",
+    "query": "SELECT pUName, AVG(costAvg) FROM WP_vProduct GROUP BY pUName",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products where the standard price is zero.",
+    "query": "SELECT pName FROM WP_vProduct WHERE priceStd = 0",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total quantity initial versus quantity now for all products?",
+    "query": "SELECT SUM(qtyInitial), SUM(qtyNow) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products where 'isSale' is set to 'Y' but 'qtyNow' is zero.",
+    "query": "SELECT pName FROM WP_vProduct WHERE isSale = 'Y' AND qtyNow = 0",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "logic_validation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the product code and the count of products in each code.",
+    "query": "SELECT pCode, COUNT(*) FROM WP_vProduct GROUP BY pCode",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "group_by_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products with a standard cost (costStd) higher than 5000 ordered by cost.",
+    "query": "SELECT pName, costStd FROM WP_vProduct WHERE costStd > 5000 ORDER BY costStd DESC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the supplier name and short name for product 'SKU-9920'.",
+    "query": "SELECT pvName, pvNameS FROM WP_vProduct WHERE pNo = 'SKU-9920'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the maximum standard price available in the entire inventory?",
+    "query": "SELECT MAX(priceStd) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all products that have supplier discounts (isPvDiscount = 'Y').",
+    "query": "SELECT pName, pvDiscount FROM WP_vProduct WHERE isPvDiscount = 'Y'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the creation time of the newest product added to the database.",
+    "query": "SELECT MAX(timeCreate) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products where the 'priceLow' is exactly half of the 'priceStd'.",
+    "query": "SELECT pName FROM WP_vProduct WHERE priceLow = priceStd / 2",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many products are currently in stock (qtyNow > 0)?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE qtyNow > 0",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the average gross profit margin per product category (assuming standard price - average cost).",
+    "query": "SELECT pCode, AVG(priceStd - costAvg) FROM WP_vProduct GROUP BY pCode",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "calculated_group_by"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve products with short names that contain 'Ltd'.",
+    "query": "SELECT pNameS FROM WP_vProduct WHERE pNameS LIKE '%Ltd%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "text_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products sorted by the highest current quantity left.",
+    "query": "SELECT pName, qtyNow FROM WP_vProduct ORDER BY qtyNow DESC",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products where the average cost is higher than the standard cost.",
+    "query": "SELECT pName, costAvg, costStd FROM WP_vProduct WHERE costAvg > costStd",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which product unit exists (pUExist) is set to 'N'?",
+    "query": "SELECT pName FROM WP_vProduct WHERE pUExist = 'N'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the count of unique units (pUnit) used in the product list.",
+    "query": "SELECT COUNT(DISTINCT pUnit) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "distinct_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify products where 'qtyNow' is greater than 1000.",
+    "query": "SELECT pName FROM WP_vProduct WHERE qtyNow > 1000",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total 'qtySafe' for all products combined?",
+    "query": "SELECT SUM(qtySafe) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products that have an 'Initial Quantity' of zero but a 'Current Quantity' greater than zero.",
+    "query": "SELECT pName, qtyInitial, qtyNow FROM WP_vProduct WHERE qtyInitial = 0 AND qtyNow > 0",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "logic_validation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve the standard price of products provided by 'Provider X'.",
+    "query": "SELECT pName, priceStd FROM WP_vProduct WHERE pvName = 'Provider X'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show products that have a 'priceBad' value greater than zero.",
+    "query": "SELECT pName, priceBad FROM WP_vProduct WHERE priceBad > 0",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the average standard cost for each supplier.",
+    "query": "SELECT pvName, AVG(costStd) FROM WP_vProduct GROUP BY pvName",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the product with the smallest current quantity.",
+    "query": "SELECT TOP 1 pName, qtyNow FROM WP_vProduct ORDER BY qtyNow ASC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "top_n_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all distinct product units and their unit names.",
+    "query": "SELECT DISTINCT pUnit, pUName FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify products where 'isUpdStock' is 'Y'.",
+    "query": "SELECT pName FROM WP_vProduct WHERE isUpdStock = 'Y'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which supplier (pvName) has the highest safe stock sum?",
+    "query": "SELECT TOP 1 pvName, SUM(qtySafe) AS TotalSafeStock FROM WP_vProduct GROUP BY pvName ORDER BY TotalSafeStock DESC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Search for products whose barcode contains '00123'.",
+    "query": "SELECT pName FROM WP_vProduct WHERE pBarcode LIKE '%00123%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "text_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products created between 2024 and 2025.",
+    "query": "SELECT pName, timeCreate FROM WP_vProduct WHERE timeCreate BETWEEN '2024-01-01' AND '2025-12-31'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "date_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products where the average cost is exactly equal to the initial cost.",
+    "query": "SELECT pName FROM WP_vProduct WHERE costAvg = costInitial",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the product name and current stock for the first 10 products created.",
+    "query": "SELECT TOP 10 pName, qtyNow FROM WP_vProduct ORDER BY timeCreate ASC",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "top_n_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total 'qtyNow' for products where 'isTax' is 'N'?",
+    "query": "SELECT SUM(qtyNow) FROM WP_vProduct WHERE isTax = 'N'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products whose standard price is between 100 and 500.",
+    "query": "SELECT pName FROM WP_vProduct WHERE priceStd BETWEEN 100 AND 500",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the count of products handled by each supplier ID (pvSn).",
+    "query": "SELECT pvSn, COUNT(*) FROM WP_vProduct GROUP BY pvSn",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "group_by_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products where 'priceBat' is greater than 1000.",
+    "query": "SELECT pName, priceBat FROM WP_vProduct WHERE priceBat > 1000",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average initial quantity for all products?",
+    "query": "SELECT AVG(qtyInitial) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show all columns for products whose current quantity is exactly zero.",
+    "query": "SELECT * FROM WP_vProduct WHERE qtyNow = 0",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify products where the membership price (priceMem) is missing or zero.",
+    "query": "SELECT pName FROM WP_vProduct WHERE priceMem IS NULL OR priceMem = 0",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "null_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total inventory value if sold at membership price (qtyNow * priceMem).",
+    "query": "SELECT SUM(qtyNow * priceMem) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "calculated_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the names of products whose 'pvDiscount' is higher than 500.",
+    "query": "SELECT pName FROM WP_vProduct WHERE pvDiscount > 500",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List product IDs (pNo) and their barcode for category 'CAT_A'.",
+    "query": "SELECT pNo, pBarcode FROM WP_vProduct WHERE pCode = 'CAT_A'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the number of products that haven't been updated since 2023.",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE timeUpdate < '2024-01-01'",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "conditional_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products whose standard cost is zero but average cost is not.",
+    "query": "SELECT pName, costStd, costAvg FROM WP_vProduct WHERE costStd = 0 AND costAvg > 0",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "logic_validation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all products where the short name (pNameS) is longer than 10 characters.",
+    "query": "SELECT pName FROM WP_vProduct WHERE LEN(pNameS) > 10",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "text_logic_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total 'qtyNow' for products handled by supplier ID 'PV-001'?",
+    "query": "SELECT SUM(qtyNow) FROM WP_vProduct WHERE pvId = 'PV-001'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the product with the highest membership price.",
+    "query": "SELECT TOP 1 pName, priceMem FROM WP_vProduct ORDER BY priceMem DESC",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "top_n_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all product categories (pCode) that have at least one product with zero stock.",
+    "query": "SELECT DISTINCT pCode FROM WP_vProduct WHERE qtyNow = 0",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve product names and safe stock levels for all products in 'P005' and 'P006'.",
+    "query": "SELECT pName, qtySafe FROM WP_vProduct WHERE pCode IN ('P005', 'P006')",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show products that have a standard price exactly equal to 999.",
+    "query": "SELECT pName FROM WP_vProduct WHERE priceStd = 999",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the average safe stock across all products.",
+    "query": "SELECT AVG(qtySafe) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products whose 'priceBad' is higher than their 'priceLow'.",
+    "query": "SELECT pName, priceBad, priceLow FROM WP_vProduct WHERE priceBad > priceLow",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the count of products for which stock update is disabled (isUpdStock = 'N').",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE isUpdStock = 'N'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total 'qtyNow' of all items provided by the supplier 'TechStore'?",
+    "query": "SELECT SUM(qtyNow) FROM WP_vProduct WHERE pvName = 'TechStore'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List the names of products whose barcode is null.",
+    "query": "SELECT pName FROM WP_vProduct WHERE pBarcode IS NULL",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "null_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Identify products where the initial cost is zero.",
+    "query": "SELECT pName FROM WP_vProduct WHERE costInitial = 0",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which product category has the highest average standard price?",
+    "query": "SELECT TOP 1 pCode, AVG(priceStd) AS AvgPrice FROM WP_vProduct GROUP BY pCode ORDER BY AvgPrice DESC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all product information for products with pNo between 'P100' and 'P200'.",
+    "query": "SELECT * FROM WP_vProduct WHERE pNo BETWEEN 'P100' AND 'P200'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products where 'isSale' is 'N'.",
+    "query": "SELECT pName FROM WP_vProduct WHERE isSale = 'N'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the total value of initial inventory (qtyInitial * costInitial)?",
+    "query": "SELECT SUM(qtyInitial * costInitial) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "calculated_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve products whose name contains 'Limited Edition'.",
+    "query": "SELECT * FROM WP_vProduct WHERE pName LIKE '%Limited Edition%'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "text_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which supplier name handles the product 'SuperWidget'?",
+    "query": "SELECT pvName FROM WP_vProduct WHERE pName = 'SuperWidget'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average membership price of products that are currently taxable.",
+    "query": "SELECT AVG(priceMem) FROM WP_vProduct WHERE isTax = 'Y'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products where 'priceStd' is equal to 'priceLow'.",
+    "query": "SELECT pName FROM WP_vProduct WHERE priceStd = priceLow",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many products were created in the month of December?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE MONTH(timeCreate) = 12",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "date_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the product names and their units for all products in the 'Electronics' code.",
+    "query": "SELECT pName, pUnit FROM WP_vProduct WHERE pCode = 'Electronics'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products whose safe stock (qtySafe) is higher than 500.",
+    "query": "SELECT pName, qtySafe FROM WP_vProduct WHERE qtySafe > 500",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all unique suppliers (pvName) that have products with stock over 100.",
+    "query": "SELECT DISTINCT pvName FROM WP_vProduct WHERE qtyNow > 100",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the total inventory current quantity for each product category.",
+    "query": "SELECT pCode, SUM(qtyNow) FROM WP_vProduct GROUP BY pCode",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the product with the largest difference between its standard price and low price.",
+    "query": "SELECT TOP 1 pName, (priceStd - priceLow) AS MaxDiff FROM WP_vProduct ORDER BY MaxDiff DESC",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "top_n_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the total membership price value for each supplier.",
+    "query": "SELECT pvName, SUM(priceMem) FROM WP_vProduct GROUP BY pvName",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which product unit name (pUName) is the most common?",
+    "query": "SELECT TOP 1 pUName, COUNT(*) AS Frequency FROM WP_vProduct GROUP BY pUName ORDER BY Frequency DESC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List products where the current quantity is more than 10 times the safe stock level.",
+    "query": "SELECT pName FROM WP_vProduct WHERE qtyNow > (qtySafe * 10)",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "comparative_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve all product information for products created by supplier ID 12.",
+    "query": "SELECT * FROM WP_vProduct WHERE pvSn = 12",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the average 'priceBad' for each product unit?",
+    "query": "SELECT pUnit, AVG(priceBad) FROM WP_vProduct GROUP BY pUnit",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products whose name ends with 'Pack'.",
+    "query": "SELECT pName FROM WP_vProduct WHERE pName LIKE '%Pack'",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "text_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "How many products were updated in the year 2026?",
+    "query": "SELECT COUNT(*) FROM WP_vProduct WHERE YEAR(timeUpdate) = 2026",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "date_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Calculate the average standard price for each supplier short name.",
+    "query": "SELECT pvNameS, AVG(priceStd) FROM WP_vProduct GROUP BY pvNameS",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "group_by_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Retrieve product names and barcodes for products that do not have a supplier discount (isPvDiscount = 'N').",
+    "query": "SELECT pName, pBarcode FROM WP_vProduct WHERE isPvDiscount = 'N'",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "conditional_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the count of unique product codes (pCode) in the system.",
+    "query": "SELECT COUNT(DISTINCT pCode) FROM WP_vProduct",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "distinct_count"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find products where 'qtyInitial' and 'qtyNow' are both zero.",
+    "query": "SELECT pName FROM WP_vProduct WHERE qtyInitial = 0 AND qtyNow = 0",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "logic_validation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "List all products where the unit name is not defined (is null or empty).",
+    "query": "SELECT pName FROM WP_vProduct WHERE pUName IS NULL OR pUName = ''",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "null_search"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Which supplier (pvName) has the most products listed?",
+    "query": "SELECT TOP 1 pvName, COUNT(*) AS ProductCount FROM WP_vProduct GROUP BY pvName ORDER BY ProductCount DESC",
+    "table": "WP_vProduct",
+    "difficulty": "medium",
+    "query_type": "top_n_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Show the standard price and average cost of the last 20 products updated.",
+    "query": "SELECT TOP 20 priceStd, costAvg FROM WP_vProduct ORDER BY timeUpdate DESC",
+    "table": "WP_vProduct",
+    "difficulty": "easy",
+    "query_type": "top_n_selection"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "What is the sum of 'qtyNow' for products where 'isSale' is 'Y' and 'isUpdStock' is 'Y'?",
+    "query": "SELECT SUM(qtyNow) FROM WP_vProduct WHERE isSale = 'Y' AND isUpdStock = 'Y'",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "conditional_aggregation"
+  },
+  {
+    "db_id": "WP_M09",
+    "question": "Find the average gross profit margin percentage ( (priceStd - costAvg) / priceStd * 100 ) for category 'P001'.",
+    "query": "SELECT AVG((priceStd - costAvg) / priceStd * 100) FROM WP_vProduct WHERE pCode = 'P001' AND priceStd > 0",
+    "table": "WP_vProduct",
+    "difficulty": "hard",
+    "query_type": "complex_calculation"
+  }
+]

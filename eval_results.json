@@ -1,0 +1,973 @@
+{
+  "total": 91,
+  "em_correct": 67,
+  "em_pct": 73.63,
+  "ex_correct": null,
+  "ex_pct": null,
+  "table_stats": {
+    "WP_vAcctIn": {
+      "total": 13,
+      "em": 11,
+      "ex": 0
+    },
+    "WP_vAcctOut": {
+      "total": 13,
+      "em": 13,
+      "ex": 0
+    },
+    "WP_vInventory": {
+      "total": 13,
+      "em": 9,
+      "ex": 0
+    },
+    "WP_vOutStock": {
+      "total": 13,
+      "em": 6,
+      "ex": 0
+    },
+    "WP_vProduct": {
+      "total": 13,
+      "em": 12,
+      "ex": 0
+    },
+    "WP_vProvider": {
+      "total": 13,
+      "em": 6,
+      "ex": 0
+    },
+    "WP_vTransfer": {
+      "total": 13,
+      "em": 10,
+      "ex": 0
+    }
+  },
+  "diff_stats": {
+    "easy": {
+      "total": 47,
+      "em": 41,
+      "ex": 0
+    },
+    "hard": {
+      "total": 13,
+      "em": 9,
+      "ex": 0
+    },
+    "medium": {
+      "total": 31,
+      "em": 17,
+      "ex": 0
+    }
+  },
+  "details": [
+    {
+      "id": 0,
+      "question": "How many distinct accounts receivable records were created in January 2026?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 6) = '202601' AND isDel = 'N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctInId) FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 6) = '202601' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 1,
+      "question": "What is the total receivable amount for member name '麻竹園' collected in December 2025?",
+      "gold_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctInId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctIn WHERE memName = N'麻竹園' AND LEFT(acctInId, 6) = '202512' AND isDel = 'N' GROUP BY acctInId) AS AR_Totals;",
+      "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctInId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctIn WHERE memName = N'麻竹園' AND LEFT(acctInId, 6) = '202512' AND isDel = 'N' GROUP BY acctInId) AS AR_Totals;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "hard"
+    },
+    {
+      "id": 2,
+      "question": "List the distinct employee IDs that processed receivables on December 26, 2025.",
+      "gold_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 8) = '20251226' AND isDel = 'N';",
+      "pred_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 8) = '20251226' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 3,
+      "question": "Find the maximum single-item sales total (oStkDtlAmtTotal) across all active detail lines.",
+      "gold_sql": "SELECT MAX(oStkDtlAmtTotal) FROM WP_M09.dbo.WP_vAcctIn WHERE dtlIsDel = 'N';",
+      "pred_sql": "SELECT MAX(oStkDtlAmtTotal) FROM WP_M09.dbo.WP_vAcctIn WHERE dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 4,
+      "question": "Which product barcodes were included in the credit sales order '202511140030'?",
+      "gold_sql": "SELECT DISTINCT pBarcode FROM WP_M09.dbo.WP_vAcctIn WHERE OutStkId = '202511140030' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT DISTINCT pBarcode FROM WP_M09.dbo.WP_vAcctIn WHERE OutStkId = '202511140030' AND isDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 5,
+      "question": "Calculate the average unit price (oStkDtlAmt) for products sold to member serial number 44.",
+      "gold_sql": "SELECT AVG(oStkDtlAmt) FROM WP_M09.dbo.WP_vAcctIn WHERE memSn = '44' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT AVG(oStkDtlAmt) FROM WP_M09.dbo.WP_vAcctIn WHERE memSn = '44' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium"
+    },
+    {
+      "id": 6,
+      "question": "Show the total discount share amount for receivables processed in November 2025.",
+      "gold_sql": "SELECT SUM(UniqueDiscount) FROM (SELECT acctInId, MAX(discountShare) AS UniqueDiscount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 6) = '202511' AND isDel = 'N' GROUP BY acctInId) AS Discount_Totals;",
+      "pred_sql": "SELECT SUM(UniqueDiscount) FROM (SELECT acctInId, MAX(discountShare) AS UniqueDiscount FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 6) = '202511' AND isDel = 'N' GROUP BY acctInId) AS Discount_Totals;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "hard"
+    },
+    {
+      "id": 7,
+      "question": "Retrieve the product short names and quantities for receivable ID '202512050001'.",
+      "gold_sql": "SELECT pNameS, oStkDtlQty FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId = '202512050001' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT pNameS, oStkDtlQty FROM WP_M09.dbo.WP_vAcctIn WHERE acctInId = '202512050001' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 8,
+      "question": "How many detail lines have a detail discount (dtlDiscnt) greater than zero?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vAcctIn WHERE dtlDiscnt > 0 AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vAcctIn WHERE dtlDiscnt > 0 AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 9,
+      "question": "Find the distinct member IDs associated with credit sales orders created in the year 2025.",
+      "gold_sql": "SELECT DISTINCT memId FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(acctInId, 4) = '2025' AND isDel = 'N';",
+      "pred_sql": "SELECT DISTINCT memId FROM WP_M09.dbo.WP_vAcctIn WHERE LEFT(OutStkId, 4) = '2025' AND isDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 10,
+      "question": "What is the sum of sales quantities for product code '2104010103053' across all active receivable records?",
+      "gold_sql": "SELECT SUM(oStkDtlQty) FROM WP_M09.dbo.WP_vAcctIn WHERE pCode = '2104010103053' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT SUM(oStkDtlQty) FROM WP_M09.dbo.WP_vAcctIn WHERE pCode = '2104010103053' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium"
+    },
+    {
+      "id": 11,
+      "question": "List the receivable IDs where the original credit sales order total (outStkAmtTotal) exceeds 5000.",
+      "gold_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE outStkAmtTotal > 5000 AND isDel = 'N';",
+      "pred_sql": "SELECT DISTINCT acctInId FROM WP_M09.dbo.WP_vAcctIn WHERE outStkAmtTotal > 5000 AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "medium"
+    },
+    {
+      "id": 12,
+      "question": "Get the minimum unit price (oStkDtlAmt) sold under the product named '益全香米'.",
+      "gold_sql": "SELECT MIN(oStkDtlAmt) FROM WP_M09.dbo.WP_vAcctIn WHERE pName = N'益全香米' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT MIN(oStkDtlAmt) FROM WP_M09.dbo.WP_vAcctIn WHERE pName = N'益全香米' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctIn",
+      "difficulty": "easy"
+    },
+    {
+      "id": 13,
+      "question": "How many distinct accounts payable records exist for December 2025?",
+      "gold_sql": "SELECT COUNT(DISTINCT acctOutId) FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 6) = '202512' AND isDel = 'N';",
+      "pred_sql": "SELECT COUNT(DISTINCT acctOutId) FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 6) = '202512' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 14,
+      "question": "What is the true total payable amount for vendor '新福華商行' in 2025?",
+      "gold_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctOutId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctOut WHERE pvName = N'新福華商行' AND LEFT(acctOutId, 4) = '2025' AND isDel = 'N' GROUP BY acctOutId) AS AP_Totals;",
+      "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT acctOutId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vAcctOut WHERE pvName = N'新福華商行' AND LEFT(acctOutId, 4) = '2025' AND isDel = 'N' GROUP BY acctOutId) AS AP_Totals;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "hard"
+    },
+    {
+      "id": 15,
+      "question": "List the distinct vendor IDs that had payable transactions on December 30, 2025.",
+      "gold_sql": "SELECT DISTINCT pvId FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 8) = '20251230' AND isDel = 'N';",
+      "pred_sql": "SELECT DISTINCT pvId FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 8) = '20251230' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 16,
+      "question": "Find the total purchase quantity from vendor serial number 21.",
+      "gold_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vAcctOut WHERE pvSn = '21' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vAcctOut WHERE pvSn = '21' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 17,
+      "question": "Show the average detail unit price (dtlAmt) in accounts payable records for vendor ID '022'.",
+      "gold_sql": "SELECT AVG(dtlAmt) FROM WP_M09.dbo.WP_vAcctOut WHERE pvId = '022' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT AVG(dtlAmt) FROM WP_M09.dbo.WP_vAcctOut WHERE pvId = '022' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "medium"
+    },
+    {
+      "id": 18,
+      "question": "Retrieve the product names and quantities for accounts payable ID '202512300001'.",
+      "gold_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId = '202512300001' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT pName, qty FROM WP_M09.dbo.WP_vAcctOut WHERE acctOutId = '202512300001' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 19,
+      "question": "Calculate the true total in-stock amount (inStkAmt) for all purchase orders in December 2025.",
+      "gold_sql": "SELECT SUM(UniqueInStkAmt) FROM (SELECT InStkId, MAX(inStkAmt) AS UniqueInStkAmt FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 6) = '202512' AND isDel = 'N' GROUP BY InStkId) AS InStk_Totals;",
+      "pred_sql": "SELECT SUM(UniqueInStkAmt) FROM (SELECT InStkId, MAX(inStkAmt) AS UniqueInStkAmt FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 6) = '202512' AND isDel = 'N' GROUP BY InStkId) AS InStk_Totals;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "hard"
+    },
+    {
+      "id": 20,
+      "question": "Which employee processed the payable record with the highest total amount in 2025?",
+      "gold_sql": "SELECT TOP 1 empName FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 4) = '2025' AND isDel = 'N' ORDER BY amount DESC;",
+      "pred_sql": "SELECT TOP 1 empName FROM WP_M09.dbo.WP_vAcctOut WHERE LEFT(acctOutId, 4) = '2025' AND isDel = 'N' ORDER BY amount DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "medium"
+    },
+    {
+      "id": 21,
+      "question": "How many detail lines are marked as taxable (isTax = 'Y') in accounts payable?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vAcctOut WHERE isTax = 'Y' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vAcctOut WHERE isTax = 'Y' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 22,
+      "question": "Find the distinct purchase order IDs (InStkId) where the remaining payment (inStkPayLeft) is greater than zero.",
+      "gold_sql": "SELECT DISTINCT InStkId FROM WP_M09.dbo.WP_vAcctOut WHERE inStkPayLeft > 0 AND isDel = 'N';",
+      "pred_sql": "SELECT DISTINCT InStkId FROM WP_M09.dbo.WP_vAcctOut WHERE inStkPayLeft > 0 AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "medium"
+    },
+    {
+      "id": 23,
+      "question": "What is the maximum accounts payable transaction amount recorded by employee '系統管理者'?",
+      "gold_sql": "SELECT MAX(amount) FROM WP_M09.dbo.WP_vAcctOut WHERE empName = N'系統管理者' AND isDel = 'N';",
+      "pred_sql": "SELECT MAX(amount) FROM WP_M09.dbo.WP_vAcctOut WHERE empName = N'系統管理者' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 24,
+      "question": "Show the vendor short names for payable records where the payment type (payType) is 2.",
+      "gold_sql": "SELECT DISTINCT pvNameS FROM WP_M09.dbo.WP_vAcctOut WHERE payType = '2' AND isDel = 'N';",
+      "pred_sql": "SELECT DISTINCT pvNameS FROM WP_M09.dbo.WP_vAcctOut WHERE payType = '2' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 25,
+      "question": "Get the total vendor discount (pvDiscount) applied across all active payable detail lines.",
+      "gold_sql": "SELECT SUM(pvDiscount) FROM WP_M09.dbo.WP_vAcctOut WHERE dtlIsDel = 'N';",
+      "pred_sql": "SELECT SUM(pvDiscount) FROM WP_M09.dbo.WP_vAcctOut WHERE dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vAcctOut",
+      "difficulty": "easy"
+    },
+    {
+      "id": 26,
+      "question": "How many products in warehouse '001' currently have zero stock?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001' AND qty = 0;",
+      "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001' AND qty = 0;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "easy"
+    },
+    {
+      "id": 27,
+      "question": "What is the total inventory valuation (quantity times standard cost) for warehouse '特產中心'?",
+      "gold_sql": "SELECT SUM(qty * costStd) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+      "pred_sql": "SELECT SUM(qty * costStd) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 28,
+      "question": "List all product names in warehouse ID '001' where quantity exceeds the safe quantity by more than 100.",
+      "gold_sql": "SELECT pName FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001' AND qty > qtySafe + 100;",
+      "pred_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001' AND qty > (qtySafe + 100);",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 29,
+      "question": "Find the product with the highest average cost (costAvg) in the entire inventory.",
+      "gold_sql": "SELECT TOP 1 pName, costAvg FROM WP_M09.dbo.WP_vInventory ORDER BY costAvg DESC;",
+      "pred_sql": "SELECT TOP 1 pName, costAvg FROM WP_M09.dbo.WP_vInventory ORDER BY costAvg DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 30,
+      "question": "Show the distinct vendor names that supply products currently stored in warehouse '特產中心'.",
+      "gold_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+      "pred_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vInventory WHERE WarehouseName = N'特產中心';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "easy"
+    },
+    {
+      "id": 31,
+      "question": "Calculate the total quantity across all warehouses for products marked as active for sale (isSale = 'Y').",
+      "gold_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vInventory WHERE isSale = 'Y';",
+      "pred_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vInventory WHERE isSale = 'Y';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "easy"
+    },
+    {
+      "id": 32,
+      "question": "How many distinct warehouses currently hold the product with barcode '4710632001318'?",
+      "gold_sql": "SELECT COUNT(DISTINCT WarehouseId) FROM WP_M09.dbo.WP_vInventory WHERE pBarcode = '4710632001318' AND qty > 0;",
+      "pred_sql": "SELECT COUNT(DISTINCT WarehouseName) FROM WP_M09.dbo.WP_vInventory WHERE pBarcode = '4710632001318';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 33,
+      "question": "What is the average standard price (priceStd) of all products in warehouse ID '001'?",
+      "gold_sql": "SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001';",
+      "pred_sql": "SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "easy"
+    },
+    {
+      "id": 34,
+      "question": "In the inventory records, retrieve the product number and quantity for all items where the batch price (priceBat) is greater than the standard price.",
+      "gold_sql": "SELECT pNo, qty FROM WP_M09.dbo.WP_vInventory WHERE priceBat > priceStd;",
+      "pred_sql": "SELECT pNo, qty FROM WP_M09.dbo.WP_vInventory WHERE priceBat > priceStd;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 35,
+      "question": "Find the total number of distinct products stocked across all warehouses.",
+      "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vInventory;",
+      "pred_sql": "SELECT COUNT(DISTINCT WarehouseName) FROM WP_M09.dbo.WP_vInventory;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "easy"
+    },
+    {
+      "id": 36,
+      "question": "List the warehouse names and total inventory quantities, grouped by warehouse.",
+      "gold_sql": "SELECT WarehouseName, SUM(qty) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName;",
+      "pred_sql": "SELECT WarehouseName, SUM(qty) FROM WP_M09.dbo.WP_vInventory GROUP BY WarehouseName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 37,
+      "question": "Show all products in warehouse '001' where the member price (priceMem) is lower than the standard price.",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001' AND priceMem < priceStd;",
+      "pred_sql": "SELECT pNo, pName, priceMem, priceStd FROM WP_M09.dbo.WP_vInventory WHERE WarehouseId = '001' AND priceMem < priceStd;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "medium"
+    },
+    {
+      "id": 38,
+      "question": "What is the minimum safe quantity (qtySafe) in inventory for products supplied by vendor '實垣有限公司'?",
+      "gold_sql": "SELECT MIN(qtySafe) FROM WP_M09.dbo.WP_vInventory WHERE pvName = N'實垣有限公司';",
+      "pred_sql": "SELECT MIN(qtySafe) FROM WP_M09.dbo.WP_vInventory WHERE pvName = N'實垣有限公司';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vInventory",
+      "difficulty": "easy"
+    },
+    {
+      "id": 39,
+      "question": "How many distinct sales orders were processed on October 23, 2025?",
+      "gold_sql": "SELECT COUNT(DISTINCT OutStkId) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 8) = '20251023' AND isDel = 'N';",
+      "pred_sql": "SELECT COUNT(DISTINCT OutStkId) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 8) = '20251023' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "easy"
+    },
+    {
+      "id": 40,
+      "question": "What is the true total sales amount for all transactions in October 2025?",
+      "gold_sql": "SELECT SUM(UniqueAmount) FROM (SELECT OutStkId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 6) = '202510' AND isDel = 'N' GROUP BY OutStkId) AS Sales_Totals;",
+      "pred_sql": "SELECT SUM(UniqueAmount) FROM (SELECT OutStkId, MAX(amount) AS UniqueAmount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 6) = '202510' AND isDel = 'N' GROUP BY OutStkId) AS OutStk_Totals;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "hard"
+    },
+    {
+      "id": 41,
+      "question": "List the member names and their total out-stock sales quantities in 2025.",
+      "gold_sql": "SELECT memName, SUM(qty) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 4) = '2025' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName;",
+      "pred_sql": "SELECT memName, COUNT(*) AS qty FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 4) = '2025' AND isDel = 'N' AND dtlIsDel = 'N' GROUP BY memName;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "medium"
+    },
+    {
+      "id": 42,
+      "question": "Find the top 1 product name with the highest total sales quantity.",
+      "gold_sql": "SELECT TOP 1 pName, SUM(qty) AS totalQty FROM WP_M09.dbo.WP_vOutStock WHERE dtlIsDel = 'N' AND isDel = 'N' GROUP BY pName ORDER BY totalQty DESC;",
+      "pred_sql": "SELECT TOP 1 pName, qty FROM (SELECT pName, OutStkId, MAX(qty) AS qty FROM WP_M09.dbo.WP_vOutStock WHERE isDel = 'N' GROUP BY pName, OutStkId) AS OutStkQty ORDER BY qty DESC;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "hard"
+    },
+    {
+      "id": 43,
+      "question": "Show the distinct product categories (pNameS) sold by employee '鳳凰分部'.",
+      "gold_sql": "SELECT DISTINCT pNameS FROM WP_M09.dbo.WP_vOutStock WHERE empName = N'鳳凰分部' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT DISTINCT pNameS FROM WP_M09.dbo.WP_vOutStock WHERE empName = N'鳳凰分部' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "easy"
+    },
+    {
+      "id": 44,
+      "question": "Calculate the true total discount applied to sales on October 23, 2025.",
+      "gold_sql": "SELECT SUM(UniqueDiscount) FROM (SELECT OutStkId, MAX(discount) AS UniqueDiscount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 8) = '20251023' AND isDel = 'N' GROUP BY OutStkId) AS Discount_Totals;",
+      "pred_sql": "SELECT SUM(UniqueDiscount) FROM (SELECT OutStkId, MAX(discount) AS UniqueDiscount FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 8) = '20251023' AND isDel = 'N' GROUP BY OutStkId) AS Discount_Totals;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "hard"
+    },
+    {
+      "id": 45,
+      "question": "What is the average detail cost (dtlCostAvg) for products sold to member ID '000000'?",
+      "gold_sql": "SELECT AVG(dtlCostAvg) FROM WP_M09.dbo.WP_vOutStock WHERE memId = '000000' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT DISTINCT dtlCostAvg FROM WP_M09.dbo.WP_vOutStock WHERE memId = '000000' AND dtlIsDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "medium"
+    },
+    {
+      "id": 46,
+      "question": "Retrieve the out-stock IDs where the total amount exceeds the amount without tax.",
+      "gold_sql": "SELECT DISTINCT OutStkId FROM WP_M09.dbo.WP_vOutStock WHERE amtTotal > amtNoneTax AND isDel = 'N';",
+      "pred_sql": "SELECT DISTINCT OutStkId FROM WP_M09.dbo.WP_vOutStock WHERE amount > amountNoneTax AND isDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "medium"
+    },
+    {
+      "id": 47,
+      "question": "How many products were sold with a detail discount percentage (dtlDiscntPer) greater than zero?",
+      "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vOutStock WHERE dtlDiscntPer > 0 AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vOutStock WHERE dtlDiscntPer > 0 AND dtlIsDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "medium"
+    },
+    {
+      "id": 48,
+      "question": "Find the total tax amount collected from sales in the year 2025.",
+      "gold_sql": "SELECT SUM(UniqueTax) FROM (SELECT OutStkId, MAX(tax) AS UniqueTax FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 4) = '2025' AND isDel = 'N' GROUP BY OutStkId) AS Tax_Totals;",
+      "pred_sql": "SELECT SUM(UniqueTax) FROM (SELECT OutStkId, MAX(tax) AS UniqueTax FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 4) = '2025' AND isDel = 'N' GROUP BY OutStkId) AS Tax_Totals;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "hard"
+    },
+    {
+      "id": 49,
+      "question": "List the distinct employee names who handled out-stock sales of product barcode '4710038852828'.",
+      "gold_sql": "SELECT DISTINCT empName FROM WP_M09.dbo.WP_vOutStock WHERE pBarcode = '4710038852828' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT DISTINCT empName FROM WP_M09.dbo.WP_vOutStock WHERE pBarcode = '4710038852828' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "easy"
+    },
+    {
+      "id": 50,
+      "question": "Show the member city names and the count of sales orders per city in 2025.",
+      "gold_sql": "SELECT memCityName, COUNT(DISTINCT OutStkId) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 4) = '2025' AND isDel = 'N' GROUP BY memCityName;",
+      "pred_sql": "SELECT memCity, COUNT(*) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 4) = '2025' AND isDel = 'N' GROUP BY memCity;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "medium"
+    },
+    {
+      "id": 51,
+      "question": "What is the total cost of goods sold (sum of dtlCostAvg times qty) for October 2025?",
+      "gold_sql": "SELECT SUM(dtlCostAvg * qty) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 6) = '202510' AND dtlIsDel = 'N' AND isDel = 'N';",
+      "pred_sql": "SELECT SUM(dtlCostAvg * qty) FROM WP_M09.dbo.WP_vOutStock WHERE LEFT(OutStkId, 6) = '202510' AND dtlIsDel = 'N' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vOutStock",
+      "difficulty": "hard"
+    },
+    {
+      "id": 52,
+      "question": "How many products are currently marked as active for sale (isSale = 'Y')?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProduct WHERE isSale = 'Y';",
+      "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProduct WHERE isSale = 'Y';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 53,
+      "question": "What is the average standard price of all products supplied by vendor '宏碁蜂蜜'?",
+      "gold_sql": "SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vProduct WHERE pvName = N'宏碁蜂蜜';",
+      "pred_sql": "SELECT AVG(priceStd) FROM WP_M09.dbo.WP_vProduct WHERE pvName = N'宏碁蜂蜜';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 54,
+      "question": "List the products where the current quantity is below the safe quantity and isSale is 'Y'.",
+      "gold_sql": "SELECT pNo, pName, qtyNow, qtySafe FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < qtySafe AND isSale = 'Y';",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE qtyNow < qtySafe AND isSale = 'Y';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium"
+    },
+    {
+      "id": 55,
+      "question": "Find the total current stock value (qtyNow times costAvg) across all products.",
+      "gold_sql": "SELECT SUM(qtyNow * costAvg) FROM WP_M09.dbo.WP_vProduct;",
+      "pred_sql": "SELECT SUM(qtyNow * costAvg) FROM WP_M09.dbo.WP_vProduct;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium"
+    },
+    {
+      "id": 56,
+      "question": "Show the product names where the average cost exceeds the initial cost.",
+      "gold_sql": "SELECT pName FROM WP_M09.dbo.WP_vProduct WHERE costAvg > costInitial;",
+      "pred_sql": "SELECT pName FROM WP_M09.dbo.WP_vProduct WHERE costAvg > costInitial;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 57,
+      "question": "Retrieve the distinct vendor names that supply taxable products (isTax = 'Y').",
+      "gold_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vProduct WHERE isTax = 'Y';",
+      "pred_sql": "SELECT DISTINCT pvName FROM WP_M09.dbo.WP_vProduct WHERE isTax = 'Y';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 58,
+      "question": "What is the maximum difference between the standard price and the lowest price across all products?",
+      "gold_sql": "SELECT MAX(priceStd - priceLow) FROM WP_M09.dbo.WP_vProduct;",
+      "pred_sql": "SELECT MAX(priceStd - priceLow) FROM WP_M09.dbo.WP_vProduct;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium"
+    },
+    {
+      "id": 59,
+      "question": "How many distinct vendors supply products that need stock update (isUpdStock = 'Y')?",
+      "gold_sql": "SELECT COUNT(DISTINCT pvId) FROM WP_M09.dbo.WP_vProduct WHERE isUpdStock = 'Y';",
+      "pred_sql": "SELECT COUNT(DISTINCT pvId) FROM WP_M09.dbo.WP_vProduct WHERE isUpdStock = 'Y';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 60,
+      "question": "List the product barcodes and names for items where the member price equals the batch price.",
+      "gold_sql": "SELECT pBarcode, pName FROM WP_M09.dbo.WP_vProduct WHERE priceMem = priceBat;",
+      "pred_sql": "SELECT pBarcode, pName FROM WP_M09.dbo.WP_vProduct WHERE priceMem = priceBat;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 61,
+      "question": "Find the vendor with the most products in the system.",
+      "gold_sql": "SELECT TOP 1 pvName, COUNT(*) AS productCount FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY productCount DESC;",
+      "pred_sql": "SELECT TOP 1 pvName, COUNT(*) AS productCount FROM WP_M09.dbo.WP_vProduct GROUP BY pvName ORDER BY productCount DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "hard"
+    },
+    {
+      "id": 62,
+      "question": "Calculate the total initial quantity (qtyInitial) for products supplied by vendor ID '001'.",
+      "gold_sql": "SELECT SUM(qtyInitial) FROM WP_M09.dbo.WP_vProduct WHERE pvId = '001';",
+      "pred_sql": "SELECT SUM(qtyInitial) FROM WP_M09.dbo.WP_vProduct WHERE pvId = '001';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 63,
+      "question": "In the product master, show the product number and name for items with a vendor discount (pvDiscount) greater than zero.",
+      "gold_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvDiscount > 0;",
+      "pred_sql": "SELECT pNo, pName FROM WP_M09.dbo.WP_vProduct WHERE pvDiscount > 0;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "easy"
+    },
+    {
+      "id": 64,
+      "question": "What is the total number of products grouped by unit name (pUName)?",
+      "gold_sql": "SELECT pUName, COUNT(*) FROM WP_M09.dbo.WP_vProduct GROUP BY pUName;",
+      "pred_sql": "SELECT pUName, COUNT(*) FROM WP_M09.dbo.WP_vProduct GROUP BY pUName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProduct",
+      "difficulty": "medium"
+    },
+    {
+      "id": 65,
+      "question": "How many vendors are currently active (isStop = 'N')?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N';",
+      "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "easy"
+    },
+    {
+      "id": 66,
+      "question": "What are the contact telephone numbers for vendors located in a city containing '市區'?",
+      "gold_sql": "SELECT pvName, ctactTel FROM WP_M09.dbo.WP_vProvider WHERE ctactCity LIKE N'%市區%';",
+      "pred_sql": "SELECT ctactTel FROM WP_M09.dbo.WP_vProvider WHERE ctactCity LIKE N'%市區%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "medium"
+    },
+    {
+      "id": 67,
+      "question": "List the vendor names that have a bank account registered at a bank containing '一銀'.",
+      "gold_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE bankName LIKE N'%一銀%';",
+      "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE bankAccountBank LIKE N'%一銀%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "medium"
+    },
+    {
+      "id": 68,
+      "question": "Find the vendor with the highest sort ID.",
+      "gold_sql": "SELECT TOP 1 pvName, sortId FROM WP_M09.dbo.WP_vProvider ORDER BY sortId DESC;",
+      "pred_sql": "SELECT TOP 1 pvName, sortId FROM WP_M09.dbo.WP_vProvider ORDER BY sortId DESC;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "medium"
+    },
+    {
+      "id": 69,
+      "question": "Show the email addresses for all active vendors that have an email on file.",
+      "gold_sql": "SELECT pvName, email FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N' AND email IS NOT NULL AND email <> '';",
+      "pred_sql": "SELECT email FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N' AND email IS NOT NULL AND email <> '';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "medium"
+    },
+    {
+      "id": 70,
+      "question": "How many vendors have a non-empty invoice title (invoTitle)?",
+      "gold_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE invoTitle IS NOT NULL AND invoTitle <> '';",
+      "pred_sql": "SELECT COUNT(*) FROM WP_M09.dbo.WP_vProvider WHERE invoTitle IS NOT NULL AND invoTitle <> '';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "easy"
+    },
+    {
+      "id": 71,
+      "question": "Retrieve the vendor ID and boss name for all vendors in the category '會員'.",
+      "gold_sql": "SELECT pvId, pvBoss FROM WP_M09.dbo.WP_vProvider WHERE pvKName = N'會員';",
+      "pred_sql": "SELECT pvId, pvBoss FROM WP_M09.dbo.WP_vProvider WHERE pvKName = N'會員';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "easy"
+    },
+    {
+      "id": 72,
+      "question": "What is the average vendor discount (pvDiscount) across all active vendors (isStop is 'N')?",
+      "gold_sql": "SELECT AVG(pvDiscount) FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N';",
+      "pred_sql": "SELECT AVG(pvDiscount) FROM WP_M09.dbo.WP_vProvider WHERE isStop = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "easy"
+    },
+    {
+      "id": 73,
+      "question": "List the vendor names that have both a telephone and fax number on record.",
+      "gold_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE pvTel IS NOT NULL AND pvTel <> '' AND fax IS NOT NULL AND fax <> '';",
+      "pred_sql": "SELECT pvName FROM WP_M09.dbo.WP_vProvider WHERE (pvTel IS NOT NULL AND pvTel <> '') AND (fax IS NOT NULL AND fax <> '');",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "medium"
+    },
+    {
+      "id": 74,
+      "question": "Find the distinct vendor category names (pvKName) in the system.",
+      "gold_sql": "SELECT DISTINCT pvKName FROM WP_M09.dbo.WP_vProvider;",
+      "pred_sql": "SELECT DISTINCT pvKName FROM WP_M09.dbo.WP_vProvider;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "easy"
+    },
+    {
+      "id": 75,
+      "question": "Show the tax IDs for vendors whose name contains '蜂蜜'.",
+      "gold_sql": "SELECT pvName, taxId FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%蜂蜜%';",
+      "pred_sql": "SELECT taxId FROM WP_M09.dbo.WP_vProvider WHERE pvName LIKE N'%蜂蜜%';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "easy"
+    },
+    {
+      "id": 76,
+      "question": "Count the number of vendors grouped by vendor category (pvKName).",
+      "gold_sql": "SELECT pvKName, COUNT(*) FROM WP_M09.dbo.WP_vProvider GROUP BY pvKName;",
+      "pred_sql": "SELECT pvKName, COUNT(pvId) FROM WP_M09.dbo.WP_vProvider GROUP BY pvKName;",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "medium"
+    },
+    {
+      "id": 77,
+      "question": "Retrieve the vendor address and city for vendor ID '001'.",
+      "gold_sql": "SELECT pvAddr, pvCity FROM WP_M09.dbo.WP_vProvider WHERE pvId = '001';",
+      "pred_sql": "SELECT addr, ctactCity FROM WP_M09.dbo.WP_vProvider WHERE pvId = '001';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vProvider",
+      "difficulty": "easy"
+    },
+    {
+      "id": 78,
+      "question": "How many distinct transfer orders were created in October 2025?",
+      "gold_sql": "SELECT COUNT(DISTINCT TransferId) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N';",
+      "pred_sql": "SELECT COUNT(DISTINCT TransferId) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "easy"
+    },
+    {
+      "id": 79,
+      "question": "What is the total transfer cost for transfers from warehouse '001' to '初鄉分部'?",
+      "gold_sql": "SELECT SUM(UniqueCost) FROM (SELECT TransferId, MAX(costAvg) AS UniqueCost FROM WP_M09.dbo.WP_vTransfer WHERE fWhId = '001' AND tfWhName = N'初鄉分部' AND isDel = 'N' GROUP BY TransferId) AS Cost_Totals;",
+      "pred_sql": "SELECT SUM(cost) FROM WP_M09.dbo.WP_vTransfer WHERE fWhId = '001' AND tfWhName = N'初鄉分部' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "hard"
+    },
+    {
+      "id": 80,
+      "question": "List the distinct product names transferred on October 27, 2025.",
+      "gold_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 8) = '20251027' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT DISTINCT pName FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 8) = '20251027' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "easy"
+    },
+    {
+      "id": 81,
+      "question": "Find the total quantity transferred into warehouse '初鄉分部' in the year 2025.",
+      "gold_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE tfWhName = N'初鄉分部' AND LEFT(TransferId, 4) = '2025' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE tfWhName = N'初鄉分部' AND LEFT(TransferId, 4) = '2025' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "medium"
+    },
+    {
+      "id": 82,
+      "question": "Show the source and destination warehouse names for all transfers containing product '益全香米'.",
+      "gold_sql": "SELECT DISTINCT fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE pName = N'益全香米' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT DISTINCT fWhName, tfWhName FROM WP_M09.dbo.WP_vTransfer WHERE pName = N'益全香米' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "easy"
+    },
+    {
+      "id": 83,
+      "question": "Calculate the average transfer quantity per transfer order in October 2025.",
+      "gold_sql": "SELECT AVG(qty) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT AVG(qty) FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "medium"
+    },
+    {
+      "id": 84,
+      "question": "How many distinct products have been transferred from warehouse ID '001'?",
+      "gold_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vTransfer WHERE fWhId = '001' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT COUNT(DISTINCT pNo) FROM WP_M09.dbo.WP_vTransfer WHERE fWhId = '001' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "easy"
+    },
+    {
+      "id": 85,
+      "question": "What is the maximum transfer quantity in a single detail line for product '7kg白米'?",
+      "gold_sql": "SELECT MAX(qty) FROM WP_M09.dbo.WP_vTransfer WHERE pName = N'7kg白米' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT MAX(qty) FROM WP_M09.dbo.WP_vTransfer WHERE pName = N'7kg白米' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "easy"
+    },
+    {
+      "id": 86,
+      "question": "List the transfer IDs where more than 3 distinct products were transferred.",
+      "gold_sql": "SELECT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId HAVING COUNT(DISTINCT pNo) > 3;",
+      "pred_sql": "SELECT TransferId FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY TransferId HAVING COUNT(DISTINCT pNo) > 3;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "hard"
+    },
+    {
+      "id": 87,
+      "question": "Find the employee IDs who handled transfers in both October and November 2025.",
+      "gold_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N' AND empId IN (SELECT DISTINCT empId FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202511' AND isDel = 'N');",
+      "pred_sql": "SELECT DISTINCT empId FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202510' AND isDel = 'N' INTERSECT SELECT DISTINCT empId FROM WP_M09.dbo.WP_vTransfer WHERE LEFT(TransferId, 6) = '202511' AND isDel = 'N';",
+      "em": false,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "hard"
+    },
+    {
+      "id": 88,
+      "question": "Show the total quantity transferred grouped by destination warehouse name.",
+      "gold_sql": "SELECT tfWhName, SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY tfWhName;",
+      "pred_sql": "SELECT tfWhName, SUM(qty) FROM WP_M09.dbo.WP_vTransfer WHERE isDel = 'N' AND dtlIsDel = 'N' GROUP BY tfWhName;",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "medium"
+    },
+    {
+      "id": 89,
+      "question": "Retrieve the product barcodes and quantities for transfer ID '202510270001'.",
+      "gold_sql": "SELECT pBarcode, qty FROM WP_M09.dbo.WP_vTransfer WHERE TransferId = '202510270001' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT pBarcode, qty FROM WP_M09.dbo.WP_vTransfer WHERE TransferId = '202510270001' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "easy"
+    },
+    {
+      "id": 90,
+      "question": "What is the minimum transfer quantity recorded for any product transferred from warehouse '001'?",
+      "gold_sql": "SELECT MIN(qty) FROM WP_M09.dbo.WP_vTransfer WHERE fWhId = '001' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "pred_sql": "SELECT MIN(qty) FROM WP_M09.dbo.WP_vTransfer WHERE fWhId = '001' AND isDel = 'N' AND dtlIsDel = 'N';",
+      "em": true,
+      "ex": null,
+      "table": "WP_vTransfer",
+      "difficulty": "easy"
+    }
+  ]
+}
