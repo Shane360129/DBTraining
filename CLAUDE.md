@@ -72,7 +72,7 @@ python auto/auto__train_loop_until_target_em.py
 | `docs/` | — | 專案文件（.md, .html, .docx, .xlsx） |
 
 ## 重要提醒
-- 訓練需要 RTX 4090，約 4-6 小時
+- 訓練需要 RTX 5070 Ti，約 4-6 小時
 - 模型儲存在 `outputs/models/` 下
 - 評估結果在 `outputs/evaluation_*.json`
 - loop_state.json 記錄自動訓練迴圈的最佳結果
