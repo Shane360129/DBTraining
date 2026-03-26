@@ -35,17 +35,17 @@
 
 ### 查詢資料庫（互動模式）
 ```bash
-python inference__query_and_execute_on_db.py
+python inference/inference__query_and_execute_on_db.py
 ```
 
 ### 重新訓練（修正版）
 ```bash
-python train__dora_spider_v0318.py
+python train/train__dora_spider_v0318.py
 ```
 
 ### 評估最新模型
 ```bash
-python eval__em_and_execution_accuracy.py \
+python eval/eval__em_and_execution_accuracy.py \
   --model outputs/models/wp_m09_dora_0317_spider_r1/final_model \
   --gold data/wp_m09/test_spider_WP_M09_v2.json \
   --output outputs/evaluation_0318_v1.json
@@ -53,24 +53,23 @@ python eval__em_and_execution_accuracy.py \
 
 ### 自動訓練迴圈（目標 EM ≥ 80%）
 ```bash
-python auto__train_loop_until_target_em.py
+python auto/auto__train_loop_until_target_em.py
 ```
 
-## 檔案命名規則
-`分類前綴__功能描述.py`
+## 資料夾結構
+各腳本按功能分類放置於對應資料夾，檔名保留 `分類前綴__功能描述.py` 格式：
 
-| 前綴 | 功能 |
-|------|------|
-| `data_prep__` | 資料準備 |
-| `schema__` | Schema 檢查 |
-| `traindata_gen__` | 訓練資料生成 |
-| `traindata_clean__` | 訓練資料清理 |
-| `traindata_merge__` | 訓練資料合併 |
-| `train__` | 模型訓練 |
-| `eval__` | 模型評估 |
-| `debug__` | 失敗診斷 |
-| `auto__` | 自動化流程 |
-| `inference__` | 推論/查詢 |
+| 資料夾 | 前綴 | 功能 |
+|--------|------|------|
+| `auto/` | `auto__` | 自動化流程 |
+| `eval/` | `eval__` | 模型評估 |
+| `inference/` | `inference__` | 推論/查詢 |
+| `schema/` | `schema__` | Schema 檢查 |
+| `train/` | `train__` | 模型訓練 |
+| `traindata_clean/` | `traindata_clean__` | 訓練資料清理 |
+| `traindata_gen/` | `traindata_gen__` | 訓練資料生成 |
+| `traindata_prep/` | `traindata_prep__` | 訓練資料準備 |
+| `docs/` | — | 專案文件（.md, .html, .docx, .xlsx） |
 
 ## 重要提醒
 - 訓練需要 RTX 4090，約 4-6 小時
