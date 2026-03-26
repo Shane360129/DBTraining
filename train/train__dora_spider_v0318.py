@@ -24,6 +24,7 @@ from transformers import (
     BitsAndBytesConfig,
 )
 from peft import LoraConfig, get_peft_model, TaskType
+from transformers import EarlyStoppingCallback
 from trl import SFTTrainer, SFTConfig
 
 # ============================================================
@@ -31,6 +32,7 @@ from trl import SFTTrainer, SFTConfig
 # ============================================================
 MODEL_PATH   = "meta-llama/Llama-3.1-8B-Instruct"
 TRAIN_PATH   = r"data\wp_m09\train_spider_WP_M09.json"   # 已合併 1017 筆
+VAL_PATH     = r"data\wp_m09\val_claude_en_spider_v2.json"  # 驗證集 238 筆
 DATE_STR     = "0318"
 OUTPUT_DIR   = f"outputs/models/wp_m09_dora_{DATE_STR}_spider"
 FINAL_MODEL  = os.path.join(OUTPUT_DIR, "final_model")
@@ -42,7 +44,7 @@ LORA_DROPOUT  = 0.05
 USE_DORA      = True
 
 # ---- 訓練超參數 ----
-NUM_EPOCHS    = 15
+NUM_EPOCHS    = 5
 BATCH_SIZE    = 4
 GRAD_ACCUM    = 4         # effective batch = 16
 LEARNING_RATE = 1e-4
@@ -202,7 +204,7 @@ def apply_dora(model):
 # ============================================================
 # 訓練
 # ============================================================
-def train(model, tokenizer, dataset):
+def train(model, tokenizer, dataset, val_dataset):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
 
     sft_cfg = SFTConfig(
@@ -217,8 +219,15 @@ def train(model, tokenizer, dataset):
         optim="paged_adamw_8bit",
         bf16=True,
         logging_steps=10,
-        save_strategy="epoch",
+        # ---- 驗證集 & early stopping ----
+        eval_strategy="steps",
+        eval_steps=50,
+        save_strategy="steps",
+        save_steps=50,
         save_total_limit=3,
+        load_best_model_at_end=True,
+        metric_for_best_model="eval_loss",
+        greater_is_better=False,
         report_to="none",
         dataloader_num_workers=0,
         dataset_text_field="text",
@@ -229,7 +238,9 @@ def train(model, tokenizer, dataset):
         model=model,
         processing_class=tokenizer,
         train_dataset=dataset,
+        eval_dataset=val_dataset,
         args=sft_cfg,
+        callbacks=[EarlyStoppingCallback(early_stopping_patience=3)],
     )
 
     effective_batch = BATCH_SIZE * GRAD_ACCUM
@@ -297,9 +308,10 @@ def main():
     print("=" * 60)
 
     dataset, n_samples  = load_dataset(TRAIN_PATH)
+    val_dataset, _      = load_dataset(VAL_PATH)
     tokenizer, model    = load_model_and_tokenizer()
     model               = apply_dora(model)
-    trainer             = train(model, tokenizer, dataset)
+    trainer             = train(model, tokenizer, dataset, val_dataset)
     save_model(trainer, tokenizer, n_samples)
 
     print("\n訓練完成！")

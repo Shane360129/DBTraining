@@ -1,0 +1,26 @@
+# Model checkpoints & weights
+outputs/models/*/checkpoint-*
+*.bin
+*.pt
+*.safetensors
+*.gguf
+
+# Evaluation results (large JSON)
+outputs/eval_*.json
+outputs/evaluation_*.json
+
+# Training cache
+__pycache__/
+*.pyc
+.venv/
+
+# Spider benchmark raw data
+data/spider/
+data/data/
+
+# Git nested repos
+**/.git/
+
+# Logs
+*.log
+loop_state.json

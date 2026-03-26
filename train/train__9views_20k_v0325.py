@@ -102,16 +102,17 @@ LORA_ALPHA    = 16          # 維持 alpha/r = 2 的放大倍率
 LORA_DROPOUT  = 0.15        # 0.05→0.15: 更強正則化
 USE_DORA      = True
 
-# ---- Training hyperparams（防過擬合 + 加速）----
-NUM_EPOCHS    = 1           # 2→1: 模型 0.2~0.3 epoch 即收斂
-BATCH_SIZE    = 4           # 2→4: gradient_checkpointing 省 VRAM 後可加大
-GRAD_ACCUM    = 4           # 8→4: effective batch = 16（不變），更頻繁更新
-EARLY_STOPPING_PATIENCE = 3 # 配合每 0.25 epoch eval
-LEARNING_RATE = 5e-6        # 2e-5→5e-6: 大幅降低，慢學習防瞬間背完
+# ---- Training hyperparams（防過擬合 v2：0.25 epoch 已收斂）----
+NUM_EPOCHS    = 1           # 上限 1 epoch，靠 early stopping 提前停
+BATCH_SIZE    = 4           # gradient_checkpointing 省 VRAM 後可加大
+GRAD_ACCUM    = 4           # effective batch = 16
+EARLY_STOPPING_PATIENCE = 2 # 3→2: 連續 2 次 eval 沒改善即停（更敏感）
+EVAL_PER_EPOCH = 10         # 每 epoch eval 10 次（~每 125 steps），更細緻偵測拐點
+LEARNING_RATE = 2e-6        # 5e-6→2e-6: 再降，0.25 epoch 就飽和代表學太快
 MAX_SEQ_LEN   = 1536        # 9 views schema 需要較長序列
 LR_SCHEDULER  = "cosine"
-WARMUP_RATIO  = 0.10        # 0.06→0.10: 更長 warmup 配合低 LR
-WEIGHT_DECAY  = 0.05        # 0.01→0.05: 更強的權重衰減
+WARMUP_RATIO  = 0.10        # 較長 warmup 配合低 LR
+WEIGHT_DECAY  = 0.05        # 強權重衰減
 
 # ---- Eval 抽樣 ----
 VAL_EVAL_MAX  = 200         # eval 時最多用 200 筆（避免每次 24 分鐘）
@@ -426,7 +427,7 @@ def train(model, tokenizer, dataset, output_dir, val_dataset=None):
 
     eff_batch = BATCH_SIZE * GRAD_ACCUM
     steps_per_epoch = max(1, len(dataset) // eff_batch)
-    eval_save_steps = max(1, steps_per_epoch // 4)  # 每 0.25 epoch eval 一次
+    eval_save_steps = max(1, steps_per_epoch // EVAL_PER_EPOCH)  # 更頻繁 eval
 
     sft_cfg = SFTConfig(
         output_dir=output_dir,
@@ -481,7 +482,7 @@ def train(model, tokenizer, dataset, output_dir, val_dataset=None):
     print(f"  Batch:       {BATCH_SIZE} x {GRAD_ACCUM} = {eff_batch}")
     print(f"  Steps/epoch: ~{steps_per_epoch}")
     print(f"  Total steps: ~{steps_per_epoch * NUM_EPOCHS}")
-    print(f"  Eval every:  {eval_save_steps} steps (~0.25 epoch)")
+    print(f"  Eval every:  {eval_save_steps} steps (~{1/EVAL_PER_EPOCH:.2f} epoch)")
     print(f"  LR:          {LEARNING_RATE} ({LR_SCHEDULER}, warmup={WARMUP_RATIO})")
     print(f"  Weight decay: {WEIGHT_DECAY}")
     print(f"  MAX_SEQ_LEN: {MAX_SEQ_LEN}")
