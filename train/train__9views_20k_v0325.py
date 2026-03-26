@@ -86,7 +86,7 @@ torch.backends.cudnn.benchmark = True
 MODEL_PATH   = "meta-llama/Llama-3.1-8B-Instruct"
 DATE_STR     = "0325"
 
-DATA_PATH    = r"data\wp_m09\train_9views_20k.json"
+DATA_PATH    = r"data\wp_m09\spider_format_light.json"
 SPLIT_SEED   = 42          # 固定種子確保可重現
 TRAIN_RATIO  = 0.80
 VAL_RATIO    = 0.10
